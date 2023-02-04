@@ -8,8 +8,12 @@ contract SolidityTypes {
     /**
      Elementary Types
 
-     Solidity is a statically typed language,
-      which means that the type of each variable (state and local) needs to be specified. 
+     Solidity is a "statically typed" language,
+      which means that the type of each variable (state and local) needs to be specified.
+     The concept of “undefined” or “null” values does not exist in Solidity,
+      but newly declared variables always have a "default value" dependent on its type. 
+     To handle any "unexpected values", you should use the "revert" function to revert the whole transaction,
+      or return a "tuple" with a "second bool value" denoting "success".
 
      Solidity provides several elementary types which can be combined to form complex types.
 
@@ -62,7 +66,40 @@ contract SolidityTypes {
             address payable is an address you can send Ether to
              while you are not supposed to send Ether to a plain address, 
              because it might be a smart contract that was not built to accept Ether.
-        
+
+            Conversion (Type Casting):
+
+            conversions from "address payable" to "address" : are allowed by Implicit conversion.
+            conversions from "address" to "address payable" : payable(address)
+            conversions to/from "address" are allowed for "uint160", "integer literals", "bytes20" , "contract" types.
+            Only expressions of type "address" and "contract-type" can be converted to the type "address payable" via the explicit conversion payable(...). 
+            For "contract-type", this conversion is only allowed if the contract can "receive" Ether,
+             i.e., the contract either has a "receive function" or a "payable fallback function".  
+            Note that payable(0) is valid and is an exception to this rule.
+
+            Note 1:
+            If you need a variable of type "address" and plan to send Ether to it,
+             then declare its type as "address payable" to make this requirement visible.
+            Also, try to make this distinction or conversion as early as possible.
+            
+            Note 2:
+            The distinction between "address" and "address payable" was introduced with version "0.5.0". 
+            Also starting from that version, "contracts" are not implicitly convertible to the "address" type,
+             but can still be explicitly converted to "address" or to "address payable", if they have a "receive" or "payable fallback" function.
+
+            Warning:
+            If you convert a type that uses a "larger byte size(>20 byte)" to an "address", for example bytes32, then the address is truncated.
+            To reduce conversion ambiguity, starting with version "0.4.24",
+             the compiler will force you to make the truncation explicit in the conversion.
+            for example:
+            byte32 b = 0x111122223333444455556666'777788889999AAAA'BBBBCCCCDDDDEEEEFFFFCCCC;
+            address(uint160(bytes20(b))) -> 0x111122223333444455556666777788889999aAaa
+            address(uint160(uint256(b))) -> 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc
+            note: each hex character takes 4 bits, so each byte can hold 2 hex chars.
+                    ethereum addresses is 20 byte and have 40 characters.
+            
+            Members of Addresses:
+                check the "Address-MoreDetails" file to see more details about address type.
     */
 
 
@@ -116,6 +153,14 @@ contract SolidityTypes {
                 +, -, *, /
                 unary -
                 % (modulo)
+
+        * Operators on Address:
+
+            <=, <, 
+            >=. >
+            ==
+            !=
+            
     **/
 
 
@@ -133,31 +178,11 @@ contract SolidityTypes {
 
 
 
-    /**
-     Conversion (Type Casting)
-    */
-
-
-
-
-
-
 
     /**
      Default Value
         Booleans: false
         Integers: 0
     */
+
 }
-
-
-
-
-
-/*
-    The concept of “undefined” or “null” values does not exist in Solidity,
-     but newly declared variables always have a default value dependent on its type. 
-    
-    To handle any unexpected values, you should use the revert function to revert the whole transaction,
-     or return a tuple with a second bool value denoting success.
-*/
