@@ -5,4 +5,4 @@ Excercises and source codes of "Blockchain Developer Bootcamp" in "AmirkabirScie
 Course Page:
 https://amirkabir-science.com/courses/blockchain-developer/
 
-Copyright (c) 2023 All Rights Reserved by @shobeirimajid(https://github.com/shobeirimajid).
+Copyright (c) 2023 All Rights Reserved by [@shobeirimajid](https://github.com/shobeirimajid)
