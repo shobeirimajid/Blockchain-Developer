@@ -27,11 +27,13 @@ contract AddresseDetails {
             
             Note:
                 Prior to version 0.5.0, Solidity allowed address members to be accessed by a contract instance, 
-                for example : this.balance
-
-                This is now forbidden and an explicit conversion to address must be done.
-                for example : address(this).balance
-        
+                    Ex: this.balance
+                "this.balance" is now forbidden.
+                
+            Note:
+                All contracts can be converted to address type.
+                so it is possible to query the balance of the current contract using explicit conversion of "this" to "address" type
+                    Ex: address(this).balance
 
 
 
@@ -42,11 +44,11 @@ contract AddresseDetails {
             .delegatecall()
             .staticcall()
 
-        low-level calls:
-            - operate on "addresses" rather than "contract instances"
-            - do not check the contract existence (by extcodesize opcode) 
-            - are cheaper in terms of gas
-            - are less safe
+            Features:
+                - operate on "addresses" rather than "contract instances"
+                - do not check the contract existence (by extcodesize opcode) 
+                - are cheaper in terms of gas
+                - are less safe
 
 
 
@@ -245,12 +247,26 @@ contract AddresseDetails {
             
 
 
-        <address>.code 
-            code at the Address (bytes memory) (can be empty)
+        5. code, codehash
 
-        <address>.codehash 
-            the codehash of the Address (bytes32)
-            
+            * code
+
+                <address>.code 
+
+                You can query the "deployed code" for any "smart contract"
+                Use .code to get the EVM bytecode -as a bytes memory- at the Address.
+                EVM bytecode for a "smart contract", might be empty.
+
+
+            * codehash
+
+                <address>.codehash 
+
+                You can query the hash of "deployed code" for any "smart contract"
+                Use .codehash to get the Keccak-256 hash of EVM bytecode -as a bytes32
+
+                Note:
+                    that addr.codehash is cheaper than using keccak256(addr.code).
         
     */
 
