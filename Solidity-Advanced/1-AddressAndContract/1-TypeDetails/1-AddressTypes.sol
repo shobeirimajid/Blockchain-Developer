@@ -1,17 +1,62 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
 
-contract AddresseDetails {
+contract AddresseTypes {
 
     /// https://docs.soliditylang.org/en/v0.8.18/types.html#members-of-addresses
 
     /**
+        The address type comes in two flavours, which are largely identical:
+            "address": Holds a 20 byte value - size of an Ethereum address
+            "address payable": Same as address, but with the additional members "transfer" and "send"
+
+        address payable is an address you can send Ether to
+            while you are not supposed to send Ether to a plain address, 
+            because it might be a smart contract that was not built to accept Ether.
+
+        Conversion (Type Casting):
+            conversions from "address payable" to "address" : are allowed by Implicit conversion.
+            conversions from "address" to "address payable" : payable(address)
+            conversions to/from "address" are allowed for "uint160", "integer literals", "bytes20" , "contract" types.
+            Only expressions of type "address" and "contract-type" can be converted to the type "address payable" via the explicit conversion payable(...). 
+            For "contract-type", this conversion is only allowed if the contract can "receive" Ether,
+            i.e., the contract either has a "receive function" or a "payable fallback function".  
+            Note that payable(0) is valid and is an exception to this rule.
+
+        Note:
+            If you need a variable of type "address" and plan to send Ether to it,
+            then declare its type as "address payable" to make this requirement visible.
+            Also, try to make this distinction or conversion as early as possible.
+        
+        Note:
+            The distinction between "address" and "address payable" was introduced with version "0.5.0". 
+            Also starting from that version, "contracts" are not implicitly convertible to the "address" type,
+            but can still be explicitly converted to "address" or to "address payable", if they have a "receive" or "payable fallback" function.
+
+        Warning:
+            If you convert a type that uses a "larger byte size(>20 byte)" to an "address", for example bytes32, then the address is truncated.
+            To reduce conversion ambiguity, starting with version "0.4.24",
+            the compiler will force you to make the truncation explicit in the conversion.
+            for example:
+            byte32 b = 0x111122223333444455556666'777788889999AAAA'BBBBCCCCDDDDEEEEFFFFCCCC;
+            address(uint160(bytes20(b))) -> 0x111122223333444455556666777788889999aAaa
+            address(uint160(uint256(b))) -> 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc
+            note: each hex character takes 4 bits, so each byte can hold 2 hex chars.
+                    ethereum addresses is 20 byte and have 40 characters.
+
+
+
+        Operators on Address types:
+            <=, <, 
+            >=. >
+            ==
+            !=
+
+
 
         Members of Addresses:
-
-        For a quick reference of all members of address, see:
-        https://docs.soliditylang.org/en/v0.8.18/units-and-global-variables.html#address-related
-
+            For a quick reference of all members of address, see:
+            https://docs.soliditylang.org/en/v0.8.18/units-and-global-variables.html#address-related
 
 
         1- <address>.balance
@@ -38,8 +83,8 @@ contract AddresseDetails {
 
 
         low-level calls:
-            .send()
             .transfer()
+            .send()
             .call()
             .delegatecall()
             .staticcall()
@@ -221,6 +266,7 @@ contract AddresseDetails {
                 The purpose of "delegatecall" is to use "library code" which is stored in another contract.
 
                 The user has to ensure that the "layout of storage" in both contracts is suitable for delegatecall to be used.
+                    see: https://docs.soliditylang.org/en/v0.8.18/internals/layout_in_storage.html
 
                 Note:
                     If state variables are accessed via a low-level delegatecall,
