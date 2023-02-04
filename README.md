@@ -1,6 +1,6 @@
 # Blockchain-Course
 
-Excercises and source codes of "Blockchain Developer Bootcamp" in "AmirkabirScience Learning Center"
+Excercises and source codes of "Blockchain Developer Bootcamp" in "[AmirkabirScience](https://amirkabir-science.com)" Learning Center.
 
 Course Page:
 https://amirkabir-science.com/courses/blockchain-developer/
