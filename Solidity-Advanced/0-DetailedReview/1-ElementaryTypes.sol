@@ -37,6 +37,16 @@
             == (equality)
             != (inequality)
 
+        * Conversion
+            Note that there is no type conversion from "non-boolean" to "boolean" types 
+                as there is in C and JavaScript.
+            so 
+                if (1) { ... } 
+            is not valid Solidity!
+
+        Parentheses can not be omitted for conditionals
+        curly braces can be omitted around single-statement bodies.
+
 
 
     2. Integers - by size 8, 16, 32, 64, 128, 256
