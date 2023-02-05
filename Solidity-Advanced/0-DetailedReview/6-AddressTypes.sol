@@ -1,62 +1,60 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
+  
+/**
+    AddresseTypes
 
-contract AddresseTypes {
+    https://docs.soliditylang.org/en/v0.8.18/types.html#members-of-addresses
 
-    /// https://docs.soliditylang.org/en/v0.8.18/types.html#members-of-addresses
+    The address type comes in two flavours, which are largely identical:
+        "address": Holds a 20 byte value - size of an Ethereum address
+        "address payable": Same as address, but with the additional members "transfer" and "send"
 
-    /**
-        The address type comes in two flavours, which are largely identical:
-            "address": Holds a 20 byte value - size of an Ethereum address
-            "address payable": Same as address, but with the additional members "transfer" and "send"
+    address payable is an address you can send Ether to
+        while you are not supposed to send Ether to a plain address, 
+        because it might be a smart contract that was not built to accept Ether.
 
-        address payable is an address you can send Ether to
-            while you are not supposed to send Ether to a plain address, 
-            because it might be a smart contract that was not built to accept Ether.
+    Conversion (Type Casting):
+        conversions from "address payable" to "address" : are allowed by Implicit conversion.
+        conversions from "address" to "address payable" : payable(address)
+        conversions to/from "address" are allowed for "uint160", "integer literals", "bytes20" , "contract" types.
+        Only expressions of type "address" and "contract-type" can be converted to the type "address payable" via the explicit conversion payable(...). 
+        For "contract-type", this conversion is only allowed if the contract can "receive" Ether,
+        i.e., the contract either has a "receive function" or a "payable fallback function".  
+        Note that payable(0) is valid and is an exception to this rule.
 
-        Conversion (Type Casting):
-            conversions from "address payable" to "address" : are allowed by Implicit conversion.
-            conversions from "address" to "address payable" : payable(address)
-            conversions to/from "address" are allowed for "uint160", "integer literals", "bytes20" , "contract" types.
-            Only expressions of type "address" and "contract-type" can be converted to the type "address payable" via the explicit conversion payable(...). 
-            For "contract-type", this conversion is only allowed if the contract can "receive" Ether,
-            i.e., the contract either has a "receive function" or a "payable fallback function".  
-            Note that payable(0) is valid and is an exception to this rule.
+    Note:
+        If you need a variable of type "address" and plan to send Ether to it,
+        then declare its type as "address payable" to make this requirement visible.
+        Also, try to make this distinction or conversion as early as possible.
+    
+    Note:
+        The distinction between "address" and "address payable" was introduced with version "0.5.0". 
+        Also starting from that version, "contracts" are not implicitly convertible to the "address" type,
+        but can still be explicitly converted to "address" or to "address payable", if they have a "receive" or "payable fallback" function.
 
-        Note:
-            If you need a variable of type "address" and plan to send Ether to it,
-            then declare its type as "address payable" to make this requirement visible.
-            Also, try to make this distinction or conversion as early as possible.
-        
-        Note:
-            The distinction between "address" and "address payable" was introduced with version "0.5.0". 
-            Also starting from that version, "contracts" are not implicitly convertible to the "address" type,
-            but can still be explicitly converted to "address" or to "address payable", if they have a "receive" or "payable fallback" function.
-
-        Warning:
-            If you convert a type that uses a "larger byte size(>20 byte)" to an "address", for example bytes32, then the address is truncated.
-            To reduce conversion ambiguity, starting with version "0.4.24",
-            the compiler will force you to make the truncation explicit in the conversion.
-            for example:
-            byte32 b = 0x111122223333444455556666'777788889999AAAA'BBBBCCCCDDDDEEEEFFFFCCCC;
-            address(uint160(bytes20(b))) -> 0x111122223333444455556666777788889999aAaa
-            address(uint160(uint256(b))) -> 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc
-            note: each hex character takes 4 bits, so each byte can hold 2 hex chars.
-                    ethereum addresses is 20 byte and have 40 characters.
+    Warning:
+        If you convert a type that uses a "larger byte size(>20 byte)" to an "address", for example bytes32, then the address is truncated.
+        To reduce conversion ambiguity, starting with version "0.4.24",
+        the compiler will force you to make the truncation explicit in the conversion.
+        for example:
+        byte32 b = 0x111122223333444455556666'777788889999AAAA'BBBBCCCCDDDDEEEEFFFFCCCC;
+        address(uint160(bytes20(b))) -> 0x111122223333444455556666777788889999aAaa
+        address(uint160(uint256(b))) -> 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc
+        note: each hex character takes 4 bits, so each byte can hold 2 hex chars.
+                ethereum addresses is 20 byte and have 40 characters.
 
 
 
-        Operators on Address types:
-            <=, <, 
-            >=. >
-            ==
-            !=
+    Operators on Address types:
+        <=, <, 
+        >=. >
+        ==
+        !=
 
 
 
-        Members of Addresses:
-            For a quick reference of all members of address, see:
-            https://docs.soliditylang.org/en/v0.8.18/units-and-global-variables.html#address-related
+    Members of Addresses:
+        For a quick reference of all members of address, see:
+        https://docs.soliditylang.org/en/v0.8.18/units-and-global-variables.html#address-related
 
 
         1- <address>.balance
@@ -116,11 +114,11 @@ contract AddresseTypes {
 
             Note:
                 If x is a contract address, its code 
-                 (more specifically: its "Receive" Ether Function, if present, or otherwise its "Fallback" Function, if present) 
+                    (more specifically: its "Receive" Ether Function, if present, or otherwise its "Fallback" Function, if present) 
                 will be executed together with the transfer call
-                 (this is a feature of the EVM and cannot be prevented). 
+                    (this is a feature of the EVM and cannot be prevented). 
                 If that execution runs out of gas or fails in any way,
-                 the Ether transfer will be "reverted" and the current contract will stop with an "exception".
+                    the Ether transfer will be "reverted" and the current contract will stop with an "exception".
 
 
 
@@ -133,8 +131,8 @@ contract AddresseTypes {
 
             Note:
                 Send is the "low-level" counterpart of the "transfer" function but
-                 if the execution "fails", 
-                  the current contract will "not stop with an exception", but send will "return false"
+                    if the execution "fails", 
+                    the current contract will "not stop with an exception", but send will "return false"
 
             Warning:
                 There are some dangers in using "send" : 
@@ -197,7 +195,7 @@ contract AddresseTypes {
 
             Note:
                 Previous versions of Solidity allowed these functions to receive "arbitrary arguments"
-                 and would also handle a first argument "of type bytes4" differently. 
+                    and would also handle a first argument "of type bytes4" differently. 
                 These edge cases were removed in version 0.5.0.
 
 
@@ -313,9 +311,25 @@ contract AddresseTypes {
 
                 Note:
                     that addr.codehash is cheaper than using keccak256(addr.code).
-        
-    */
 
-    
-}
+    Conversion:
+
+        Every "hex literals" of the "correct size" that pass the "checksum test" are of "address type"
+            No other literals can be implicitly converted to the address type.
+
+        Explicit conversions to address are allowed only from "bytes20" and "uint160"
+
+        An "address" a can be converted explicitly to "address payable" via :
+            "payable(a)"
+
+        Note:
+            Prior to version 0.8.0, it was possible to 
+                explicitly convert from any integer type (of any size, signed or unsigned) to address or address payable. 
+
+            Starting with in 0.8.0 
+                only conversion from "uint160" is allowed
+*/
+
+
+
 

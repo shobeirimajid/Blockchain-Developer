@@ -1,14 +1,9 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
-
-contract ElementaryTypes {}
-
-    
 
 /**
-    /// https://docs.soliditylang.org/en/v0.8.18/types.html
-
     Elementary Types
+
+    https://docs.soliditylang.org/en/v0.8.18/types.html
+
 
     Solidity is a "statically typed" language,
         which means that the type of each variable (state and local) needs to be specified.
@@ -24,7 +19,6 @@ contract ElementaryTypes {}
     "Elementary types" are also called "value types" because:
         - variables of these types will always be passed by value
         - they are always copied when they are used as function arguments or in assignments.
-
 
 
     1. Booleans

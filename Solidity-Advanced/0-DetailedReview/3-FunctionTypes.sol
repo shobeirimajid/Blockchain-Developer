@@ -1,12 +1,8 @@
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
-
-contract FunctionTypes {
 
 /**
     Function Types
 
-        /// https://docs.soliditylang.org/en/v0.8.18/types.html#function-types
+        https://docs.soliditylang.org/en/v0.8.18/types.html#function-types
 
     Function types are the types of functions. 
     
@@ -161,14 +157,13 @@ contract FunctionTypes {
     "Lambda functions" or "inline functions" are planned but not yet supported in Solidity.
 */
 
-}
-
 
 
 
 
 /// Example that shows how to use the members
 
+// SPDX-License-Identifier: GPL-3.0
 contract Example {
 
     function f() public payable returns (bytes4) {
@@ -186,7 +181,6 @@ contract Example {
 
 
 /// Example that shows how to use internal function types:
-
 library ArrayUtils {
 
     // "internal functions" can be used in "internal library functions"
@@ -253,8 +247,8 @@ contract Pyramid {
 
 /// Another example that uses external function types:
 
-// SPDX-License-Identifier: GPL-3.0
 
+// SPDX-License-Identifier: GPL-3.0
 contract Oracle {
     struct Request {
         bytes data;
@@ -277,6 +271,7 @@ contract Oracle {
 }
 
 
+// SPDX-License-Identifier: GPL-3.0
 contract OracleUser {
 
     Oracle constant private ORACLE_CONST = Oracle(address(0x00000000219ab540356cBB839Cbe05303d7705Fa)); // known contract
