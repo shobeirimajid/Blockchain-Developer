@@ -1,5 +1,5 @@
 /**
-    try/catch
+    ExceptionHandling by try/catch
         https://docs.soliditylang.org/en/v0.8.18/control-structures.html#try-catch
 
     Solidity also supports exception handling in the form of "try/catch-statements", 
