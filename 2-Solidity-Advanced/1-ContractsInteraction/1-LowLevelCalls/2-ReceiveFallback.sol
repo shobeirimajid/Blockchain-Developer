@@ -52,7 +52,7 @@
 
 
         In the "worst case", the receive function can only rely on "2300 gas" being available 
-            (for example when send or transfer is used)
+            (for example when "send" or "transfer" functions is used)
             leaving little room to "perform other operations" except "basic logging". 
 
         The following operations will consume "more gas than the 2300 gas" stipend:

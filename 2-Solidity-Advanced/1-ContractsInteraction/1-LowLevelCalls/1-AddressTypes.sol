@@ -329,7 +329,3 @@
             Starting with in 0.8.0 
                 only conversion from "uint160" is allowed
 */
-
-
-
-
