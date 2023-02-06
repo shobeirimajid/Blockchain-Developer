@@ -9,12 +9,17 @@
 
 /// A failure in an "external call" can be caught using a try/catch statement, as follows:
 
+
+
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.8.1;
+
 
 interface DataFeed { 
     function getData(address token) external returns (uint value); 
 }
+
+
 
 contract FeedConsumer {
 

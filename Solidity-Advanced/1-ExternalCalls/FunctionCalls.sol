@@ -81,9 +81,8 @@ contract C {
         Any "Wei you send to the contract" is added to the "total balance of that contract":
 */
 
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.6.2 <0.9.0;
 
+pragma solidity >=0.6.2 <0.9.0;
 
 contract InfoFeed {
 
@@ -91,6 +90,7 @@ contract InfoFeed {
         return 42; 
     }
 }
+
 
 
 contract Consumer {
@@ -201,7 +201,6 @@ contract Consumer {
             but can be in arbitrary order. 
 */
 
-// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.0 <0.9.0;
 
 contract C {
@@ -232,7 +231,6 @@ contract C {
 */
 
 
-// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.22 <0.9.0;
 
 contract C {
