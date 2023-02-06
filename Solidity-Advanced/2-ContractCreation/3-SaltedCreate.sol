@@ -7,7 +7,7 @@ contract Account {
     address public owner;
     address public creator;
 
-    constructor(address _owner) {
+    constructor(address _owner) payable {
         owner = _owner;
         creator = msg.sender;
     }
@@ -30,15 +30,18 @@ contract Account {
 
 contract Factory {
 
+    constructor() payable {}
+
     mapping(address => bytes) public codes;
     address[] public accounts;
 
-    event Deployed(address addr, uint256 salt);
+    event Deployed(address addr, bytes32 salt);
 
 
+    // the new contract's address can be pre-computed
     function create2BySalt(bytes32 salt, address arg) public returns(address createdAdr) {
 
-        // This complicated expression just tells you how the address can be pre-computed. 
+        // pre-compute the address
         address predictedAdr = address(uint160(uint(keccak256(abi.encodePacked(
             bytes1(0xff),
             address(this),
@@ -50,37 +53,43 @@ contract Factory {
         )))));
 
         Account d = new Account{salt: salt}(arg);
+        createdAdr = address(d);
 
-        require(address(d) == predictedAdr);
+        require(createdAdr == predictedAdr);
+        accounts.push(createdAdr);
+        codes[createdAdr] = createdAdr.code;
 
-        accounts.push(address(d));
-        codes[address(d)] = address(d).code;
-
-        return predictedAdr;
+        emit Deployed(address(d), salt);
+        return createdAdr;
     }
 
 
-    function create2BySaltAndCode(bytes memory code, uint256 salt) public {
-        address addr;
+    /*
+    function create2BySaltAndCode(bytes memory code, bytes32 salt) public {
+        address payable addr;
         assembly {
             addr := create2(0, add(code, 0x20), mload(code), salt)
             if iszero(extcodesize(addr)) {
                 revert(0, 0)
             }
         }
-
         emit Deployed(addr, salt);
     }
+
+    [revert]
+    The transaction has been reverted to the initial state.
+    Note: The "called function" should be "payable" if you "send value" and the "value you send" should be less than your "current balance".
+    "Debug" the "transaction" to get more information.
+    
+    */
 
 
     function destroyAccount(address payable account) public {
         Account(account).destroy(payable(address(this)));
     }
 
-    receive() payable external {}
-    fallback() payable external {}
-
-
+    receive() external payable {}
+    fallback() external payable {}
 }
 
 
@@ -88,4 +97,5 @@ contract Factory {
 /*
     0x1234567812345678123456781234567812345678123456781234567812345678
 
+    0xbd43681Df6dD68745ef9e882659587e630B2E8b5
 */
