@@ -14,6 +14,8 @@
     Functions of the current contract can be called directly (“internally”), also recursively, as seen in this nonsensical example:
 */
 
+
+
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.22 <0.9.0;
 
@@ -29,6 +31,8 @@ contract C {
     }
 }
 
+
+
 /**
     Internal "function calls" are translated into "simple jumps" inside the EVM.
 
@@ -40,7 +44,61 @@ contract C {
     You should still "avoid excessive recursion"!
         because every "internal function call" uses up at least "one stack slot" 
             and there are only 1024 slots available.
+
+
+    -----------------------------------------
+    Function Calls with "Named Parameters"
+    -----------------------------------------
+    Function call "arguments" can be given by "name", "in any order", 
+        if they are enclosed in { } as can be seen in the following example. 
+        The "argument list" has to coincide by name with the "list of parameters" from the "function declaration", 
+            but can be in arbitrary order. 
 */
+
+
+
+pragma solidity >=0.4.0 <0.9.0;
+
+contract DataSet {
+
+    mapping(uint => uint) data;
+
+    function f() public {
+        set({value: 2, key: 3});
+    }
+
+    function set(uint key, uint value) public {
+        data[key] = value;
+    }
+}
+
+
+
+/**
+    -----------------------------------------
+    "Omitted Names" in Function Definitions
+    -----------------------------------------
+    The "names of parameters" and "return values" in the "function declaration" can be omitted.
+
+    Those items with omitted names will still be present on the stack, 
+        but they are inaccessible by name. 
+
+    An "omitted return value" name can still "return a value" to the "caller" by use of the "return" statement.
+*/
+
+
+pragma solidity >=0.4.22 <0.9.0;
+
+contract OmittedNames {
+
+    // omitted name for parameter
+    function func(uint k, uint) public pure returns(uint) {
+        return k;
+    }
+}
+
+
+
 
 
 
@@ -50,8 +108,10 @@ contract C {
     -----------------------------------------
 
         Functions can also be called using the :
-            this.g(8);
-            c.g(2);
+
+            - this.g(8);
+            - c.g(2);
+
         where c is a contract instance and g is a function belonging to c. 
         Calling the function g via either way results in it being called “externally”, 
             using a "message call" and not "directly via jumps". 
@@ -187,57 +247,5 @@ contract Consumer {
         This was deprecated in Solidity 0.6.2 
         and is no longer possible since Solidity 0.7.0.
 */
-
-
-
-
-/**
-    -----------------------------------------
-    Function Calls with "Named Parameters"
-    -----------------------------------------
-    Function call "arguments" can be given by "name", "in any order", 
-        if they are enclosed in { } as can be seen in the following example. 
-        The "argument list" has to coincide by name with the "list of parameters" from the "function declaration", 
-            but can be in arbitrary order. 
-*/
-
-pragma solidity >=0.4.0 <0.9.0;
-
-contract C {
-
-    mapping(uint => uint) data;
-
-    function f() public {
-        set({value: 2, key: 3});
-    }
-
-    function set(uint key, uint value) public {
-        data[key] = value;
-    }
-}
-
-
-
-/**
-    -----------------------------------------
-    "Omitted Names" in Function Definitions
-    -----------------------------------------
-    The "names of parameters" and "return values" in the "function declaration" can be omitted.
-
-    Those items with omitted names will still be present on the stack, 
-        but they are inaccessible by name. 
-
-    An "omitted return value" name can still "return a value" to the "caller" by use of the "return" statement.
-*/
-
-
-pragma solidity >=0.4.22 <0.9.0;
-
-contract C {
-    // omitted name for parameter
-    function func(uint k, uint) public pure returns(uint) {
-        return k;
-    }
-}
 
 
