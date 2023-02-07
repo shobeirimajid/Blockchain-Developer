@@ -1,23 +1,70 @@
 /**
     Special Functions
+
         https://docs.soliditylang.org/en/v0.8.18/contracts.html#special-functions
 
 
-        "receive" Ether function
-            "Ether transfers"
-            Any call with "empty calldata"
+        
+    How to send Ether?
 
-        payable "fallback" function
-            "interface confusions"
-            every call with "non-empty calldata"
-                even if Ether is sent along with the call
+        -------------------------------------------
+        You can send Ether to other contracts by
+        -------------------------------------------
+        METHOD      GAS COST            IF FAIL
+        -------------------------------------------
+        transfer    2300 gas            throws error
+        send        2300 gas            returns bool
+        call        forward all gas     returns bool
+        -------------------------------------------
+            * gas limit for call is adjustable *
+        -------------------------------------------
+
+
+
+    How to receive Ether?
+
+        A contract receiving Ether must have at least one of the functions below
+
+        -----------------------------------------------------------
+        METHOD                              WHEN CALL
+        -----------------------------------------------------------
+        receive() external payable          if msg.data is empty
+        fallback() external payable         otherwise
+        -----------------------------------------------------------
+
+
+        "receive"
+            Ether transfers
+            empty calldata
+
+        "fallback" function
+            interface confusions (none of the other functions match the function identifier)
+            non-empty calldata (even if Ether is sent along with the call)
+
+
+
+    Which function is called, fallback() or receive()?
+
+
+                         send Ether
+                             |
+                    msg.data is empty?
+                            / \
+                           /   \
+                        yes     no
+                        /         \
+            receive() exists?   fallback()
+                     /   \
+                    yes   no
+                 /         \
+            receive()    fallback()
             
 */
 
 
 
 /**
-    Receive Ether Function
+    Receive
 
         A contract can have at most one receive function, without the function keyword, declared using :
 
@@ -91,6 +138,7 @@
 */
 
 
+
 /// Below you can see an example of a Sink contract that uses function receive.
 /// This contract keeps all Ether sent to it with no way to get it back.
 
@@ -109,7 +157,7 @@ contract Sink {
 
 
 /**
-    Fallback Function
+    Fallback
 
         A contract can have at most one "fallback function", without the "function keyword", declared using : 
 
@@ -124,6 +172,19 @@ contract Sink {
             - can have "modifiers"
             - always receives data
             - must be marked payable (in order to also receive Ether)
+
+
+        
+        fallback is executed when:
+            - 'non-exixting' function is called
+            - Ether is sent directly to a contract but 'does not exist receive function' or 'msg.data is not empty'
+
+
+        fallback has a '2300 gas limit' when called by 'transfer' or 'send'
+
+
+        send / transfer      forwards 2300 gas to this fallback function
+        call                 forwards all of the gas (adhustable)
 
 
         The "fallback" function is executed on a call to the contract :
@@ -168,7 +229,6 @@ contract Sink {
 
 
 
-// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.6.2 <0.9.0;
 
 contract Test {
@@ -274,7 +334,10 @@ contract Caller {
 
 
 
+
+
 /**
+
     Best Practice
         https://consensys.github.io/smart-contract-best-practices/development-recommendations/solidity-specific/fallback-functions/
 
@@ -311,7 +374,7 @@ contract Caller {
         }
 
 
-        Check data length in fallback functions
+        NOTE: Check data length in fallback functions
 
 
         fallback functions is called for
@@ -321,8 +384,7 @@ contract Caller {
 
             so you should check that the data is empty 
                 if the fallback function is intended to be used only for the purpose of "logging received Ether".
-
-            Otherwise, callers will not notice if your contract is used incorrectly and functions that do not exist are called.
+                Otherwise, callers will not notice if your contract is used incorrectly and functions that do not exist are called.
 
 
 
@@ -340,4 +402,17 @@ contract Caller {
             require(msg.data.length == 0); 
             emit LogDepositReceived(msg.sender); 
         }
+
+
+
+
+    Which method should you use?
+
+        'call' in combination with 're-entrancy guard' is the recommended method to use after December 2019.
+
+
+    Guard against re-entrancy by:
+        1. making all 'state changes' before 'calling other contracts'(External Calls)
+        2. using 're-entrancy' guard modifier (OpenZeppelin)
+
 */

@@ -133,6 +133,7 @@
                 Send is the "low-level" counterpart of the "transfer" function but
                     if the execution "fails", 
                     the current contract will "not stop with an exception", but send will "return false"
+                    and failure handling is left to the calling contract.
 
             Warning:
                 There are some dangers in using "send" : 
@@ -142,6 +143,18 @@
                     1- Always check the "return value" of send
                     2- Use ".transfer" function 
                     3- or even better: Use a pattern where the recipient "withdraws" the money.
+
+
+
+
+        Both "send" and "transfer" can be used for payments to EOAs or other smart contracts. 
+        But since the amount of gas they forward to the called smart contract is very low, 
+        the called smart contract can easily run out of gas. This would make the payment impossible.
+
+        The problem here is that even if the receiving contract is designed carefully not to exceed the gas limit, 
+        future changes in the gas costs for some opcodes can break this design.
+        Therefore, the recommended way of sending payments is :  call()
+
 
 
 
