@@ -9,6 +9,7 @@ contract Receiver {
     
 
     // These functions are going to be executed via Low-Level call()
+
     function payment() external payable {
         payments[msg.sender] += msg.value;
         emit Received("getPayments", msg.sender, msg.value);
@@ -71,8 +72,9 @@ contract Sender {
     function pay_ViaCall() public payable {
         
         // Receiver.receive() will be executed
-        (bool sent, bytes memory data) = 
-            receiverAdr.call{value: msg.value}("");
+        (bool sent, bytes memory data) = receiverAdr.call
+            {value: msg.value}
+            ("");
 
         require(sent, "Failed to send Ether");
         emit Response(sent, data);
@@ -90,6 +92,11 @@ contract Sender {
             - Function existence checks are omitted
 
         The Best way to call an existing function is to call it directly without low-level call
+
+        After all
+            Let's imagine that Caller contract doesn't have the Target contract source code
+            but know the Target contract "address" and the "function" to call.
+            In this case, calling via call() is only way!
     */
 
 
@@ -97,8 +104,23 @@ contract Sender {
     function call_payment() public payable {
 
         // Receiver.payment() will be executed
-        (bool sent, bytes memory data) = 
-            receiverAdr.call{value: msg.value}(abi.encodeWithSignature("payment()"));
+        (bool sent, bytes memory data) = receiverAdr.call
+            {value: msg.value}
+            (abi.encodeWithSignature("payment()"));
+
+        require(sent, "Failed to send Ether");
+        emit Response(sent, data);
+    }
+
+
+    // to call the payAndGetBalance
+    // payAndGetBalance has an input parameter
+    function call_payAndGetBalance() public payable {
+
+        // Receiver.payment() will be executed
+        (bool sent, bytes memory data) = receiverAdr.call
+            {value: msg.value, gas: 10_000}
+            (abi.encodeWithSignature("payAndGetBalance(string)", "we are calling via call_payAndGetBalance"));
 
         require(sent, "Failed to send Ether");
         emit Response(sent, data);
@@ -109,8 +131,9 @@ contract Sender {
     function call_Fallback() public payable {
 
         // Receiver.fallbacl() will be executed
-        (bool sent, bytes memory data) = 
-            receiverAdr.call{value: msg.value}(abi.encodeWithSignature("nonExistingFunction()"));
+        (bool sent, bytes memory data) = receiverAdr.call
+            {value: msg.value}
+            (abi.encodeWithSignature("nonExistingFunction()"));
 
         require(sent, "Failed to send Ether"); 
         emit Response(sent, data);

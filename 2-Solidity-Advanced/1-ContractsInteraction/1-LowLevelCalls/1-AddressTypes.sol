@@ -81,8 +81,10 @@
 
 
         low-level calls:
+
             .transfer()
             .send()
+
             .call()
             .delegatecall()
             .staticcall()
@@ -91,7 +93,25 @@
                 - operate on "addresses" rather than "contract instances"
                 - do not check the contract existence (by extcodesize opcode) 
                 - are cheaper in terms of gas
-                - are less safe
+                - are less safe !!!
+
+
+
+
+                call            Execute code of another contract
+
+                delegatecall    Execute code of another contract, but with the state(storage) of the calling contract. 
+                                When a third contract calls a delegate call to some function in callee on behalf of the caller 
+                                and storage changes are made in the caller’s value and nothing is reflected in callee’s storage. 
+                                This means that a contract can dynamically load code from a different address at runtime. 
+                                Storage, current address, and balance still refer to the calling contract, 
+                                only the code is taken from the called address.
+
+                callcode        Deprecated
+
+                staticcall      This is basically the same as a call, 
+                                but will revert if the called function modifies the state in any way.
+
 
 
 
@@ -298,9 +318,8 @@
                 After "byzantium" Hard Fork, "staticcall" can be used as well.
 
                 "staticcall" is basically the same as "call",
-                    but with difference that
-                
-                staticcall will "revert" if the "called function" modifies the "state" in any way.
+                    but with difference that 
+                    staticcall will "revert" if the "called function" modifies the "state" in any way.
             
 
 
