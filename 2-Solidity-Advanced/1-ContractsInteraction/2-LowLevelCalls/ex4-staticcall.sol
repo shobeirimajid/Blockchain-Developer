@@ -55,15 +55,8 @@ contract Sender {
         require(success, "Failed to send Ether");
     }
 
-    // call the fallbacl()
-    function call_Fallback() public view returns(bool success, bytes memory result) {
-        (success, result) = receiverAdr.staticcall(abi.encodeWithSignature("noFunction()"));
-        require(success, "Failed to send Ether"); 
-    }
-
     // call the fallbacl() with data
     function call_Fallback(bytes calldata data) public view returns(bool success, bytes memory result) {
-
         (success, result) = receiverAdr.staticcall(data); 
         require(success, "call failed"); 
     }
@@ -76,6 +69,6 @@ contract Sender {
 
 /*
     byte to string converter
-
-        https://onlinestringtools.com/convert-bytes-to-string
+    
+    https://onlinestringtools.com/convert-bytes-to-string
 */
