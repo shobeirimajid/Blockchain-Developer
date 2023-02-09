@@ -1,0 +1,118 @@
+{
+	"compiler": {
+		"version": "0.8.6+commit.11564f7e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract InfoFeed",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "gas_",
+						"type": "uint256"
+					}
+				],
+				"name": "cheapCall",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "result",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "x_",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount_",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "gas_",
+						"type": "uint256"
+					}
+				],
+				"name": "expensiveCall",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "result",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "simpleCall",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "result",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"2-Solidity-Advanced\\1-ContractsInteraction\\1-ExternalCalls\\ex1-SimpleExtCall.sol": "Consumer"
+		},
+		"evmVersion": "berlin",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"2-Solidity-Advanced\\1-ContractsInteraction\\1-ExternalCalls\\ex1-SimpleExtCall.sol": {
+			"keccak256": "0xe8784e35b7b4ee67145e283c2a3be8bce54de164b81bc098cc8d03dcd570ced8",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://0f58a3cbfbf2bf4ede75cd0bbab740ff71ff3f4798a9666420fcf2153fd41e48",
+				"dweb:/ipfs/QmWqxSUBHhjTGuD4AMqcR5wN3QbUN7XCi7fxyH1W1GcnSA"
+			]
+		}
+	},
+	"version": 1
+}
