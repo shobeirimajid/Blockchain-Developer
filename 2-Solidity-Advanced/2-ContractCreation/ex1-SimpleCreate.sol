@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
+pragma solidity >=0.4.22 <0.9.0;
 
 contract SimpleContract {
 
@@ -8,6 +8,8 @@ contract SimpleContract {
     constructor(address _creator) payable {
         creator = _creator;
     }
+
+    receive() external payable {}
 }
 
 
@@ -15,7 +17,7 @@ contract SimpleContract {
 contract Factory {
 
     // to hold instance of new contract
-    SimpleContract newSC;
+    SimpleContract[] public newSCs;
 
     constructor() payable {}
 
@@ -24,8 +26,18 @@ contract Factory {
     // execute its constructor
     // send address of Factory as its constructor's input parameter
 
-    function createNewContract() public {
+    function create() public returns (SimpleContract newSC) {
         newSC = new SimpleContract(address(this));
+        newSCs.push(newSC);
+
+        return newSC;
+    }
+
+
+    // send ether to a created contract
+    function charge(address adr, uint amount) public payable {
+        (bool status,) = adr.call{value: amount}("");
+        require(status, "Charge failed");
     }
     
 
@@ -33,8 +45,9 @@ contract Factory {
     //  send "value" along with the creation
     //  get "value" from the "caller"
 
-    function createAndCharge() public payable {
+    function createAndCharge() public payable returns (SimpleContract newSC) {
         newSC = new SimpleContract{value: msg.value}(address(this));
+        newSCs.push(newSC);
     }
 
 
@@ -43,18 +56,21 @@ contract Factory {
     //  Contract have to be charged already.
 
     function createAndCharge(uint amount) public {
-        newSC = new SimpleContract{value: amount}(address(this));
+        SimpleContract newSC = new SimpleContract{value: amount}(address(this));
+        newSCs.push(newSC);
     }
 
 
     // return new contract's Info
-    function getNewContractInfo() public view returns(
-        address newSC_Adr, 
-        address newSC_creator, 
-        uint newSC_balance
+    function getNewSC(uint idx) public view returns (
+        address creator, 
+        address adr, 
+        uint balance
     ) {
-        newSC_Adr = address(newSC);
-        newSC_creator = newSC.creator();
-        newSC_balance = address(newSC).balance;
+        SimpleContract sc = newSCs[idx];
+        
+        creator = sc.creator();
+        adr = address(sc);
+        balance = address(sc).balance;
     }
 }
