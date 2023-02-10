@@ -4,13 +4,16 @@
     Checking Signatures On-Chain
     ------------------------------------------
 
-    ECDSA provides functions for recovering and managing Ethereum account "ECDSA signatures"
-    
-    These are often generated via :
-    
-        web3.eth.sign    →   65 byte array ("bytes" in Solidity) 
+        ECDSA : Elliptic Curve Digital Signature Algorithm
 
-                              [ [v (1)] , [r (32)] , [s (32)] ]
+        "ECDSA" provides functions for recovering and managing Ethereum account "ECDSA signatures"
+        
+        "ECDSA signatures" are often generated via :
+        
+            web3.eth.sign    →   65 byte array ("bytes" in Solidity) 
+
+                                [ [v (1)] , [r (32)] , [s (32)] ]
+
 
 
     ------------------------------------------
@@ -35,27 +38,28 @@
             https://ethereum.stackexchange.com/questions/1777/workflow-on-signing-a-string-with-private-key-followed-by-signature-verificatio
 
 
+
         ----------
         WARNING
         ----------
-        If you use ecrecover, be aware that 
-        a "valid signature" can be turned into a "different valid signature" 
-        without requiring knowledge of the corresponding private key. 
+        If you use "ecrecover", be aware that a "valid signature" can be turned into a "different valid signature" 
+            without requiring knowledge of the corresponding private key. 
         
         In the "Homestead" hard fork, this issue was fixed for _transaction_ signatures (see EIP-2), but the ecrecover function remained unchanged.
-
         This is usually not a problem unless you require signatures to be unique or use them to identify items. 
         
-        OpenZeppelin have a ECDSA helper library that you can use as a wrapper for ecrecover without this issue.
+        
+        "OpenZeppelin" have a ECDSA helper "library" that you can use as a wrapper for ecrecover without this issue.
+
+                https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/ECDSA.sol
 
 
-        ------------------------------------------
-        OpenZeppelin ECDSA
-        ------------------------------------------
-        https://docs.openzeppelin.com/contracts/2.x/api/cryptography#ECDSA
 
-        Elliptic Curve Digital Signature Algorithm (ECDSA) operations.
+    ------------------------------------------
+    OpenZeppelin ECDSA
+    ------------------------------------------
 
+    https://docs.openzeppelin.com/contracts/2.x/api/cryptography#ECDSA
 
         -----------
         FUNCTIONS
@@ -68,7 +72,7 @@
 
         The "data signer" can be recovered with "ECDSA.recover"
         and its address compared to verify the "signature"
-    
+
         Most wallets 
             will "hash the data" to sign 
             and add the prefix '\x19Ethereum Signed Message:\n'
@@ -83,11 +87,10 @@
 
         function _verify(bytes32 data, address account) pure returns (bool) {
 
-            return keccack256(data).toEthSignedMessageHash().recover(signature) == account;
+            return keccak256(data).toEthSignedMessageHash().recover(signature) == account;
 
         }
-
-
+        
         ----------
         WARNING
         ----------
@@ -134,19 +137,19 @@
         This replicates the behavior of the "eth_sign" JSON-RPC method.
 
 
-        ----------
-        Note
-        ----------
-        When running 'sha256', 'ripemd160' or 'ecrecover' on a "private blockchain" LIKE Ganache, you might encounter "Out-of-Gas"
+    ----------
+    Note
+    ----------
+    When running 'sha256', 'ripemd160' or 'ecrecover' on a "private blockchain" LIKE Ganache, you might encounter "Out-of-Gas"
 
-        This is because these functions are implemented as “precompiled contracts” 
-            and only really exist after they receive the first message (although their contract code is hardcoded). 
-        
-        Messages to "non-existing contracts" are "more expensive" 
-            and thus the execution might run into an Out-of-Gas error. 
-        
-        A workaround for this problem is to
-            first send Wei (1 for example) to each of the contracts before you use them in your actual contracts.
+    This is because these functions are implemented as “precompiled contracts” 
+        and only really exist after they receive the first message (although their contract code is hardcoded). 
+    
+    Messages to "non-existing contracts" are "more expensive" 
+        and thus the execution might run into an Out-of-Gas error. 
+    
+    A workaround for this problem is to
+        first send Wei (1 for example) to each of the contracts before you use them in your actual contracts.
 
-        Nevertheless, there is not such an issue in the mainnet or testnet!
+    Nevertheless, there is not such an issue in the mainnet or testnet!
 */
