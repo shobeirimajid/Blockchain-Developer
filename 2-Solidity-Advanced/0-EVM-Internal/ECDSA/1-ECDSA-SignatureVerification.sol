@@ -152,4 +152,15 @@
         first send Wei (1 for example) to each of the contracts before you use them in your actual contracts.
 
     Nevertheless, there is not such an issue in the mainnet or testnet!
+
+    ------------------------------------------
+    Why would I need this?
+    ------------------------------------------
+    We've actually discussed several examples of how one would use this before:
+
+        1. Meta Transactions
+        2. ERC20-Permit
+
+    Essentially you can verify signed data which doesn't have to come from the transaction signer.
+
 */
