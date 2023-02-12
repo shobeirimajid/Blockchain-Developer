@@ -63,9 +63,12 @@ contract MultiSigWallet {
     }
 
 
-    constructor(/*address[] memory _owners, */uint _numConfirmationsRequired) {
+    constructor(uint _numConfirmationsRequired) {
 
-        address[3] memory _owners = [0x367395559a1b8AA49B520409A48e8b1477247b39, 0x8E76f8f41ae019016aF18E15F7A80A610E7c61C2, 0xc952dc1646699dDFb69E256E83c0AA6de122214c];
+        address[3] memory _owners = 
+            [0x367395559a1b8AA49B520409A48e8b1477247b39, 
+            0x8E76f8f41ae019016aF18E15F7A80A610E7c61C2, 
+            0xc952dc1646699dDFb69E256E83c0AA6de122214c];
 
         require(_owners.length > 0, "owners required");
         require(_numConfirmationsRequired > 0 && _numConfirmationsRequired <= _owners.length, "invalid number of required confirmations");
@@ -90,6 +93,7 @@ contract MultiSigWallet {
     }
 
 
+    // Txs should be submit by one of registered owners.
     function submitTransaction(address _to, uint _value, bytes memory _data) public onlyOwner {
 
         uint txIndex = transactions.length;
@@ -131,6 +135,13 @@ contract MultiSigWallet {
         require(success, "tx failed");
 
         emit ExecuteTransaction(msg.sender, _txIndex);
+    }
+
+
+    function batchExecute() public onlyOwner {
+        for (uint i = 0; i < transactions.length; i++) {
+            executeTransaction(i);
+        }
     }
 
 
@@ -184,7 +195,7 @@ contract TestContract {
 
     // to generate some calldata for test mutiSigWallet
     function getData() public pure returns (bytes memory) {
-        return abi.encodeWithSignature("callMe(uint256)", 123);
+        return abi.encodeWithSignature("callMe(uint256)", 10);
     }
 }
 
@@ -198,23 +209,31 @@ contract TestContract {
 
         _numConfirmationsRequired : 3
 
+
     2. SubmitTransaction()
 
-        _to: 0x2066E1d32112E3367Ec4E75c71710A2E1941e5F9 // address of TestContract
+        _to: 0xbEDB15b59393ADdbf3960AC7097ae30875DFDe5D // address of TestContract
         _value: 1000000000000000000
-        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000007b // TestContract.callMe(123)
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
 
-         _to: 0x2066E1d32112E3367Ec4E75c71710A2E1941e5F9 // address of TestContract
+         _to: 0xbEDB15b59393ADdbf3960AC7097ae30875DFDe5D // address of TestContract
         _value: 2000000000000000000
-        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000007b // TestContract.callMe(uint256)
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
 
-         _to: 0x2066E1d32112E3367Ec4E75c71710A2E1941e5F9 // address of TestContract
+         _to: 0xbEDB15b59393ADdbf3960AC7097ae30875DFDe5D // address of TestContract
         _value: 3000000000000000000
-        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000007b // TestContract.callMe(uint256)
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
 
-    3. confirmTransaction(_txIndex)
+
+    3.  confirmTransaction(_txIndex)
+        each of owners have to confirm arbitrary numbers of TXs.
+        each Tx to be able to execute, have to be confirmed at least by _numConfirmationsRequired of owners
+        
 
     4. 
+        First send at least 6 ether to this contract
+        as values of txs will be send from SC's balance.
+
         executeTransaction(0)
         value: 1000000000000000000
 
