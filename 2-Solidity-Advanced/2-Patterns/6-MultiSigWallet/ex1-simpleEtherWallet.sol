@@ -8,6 +8,7 @@ pragma solidity ^0.8.17;
 */
 
 contract EtherWallet {
+    
     address payable public owner;
 
     constructor() {

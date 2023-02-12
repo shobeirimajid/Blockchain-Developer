@@ -40,7 +40,7 @@ contract MultiSigWallet {
     // txIndex => owner => bool
     mapping(uint => mapping(address => bool)) public isConfirmed;
 
-    Transaction[] public transactions;
+    Transaction[] transactions;
 
     modifier onlyOwner() {
         require(isOwner[msg.sender], "not owner");
@@ -63,7 +63,9 @@ contract MultiSigWallet {
     }
 
 
-    constructor(address[] memory _owners, uint _numConfirmationsRequired) {
+    constructor(/*address[] memory _owners, */uint _numConfirmationsRequired) {
+
+        address[3] memory _owners = [0x367395559a1b8AA49B520409A48e8b1477247b39, 0x8E76f8f41ae019016aF18E15F7A80A610E7c61C2, 0xc952dc1646699dDFb69E256E83c0AA6de122214c];
 
         require(_owners.length > 0, "owners required");
         require(_numConfirmationsRequired > 0 && _numConfirmationsRequired <= _owners.length, "invalid number of required confirmations");
@@ -124,6 +126,7 @@ contract MultiSigWallet {
 
         transaction.executed = true;
 
+        // value must be provided by this wallet contract
         (bool success, ) = transaction.to.call{value: transaction.value}(transaction.data);
         require(success, "tx failed");
 
@@ -169,10 +172,13 @@ pragma solidity ^0.8.17;
 
 contract TestContract {
 
+    event Received(address sender, uint amount);
+
     uint public i;
 
-    function callMe(uint j) public {
+    function callMe(uint j) public payable {
         i += j;
+        emit Received(msg.sender, msg.value);
     }
 
 
@@ -181,3 +187,40 @@ contract TestContract {
         return abi.encodeWithSignature("callMe(uint256)", 123);
     }
 }
+
+
+/*
+    1. Constructor()
+        _owners : 
+            ['0x367395559a1b8AA49B520409A48e8b1477247b39', 
+            '0x8E76f8f41ae019016aF18E15F7A80A610E7c61C2', 
+            '0xc952dc1646699dDFb69E256E83c0AA6de122214c']
+
+        _numConfirmationsRequired : 3
+
+    2. SubmitTransaction()
+
+        _to: 0x2066E1d32112E3367Ec4E75c71710A2E1941e5F9 // address of TestContract
+        _value: 1000000000000000000
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000007b // TestContract.callMe(123)
+
+         _to: 0x2066E1d32112E3367Ec4E75c71710A2E1941e5F9 // address of TestContract
+        _value: 2000000000000000000
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000007b // TestContract.callMe(uint256)
+
+         _to: 0x2066E1d32112E3367Ec4E75c71710A2E1941e5F9 // address of TestContract
+        _value: 3000000000000000000
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000007b // TestContract.callMe(uint256)
+
+    3. confirmTransaction(_txIndex)
+
+    4. 
+        executeTransaction(0)
+        value: 1000000000000000000
+
+        executeTransaction(1)
+        value: 2000000000000000000
+
+        executeTransaction(2)
+        value: 3000000000000000000
+*/
