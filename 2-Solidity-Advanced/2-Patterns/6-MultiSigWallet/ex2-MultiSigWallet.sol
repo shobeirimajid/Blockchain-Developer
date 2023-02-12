@@ -122,7 +122,7 @@ contract MultiSigWallet {
     }
 
 
-    function executeTransaction(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+    function executeTransaction(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) returns (bool success) {
 
         Transaction storage transaction = transactions[_txIndex];
 
@@ -131,7 +131,7 @@ contract MultiSigWallet {
         transaction.executed = true;
 
         // value must be provided by this wallet contract
-        (bool success, ) = transaction.to.call{value: transaction.value}(transaction.data);
+        (success, ) = transaction.to.call{value: transaction.value}(transaction.data);
         require(success, "tx failed");
 
         emit ExecuteTransaction(msg.sender, _txIndex);
@@ -139,8 +139,11 @@ contract MultiSigWallet {
 
 
     function batchExecute() public onlyOwner {
-        for (uint i = 0; i < transactions.length; i++) {
-            executeTransaction(i);
+
+        for (uint i=0; i<transactions.length; i++) {
+
+            if(!transactions[i].executed)
+                executeTransaction(i);
         }
     }
 
@@ -172,6 +175,11 @@ contract MultiSigWallet {
         Transaction storage transaction = transactions[_txIndex];
         return (transaction.to, transaction.value, transaction.data, transaction.executed, transaction.numConfirmations);
     }
+
+
+    function getBalance() external view returns (uint) {
+        return address(this).balance;
+    }
 }
 
 
@@ -197,7 +205,14 @@ contract TestContract {
     function getData() public pure returns (bytes memory) {
         return abi.encodeWithSignature("callMe(uint256)", 10);
     }
+
+
+    function getBalance() external view returns (uint) {
+        return address(this).balance;
+    }
 }
+
+
 
 
 /*
@@ -212,34 +227,43 @@ contract TestContract {
 
     2. SubmitTransaction()
 
-        _to: 0xbEDB15b59393ADdbf3960AC7097ae30875DFDe5D // address of TestContract
+        _to: 0x53B741C64dB3F0567334e651ce62BfEe020b802a // address of TestContract
         _value: 1000000000000000000
         _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
 
-         _to: 0xbEDB15b59393ADdbf3960AC7097ae30875DFDe5D // address of TestContract
+         _to: 0x53B741C64dB3F0567334e651ce62BfEe020b802a // address of TestContract
         _value: 2000000000000000000
         _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
 
-         _to: 0xbEDB15b59393ADdbf3960AC7097ae30875DFDe5D // address of TestContract
+         _to: 0x53B741C64dB3F0567334e651ce62BfEe020b802a // address of TestContract
         _value: 3000000000000000000
         _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
 
 
     3.  confirmTransaction(_txIndex)
-        each of owners have to confirm arbitrary numbers of TXs.
+        each of owners can confirm arbitrary numbers of TXs.
         each Tx to be able to execute, have to be confirmed at least by _numConfirmationsRequired of owners
         
 
     4. 
         First send at least 6 ether to this contract
-        as values of txs will be send from SC's balance.
+        because the value of each tx will be sent from SC's balance.
 
         executeTransaction(0)
         value: 1000000000000000000
+        transaction cost:	85_625 gas 
 
         executeTransaction(1)
         value: 2000000000000000000
+        transaction cost:	85_625 gas 
 
         executeTransaction(2)
         value: 3000000000000000000
+        transaction cost:	85_625 gas 
+
+    
+        or
+            batchExecute()
+            transaction cost ( 5 tx in 1 tx) :  266_514 
+            running batchExecute() in compare to executeTransaction() save 50% gas per each tx
 */
