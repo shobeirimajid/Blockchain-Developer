@@ -16,24 +16,24 @@ pragma solidity >=0.6.2 <0.9.0;
 
 
 
-        A  ------------- call() -------------> B  ------------- call() -------------> C
+        A  ───────────── call() ─────────────► B  ───────────── call() ─────────────► C
     msg.sender                             msg.sender                             msg.sender 
   (userA address)                      (ContractA address)                    (ContractB address)
 
 
-        A  ---------- delegatecall() ------->  B  --------- delegatecall() ---------> C
-    msg.sender <-----------------------------  * <----------------------------------- *
+        A  ────────── delegatecall() ───────►  B  ────────── delegatecall() ────────► C
+    msg.sender ◄─────────────────────────────  * ◄─────────────────────────────────── *
   (userA address)                        (userA address)                        (userA address)
 
 
-        A  ------------- call() ------------->  B  --------- delegatecall() ---------> C
-    msg.sender                              msg.sender <------------------------------ *   
-  (userA address)                       (ContractA address)                    (ContractA address)         
+        A  ───────────── call() ─────────────►  B  ───────── delegatecall() ────────► C
+    msg.sender                              msg.sender ◄───────────────────────────── *   
+  (userA address)                      (ContractA address)                   (ContractA address)         
 
 
-        A  ---------- delegatecall() ------->  B  ------------- call() -------------> C
-    msg.sender <-----------------------------  *                                  msg.sender 
-  (userA address)                         (userA address)                      (ContractB address)
+        A  ────────── delegatecall() ───────►  B  ───────────── call() ─────────────► C
+    msg.sender ◄─────────────────────────────  *                                  msg.sender 
+  (userA address)                        (userA address)                      (ContractB address)
 
 
 
