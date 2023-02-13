@@ -202,6 +202,125 @@
                 https://dashboard.alchemy.com/
 
 
+        ------------------------------------
+        2. Chainlink VRF
+        ------------------------------------
+            https://docs.chain.link/vrf/v2/introduction
+
+            Chainlink VRF (Verifiable Random Function) is a provably fair and verifiable 
+                random number generator (RNG) that enables smart contracts to access random values without compromising security or usability. 
+            For each request, Chainlink VRF generates one or more random values and cryptographic proof of how those values were determined. 
+            The proof is published and verified on-chain before any consuming applications can use it. 
+            This process ensures that results cannot be tampered with or manipulated by any single entity including 
+                oracle operators, 
+                miners, 
+                users, 
+                or smart contract developers.
+
+            ------------------------------------
+            Use Case
+            ------------------------------------
+            Use Chainlink VRF to build reliable smart contracts for any applications that rely on unpredictable outcomes:
+                - Building blockchain games and NFTs.
+                - Random assignment of duties and resources (For example, randomly assigning judges to cases)
+                - Choosing a representative sample for consensus mechanisms.
+
+
+            ------------------------------------
+            Randomness Request Methods
+            ------------------------------------
+            Chainlink VRF v2 offers two methods for requesting randomness:
+
+                1. Subscription : https://docs.chain.link/vrf/v2/subscription/
+                    Create a subscription account and fund its balance with LINK tokens. 
+                    Users can then connect multiple consuming contracts to the subscription account. 
+                    When the consuming contracts request randomness, 
+                        the transaction costs are calculated after the randomness requests are fulfilled 
+                        and the subscription balance is deducted accordingly. 
+                    This method allows you to fund requests for multiple consumer contracts from a single subscription.
+
+                2. Direct funding : https://docs.chain.link/vrf/v2/direct-funding/
+                    Consuming contracts directly pay with LINK when they request random values. 
+                    You must directly fund your consumer contracts and ensure that there are enough LINK tokens to pay for randomness requests.
+
+
+            -------------
+            FAUCETS
+            -------------
+            Testnet LINK
+                https://faucets.chain.link/goerli
+
+            Testnet ETH
+                https://goerlifaucet.com/
+                https://faucetlink.to/goerli
+
+
+            ------------------------------------
+            Supported networks
+            ------------------------------------
+                Subscription : https://docs.chain.link/vrf/v2/subscription/supported-networks/
+
+                    Goerli testnet
+                        LINK Token	                0x326C977E6efc84E512bB9C30f76E30c160eD06FB
+                        VRF Coordinator	            0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D
+                        150 gwei Key Hash	        0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15
+                        Premium	                    0.25 LINK
+                        Max Gas Limit	            2_500_000
+                        Minimum Confirmations	    3
+                        Maximum Confirmations	    200
+                        Maximum Random Values       500
+
+                Direct Funding : https://docs.chain.link/vrf/v2/direct-funding/supported-networks/
+
+                    Goerli testnet
+                        LINK Token	                0x326C977E6efc84E512bB9C30f76E30c160eD06FB
+                        VRF Wrapper	                0x708701a1DfF4f478de54383E49a627eD4852C816
+                        VRF Coordinator	            0x2ca8e0c643bde4c2e08ab1fa0da3401adad7734d
+                        Wrapper Premium Percentage	0
+                        Coordinator Flat Fee	    0.25 LINK
+                        Maximum Confirmations	    200
+                        Maximum Random Values	    10
+                        Wrapper Gas overhead	    40_000
+                        Coordinator Gas Overhead	90_000
+
+            
+            ------------------------------------
+            Get a Random Number  
+            ------------------------------------
+
+            subscription method
+                https://docs.chain.link/vrf/v2/subscription/examples/get-a-random-number/
+
+            direct-funding
+                https://docs.chain.link/vrf/v2/direct-funding/examples/get-a-random-number/
+                This guide explains how to get random values using a simple contract to request and receive random values from Chainlink VRF v2 
+                    without managing a subscription. 
+
+                After you deploy your contract, copy the address from the Deployed Contracts list in Remix. 
+                Before you can request randomness from VRF v2, you must fund your consuming contract with enough LINK tokens 
+                    in order to request for randomness.
+                    https://docs.chain.link/resources/acquire-link/
+                    https://faucets.chain.link/
+
+
+            ------------------------------------
+            VRF Best Practices
+            ------------------------------------
+                https://docs.chain.link/vrf/v2/best-practices/
+
+                    Getting a random number within a range
+                    Getting multiple random values
+                    Processing simultaneous VRF requests
+                    Processing VRF responses through different execution paths
+
+
+
+
+
+
+
+                
+
 
         
 
