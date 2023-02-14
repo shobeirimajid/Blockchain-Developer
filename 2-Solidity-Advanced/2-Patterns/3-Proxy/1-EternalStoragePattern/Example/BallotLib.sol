@@ -1,0 +1,19 @@
+//SPDX-License-Identifier: MIT
+pragma solidity 0.8.1;
+import "./ExternalStorage.sol";
+
+// library does a delegatecall, 
+// which executes the libraries code in the context of the Ballot Smart Contract.
+// If you were to use msg.sender in the library, 
+//  then it has the same value as in the Ballot Smart Contract itself.
+
+library ballotLib {
+
+    function getNumberOfVotes(address _externalStorage) public view returns (uint256)  {
+        return ExternalStorage(_externalStorage).getUIntValue(keccak256('votes'));
+    }
+
+    function setVoteCount(address _externalStorage, uint _voteCount) public {
+        ExternalStorage(_externalStorage).setUIntValue(keccak256('votes'), _voteCount);
+    }
+}
