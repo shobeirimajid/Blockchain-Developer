@@ -170,18 +170,22 @@
         ------------------------------------
 
             1. Data Feeds
+
                 to obtain accurate real-time asset prices
                 https://docs.chain.link/data-feeds/
             
             2. VRF (Verifiable Random Numbers)
+
                 to consume randomness in your smart contracts.
                 https://docs.chain.link/vrf/v2/introduction/
 
             3. Any API (Call External APIs)
+
                 to Request & Receive data from any API using the Chainlink contract library.
                 https://docs.chain.link/any-api/introduction/
 
             4. Automation (Automate Smart Contract Functions)
+            
                 Automating smart contract functions and regular contract maintenance.
                 https://docs.chain.link/chainlink-automation/introduction/
 
