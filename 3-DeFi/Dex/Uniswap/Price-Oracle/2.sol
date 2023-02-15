@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity =0.7.6;
+pragma solidity 0.8.17;
 pragma abicoder v2;
 
 //import "https://github.com/Uniswap/uniswap-v3-periphery/blob/main/contracts/interfaces/ISwapRouter.sol";
 //import "https://github.com/Uniswap/uniswap-v3-periphery/blob/main/contracts/interfaces/IQuoter.sol";
-
 import '@uniswap/v3-periphery/contracts/interfaces/ISwapRouter.sol';
 import '@uniswap/v3-periphery/contracts/interfaces/IQuoter.sol';
 
@@ -13,12 +12,16 @@ interface IUniswapRouter is ISwapRouter {
 }
 
 contract Uniswap3 {
+
   IUniswapRouter public constant uniswapRouter = IUniswapRouter(0xE592427A0AEce92De3Edee1F18E0157C05861564);
   IQuoter public constant quoter = IQuoter(0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6);
-  address private constant multiDaiKovan = 0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa;
-  address private constant WETH9 = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+  address private constant multiDaiKovan = 0xdc31Ee1784292379Fbb2964b3B9C4124D8F89C60; //0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa;
+  address private constant WETH9 = 0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6; //0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+
+
 
   function convertExactEthToDai() external payable {
+
     require(msg.value > 0, "Must pass non 0 ETH amount");
 
     uint256 deadline = block.timestamp + 15; // using 'now' for convenience, for mainnet pass deadline from frontend!
@@ -49,7 +52,10 @@ contract Uniswap3 {
     require(success, "refund failed");
   }
   
+
+
   function convertEthToExactDai(uint256 daiAmount) external payable {
+
     require(daiAmount > 0, "Must pass non 0 DAI amount");
     require(msg.value > 0, "Must pass non 0 ETH amount");
       
@@ -81,8 +87,11 @@ contract Uniswap3 {
     require(success, "refund failed");
   }
   
+
+
   // do not used on-chain, gas inefficient!
   function getEstimatedETHforDAI(uint daiAmount) external payable returns (uint256) {
+    
     address tokenIn = WETH9;
     address tokenOut = multiDaiKovan;
     uint24 fee = 3000;
