@@ -44,24 +44,38 @@ contract Factory {
     function create2BySalt(bytes32 salt, address arg) public returns(address createdAdr) {
 
         // pre-compute the address
-        address predictedAdr = address(uint160(uint(keccak256(abi.encodePacked(
-            bytes1(0xff),
-            address(this),
-            salt,
-            keccak256(abi.encodePacked(
-                type(Account).creationCode,
-                abi.encode(arg)
-            ))
-        )))));
+        address predictedAdr = 
+
+            address(
+                uint160(
+                    uint(
+                        keccak256(
+                            abi.encodePacked(
+                                bytes1(0xff),
+                                address(this),
+                                salt,
+                                keccak256(
+                                    abi.encodePacked(
+                                        type(Account).creationCode,
+                                        abi.encode(arg)
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
 
         Account d = new Account{salt: salt}(arg);
         createdAdr = address(d);
 
         require(createdAdr == predictedAdr);
+
         accounts.push(createdAdr);
         codes[createdAdr] = createdAdr.code;
 
         emit Deployed(address(d), salt);
+        
         return createdAdr;
     }
 

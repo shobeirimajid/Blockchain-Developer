@@ -27,3 +27,13 @@ contract Factory {
 contract NoConstructor {
     uint public myUint = 5;
 }
+
+
+
+contract WithConstructor {
+  address public owner;
+  
+  constructor(address _owner) {
+    owner = _owner;
+  }
+}
