@@ -215,17 +215,22 @@
 
     And dangerous!
 
-    Let's give it a try. 
-    The full example can be found here:
+    
+        ------------------------------------------------------------------------------------------------------------
+            The full example can be found here:
+            https://github.com/0age/metamorphic
 
-        https://github.com/0age/metamorphic
         Metamorphic - A factory contract for creating metamorphic (i.e. redeployable) contracts.
         This factory contract creates "metamorphic contracts"
         "metamorphic contracts" : contracts that can be redeployed with new code to the same address.
+        ------------------------------------------------------------------------------------------------------------
+
+
+    Let's give it a try. 
 
     I am running a minimal example here for you to understand what's going on under the hood!
-
         see the "ex5-Metamorphosis.sol"
+
 
     What does it do? 
     
