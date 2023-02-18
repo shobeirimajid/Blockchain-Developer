@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
+pragma abicoder v2;
+//pragma experimental ABIEncoderV2;
 
 
 
@@ -82,12 +84,14 @@ contract Proxy {
 
     // 1- for unknown preimage
     // 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc
-    bytes32 private constant IMPLEMENTATION_SLOT =
-        bytes32(uint(keccak256("eip1967.proxy.implementation")) - 1);
+    bytes32 private constant IMPLEMENTATION_SLOT = bytes32(
+        uint(keccak256("eip1967.proxy.implementation")) - 1
+    );
 
     // 0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103
-    bytes32 private constant ADMIN_SLOT =
-        bytes32(uint(keccak256("eip1967.proxy.admin")) - 1);
+    bytes32 private constant ADMIN_SLOT = bytes32(
+        uint(keccak256("eip1967.proxy.admin")) - 1)
+    ;
 
     constructor() {
         _setAdmin(msg.sender);
@@ -111,6 +115,10 @@ contract Proxy {
         StorageSlot.getAddressSlot(ADMIN_SLOT).value = _admin;
     }
 
+    // Admin interface
+    function changeAdmin(address _admin) external ifAdmin {
+        _setAdmin(_admin);
+    }
 
     function _getImplementation() private view returns (address) {
         return StorageSlot.getAddressSlot(IMPLEMENTATION_SLOT).value;
@@ -119,12 +127,6 @@ contract Proxy {
     function _setImplementation(address _implementation) private {
         require(_implementation.code.length > 0, "implementation is not contract");
         StorageSlot.getAddressSlot(IMPLEMENTATION_SLOT).value = _implementation;
-    }
-
-
-    // Admin interface
-    function changeAdmin(address _admin) external ifAdmin {
-        _setAdmin(_admin);
     }
 
     // 0x3659cfe6
@@ -211,7 +213,10 @@ contract Proxy {
     }
 }
 
+
+
 contract ProxyAdmin {
+
     address public owner;
 
     constructor() {
@@ -237,8 +242,8 @@ contract ProxyAdmin {
         return abi.decode(res, (address));
     }
 
-    function changeProxyAdmin(address payable proxy, address admin) external onlyOwner {
-        Proxy(proxy).changeAdmin(admin);
+    function changeProxyAdmin(address payable proxy, address _admin) external onlyOwner {
+        Proxy(proxy).changeAdmin(_admin);
     }
 
     function upgrade(address payable proxy, address implementation) external onlyOwner {
@@ -246,28 +251,32 @@ contract ProxyAdmin {
     }
 }
 
+
+
 library StorageSlot {
+
     struct AddressSlot {
         address value;
     }
 
-    function getAddressSlot(
-        bytes32 slot
-    ) internal pure returns (AddressSlot storage r) {
+    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
         assembly {
             r.slot := slot
         }
     }
 }
 
+
+
 contract TestSlot {
+
     bytes32 public constant slot = keccak256("TEST_SLOT");
 
     function getSlot() external view returns (address) {
         return StorageSlot.getAddressSlot(slot).value;
     }
 
-    function writeSlot(address _addr) external {
+    function setSlot(address _addr) external {
         StorageSlot.getAddressSlot(slot).value = _addr;
     }
 }
@@ -284,10 +293,44 @@ contract TestSlot {
 
 
     This example shows:
-
         how to use 'delegatecall' and return data when 'fallback' is called.
         how to store address of admin and implementation in a specific slot.
 
 
+    Video:
+        https://youtu.be/EUOERNErbyI
+
+
+    1- Deploy COUNTERV1
+        0x1d142a62E2e98474093545D4A3A0f7DB9503B8BD
+
+    2- Deploy COUNTERV2
+        0xF27374C91BF602603AC5C9DaCC19BE431E3501cb
+
+    3- Deploy Proxy
+        0x26b989b9525Bb775C8DEDf70FeE40C36B397CE67
+
+    4- Deploy ProxyAdmin
+        0x8B801270f3e02eA2AACCf134333D5E5A019eFf42
+
+    5- call Proxy.upgradeTo(address COUNTERV1)
+        "address _implementation": "0x1d142a62E2e98474093545D4A3A0f7DB9503B8BD
+
+    6- call Proxy.changeAdmin(address ProxyAdmin)
+        "address _admin": "0x8B801270f3e02eA2AACCf134333D5E5A019eFf42"
+
+    7- call ProxyAdmin.getProxyAdmin(address Proxy)
+        returns: address of ProxyAdmin : 0x8B801270f3e02eA2AACCf134333D5E5A019eFf42
+
+    8- call ProxyAdmin.getProxyOmplementation(address Proxy)
+        returns: address of COUNTERV1 : 0x1d142a62E2e98474093545D4A3A0f7DB9503B8BD
+
+    9- select CounterV1 and past address of proxy into "At Address"
+        see "inc" and "count" in interface
+
+    10- call ProxyAdmin.upgrade(Proxy adr, implementation : COUNTERV2 adr)
+
+    11- select CounterV2 and past address of proxy into "At Address"
+        see "dec", "inc" and "count" in interface
 
 */

@@ -4,10 +4,8 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 
-
 contract CloneFactory {
  
-
     function createClone(address target) internal returns (address result) {
 
         // convert address to 20 bytes
@@ -89,19 +87,52 @@ contract CloneFactory {
 
 
 
-contract Thing {
+// library contract
+contract libraryContract {
 
-    string name; 
-    uint value;
+    /*function init(address _thing, string memory _name, uint _value) public returns (bool status, bytes memory result) {
+        bytes memory data = abi.encodeWithSignature("init(address,uint)", _name, _value);
+        (status, result) = _thing.delegatecall(data);
+        require(status, "call failed");
+    }*/
 
-    constructor(string memory _name, uint _value) {
-        name = _name;
-        value = _value;
-    }
+    string public name; 
+    uint public value;
 
     function init(string memory _name, uint _value) public {
         name = _name;
         value = _value;
+    }
+}
+
+
+
+// master contract
+contract Thing is Ownable {
+
+    string public name; 
+    uint public value;
+
+    address public libraryAddress;
+
+    function setLibraryAddress(address _libraryAddress) public onlyOwner {
+        libraryAddress = _libraryAddress;
+    }
+
+    /*constructor(string memory _name, uint _value) {
+        name = _name;
+        value = _value;
+    }*/
+
+    /*function init(string memory _name, uint _value) public {
+        name = _name;
+        value = _value;
+    }*/
+
+    function init(string memory _name, uint _value) public returns (bool status, bytes memory result) {
+        bytes memory data = abi.encodeWithSignature("init(address,uint)", _name, _value);
+        (status, result) = libraryAddress.delegatecall(data);
+        require(status, "call failed");
     }
 
 }
@@ -153,6 +184,26 @@ contract ThingFactory is Ownable, CloneFactory {
 
 
 
+contract Helper {
+
+    /*function getBytecode1() external pure returns (bytes memory) {
+        bytes memory bytecode = type(TestContract1).creationCode;
+        return bytecode;
+    }*/
+
+
+    /*function getBytecode2(uint _x, uint _y) external pure returns (bytes memory) {
+        bytes memory bytecode = type(TestContract2).creationCode;
+        return abi.encodePacked(bytecode, abi.encode(_x, _y));
+    }*/
+
+    function getCalldata(string memory _name, uint _value) external pure returns (bytes memory) {
+        return abi.encodeWithSignature("init(address,uint)", _name, _value);
+    }
+}
+
+
+
 
 /*
     ---------------------------
@@ -174,4 +225,14 @@ contract ThingFactory is Ownable, CloneFactory {
         The 'deployed bytecode' just 'delegates' all calls to the 'master contract' address
 
 
+        1-Deploy Library Contract
+            0x1c91347f2A44538ce62453BEBd9Aa907C662b4bD
+
+        2-Deploy ThingFactory contract
+
+        3-call ThingFactory.setLibraryAddress(_libraryAddress)
+
+        3-Call ThingFactory.createThing(name, value)
+            clone contract address:
+            0x8dF5FC7AfF228ABa3F0fcf0433B421C4647beBEd
 */
