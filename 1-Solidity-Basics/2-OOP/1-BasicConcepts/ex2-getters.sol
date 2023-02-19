@@ -84,3 +84,36 @@ contract Getter {
 
     }
 }
+
+
+
+/*
+    ------------------------------------
+    Note: restriction in return types
+    ------------------------------------
+    You cannot return some types from "non-internal" functions. 
+    This includes the types listed below and any composite types that recursively contain them:
+
+        - mappings
+        - internal function types
+        - reference types with location set to storage
+        - multi-dimensional arrays (applies only to ABI coder v1)
+        - structs (applies only to ABI coder v1).
+
+    This restriction does not apply to "library" functions 
+    because of their different internal ABI.
+        https://docs.soliditylang.org/en/latest/contracts.html#library-selectors
+
+
+    ABI coder
+    https://docs.soliditylang.org/en/latest/layout-of-source-files.html#abi-coder
+
+    two implementations of the ABI encoder and decoder:
+        pragma abicoder v1
+        pragma abicoder v2
+
+    The new ABI coder (v2) is able to encode and decode arbitrarily "nested arrays" and "structs"
+    it is enabled by default starting with Solidity 0.8.0. 
+    The old ABI coder can still be selected using : pragma abicoder v1;
+
+*/
