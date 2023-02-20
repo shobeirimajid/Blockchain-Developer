@@ -24,9 +24,9 @@
     and the conversion between the ABI and an interface should be possible without any information loss.
 
 
-    ------------------------
-    inherit the interfaces
-    ------------------------
+    --------------------------
+    inheriting the interfaces
+    --------------------------
     Contracts can inherit interfaces as they would inherit other contracts.
 
     All functions declared in interfaces are implicitly 'virtual'
@@ -37,6 +37,12 @@
 
     Interfaces can inherit from other interfaces. 
      This has the same rules as normal inheritance.
+
+    
+    Types defined inside interfaces and other contract-like structures 
+        can be accessed from other contracts.
+
+    
 
 
 
