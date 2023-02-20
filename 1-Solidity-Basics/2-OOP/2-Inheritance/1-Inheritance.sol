@@ -49,13 +49,4 @@
     especially concerning multiple inheritance
     but there are also some differences
         https://docs.soliditylang.org/en/latest/contracts.html#multi-inheritance
-
-        
-
-
-
-    
-
-
-
 */

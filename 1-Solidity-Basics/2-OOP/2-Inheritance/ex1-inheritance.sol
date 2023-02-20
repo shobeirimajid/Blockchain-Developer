@@ -107,6 +107,17 @@ contract Named is Owned, Destructible {
 
             // It is still possible to call a specific overridden function.
             Destructible.destroy();
+
+            /*
+                ---------
+                Note 
+                ---------
+                we call Destructible.destroy() to “forward” the destruction request. 
+                The way this is done is problematic!
+                As we'll see in the next example, The way around this is to use of 
+                'super.destroy()' instead of 'Destructible.destroy()' 
+            */
+
         }
     }
 }
