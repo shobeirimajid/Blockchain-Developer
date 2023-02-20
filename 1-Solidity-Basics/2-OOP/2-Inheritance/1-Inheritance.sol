@@ -4,6 +4,8 @@
     ---------------
     https://docs.soliditylang.org/en/latest/contracts.html#inheritance
     
+
+
     ---------------
     Polymorphism
     ---------------
@@ -36,6 +38,7 @@
         Note: super.f() will use JUMP and not a message call
 
 
+
     ------------------------
     State variable shadowing
     ------------------------
@@ -47,6 +50,26 @@
     The general inheritance system is very similar to Python’s
         https://docs.python.org/3/tutorial/classes.html#inheritance
     especially concerning multiple inheritance
+
     but there are also some differences
         https://docs.soliditylang.org/en/latest/contracts.html#multi-inheritance
+
+    
+
+    -----------------------------------------------------------
+    Inheriting Different Kinds of Members of the Same Name
+    -----------------------------------------------------------
+    It is an error when 
+    any of the following pairs in a contract have the same name due to inheritance:
+
+        - a function and a modifier
+
+        - a function and an event
+
+        - an event and a modifier
+
+    an exception:
+
+        - a "state variable getter" can override an "external function"
+
 */
