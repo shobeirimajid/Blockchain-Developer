@@ -2,14 +2,19 @@
     -------------
     Libraries
     -------------
+    library is an isolated piece of source code
+
+    if all library functions are internal
+        - the library is embedded into the contract 
+    Otherwise 
+        - the library must be deployed and then linked before the contract is deployed
+
+
     Libraries are similar to contracts
-
-
     but : 
-        - library is an isolated piece of source code
         - it is not possible to destroy a library
         - libraries are assumed to be stateless
-        - libraries disallows state-modifying functions to be called directly (without DELEGATECALL)
+        - libraries disallows state-modifying functions (like send ether) to be called directly (without DELEGATECALL)
         - they are deployed only once at a specific address
         - their code is reused using the DELEGATECALL (CALLCODE until Homestead) feature of the EVM
         - they cannot have state variables
@@ -296,15 +301,5 @@
     The only situation where no copy will be performed 
     is when storage reference variables are used 
     or when internal library functions are called.
-
-    
-
-
-
-
-
-
-
-
 
 */
