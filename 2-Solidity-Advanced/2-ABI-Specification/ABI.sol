@@ -4,7 +4,7 @@
     Application Binary Interface
     -----------------------------
 
-    https://docs.soliditylang.org/en/v0.8.18/abi-spec.html#abi
+    https://docs.soliditylang.org/en/latest/abi-spec.html
     
 
     An Application Binary Interface (ABI) is a collection of Fragments which specify 
@@ -21,8 +21,6 @@
         and will most likely use a Contract which provides a more convenient interface. 
     Some framework, tool developers or developers using advanced techniques may find these classes and utilities useful.
     https://docs.ethers.org/v5/api/utils/abi/
-
-    
 
 */
 
