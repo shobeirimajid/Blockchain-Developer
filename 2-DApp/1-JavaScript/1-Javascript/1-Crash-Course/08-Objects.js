@@ -24,3 +24,43 @@ myObj.myThirdKey = true;
 
 // If you try to access a value that's not yet set, you'll get undefined.
 myObj.myFourthKey; // = undefined
+
+
+var cuboid = {
+    length: 25,
+    width: 50,
+    height: 200
+};
+
+//your code goes here
+let volume = cuboid.length * cuboid.width * cuboid.height;
+console.log(volume);
+
+
+
+/*
+    Sometimes, we need to set an "object type" 
+        that can be used to create a number of objects of a single type.
+
+    The standard way to create an "object type" 
+        is to use an object constructor function.
+*/
+
+
+function person(name, age, color) {
+    this.name = name;
+    this.age = age;
+    this.favColor = color;
+  }
+
+  /*
+    The above function (person) is an object constructor, 
+        which takes parameters and assigns them to the object properties.
+  */
+
+//                   name,  age, color
+var p1 = new person("John", 42, "green");
+var p2 = new person("Amy", 21, "red");
+
+console.log("p1.age", p1.age); 
+console.log("p2.name", p2.name);
