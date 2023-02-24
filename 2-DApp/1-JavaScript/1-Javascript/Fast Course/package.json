@@ -1,0 +1,11 @@
+{
+  "name": "fast-course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "0-Intro.js",
+  "scripts": {
+    "start": "node 0-Intro.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
