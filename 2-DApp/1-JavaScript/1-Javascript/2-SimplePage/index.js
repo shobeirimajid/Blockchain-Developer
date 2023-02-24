@@ -1807,14 +1807,267 @@ document.write(" " + namevar + "! How are you today?");
 
 
 
+    We can pass any number of arguments to the function 
+    and access it using the 'arguments' object.
+
+
+    While this does the job, 
+    ES6 provides a more readable syntax to achieve variable number of parameters 
+    by using a rest parameter
+
+
+        function containsAll(arr, ...nums) {
+            for (let num of nums) {
+                if (arr.indexOf(num) === -1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        let x = [2, 4, 6, 7];
+        console.log(containsAll(x, 2, 4, 7));   // true
+        console.log(containsAll(x, 6, 4, 9));   // false
+
+
+
+    The '...nums' parameter is called a 'rest' parameter
+        It takes all the "extra" arguments passed to the function
+    
+    The three dots (...) are called the 'Spread' operator
+
+    Only the last parameter of a function may be marked as a rest parameter.
+
+    If there are no extra arguments, 
+    the rest parameter will simply be an empty array; 
+    
+    the rest parameter will never be undefined.
+
+
+
+
+    Example:  calculate the sum of any number of values
+
+        //complete the function
+        function Add(...nums){
+            var sum = 0;
+            for (let num of nums) {
+                sum += num;
+            }
+            return sum;
+        }
+
+        console.log(Add(1,2,3));
+        console.log(Add(4,14,5,9,14));
+        console.log(Add(2,36));
+
+
+
+
+    Example:  calculate the sum of even number of input values
+
+        function magic(...nums) {
+            let sum = 0;
+            nums.filter(n => n % 2 == 0).map(el => sum+= el);
+            return sum;
+        }
+        console.log(magic(1, 2, 3, 4, 5, 6));
+
+
+
+    ---------------------------
+    The Spread Operator
+    ---------------------------
+    This operator is similar to the Rest Parameter, 
+    but it has another purpose when used in objects or arrays or function calls (arguments).
+
+
+    Spread in function calls
+
+    It is common to pass the elements of an array as arguments to a function. 
+
+
+    Before ES6, we used the following method:
+
+
+        function myFunction(w, x, y, z) {
+            console.log(w + x + y + z);
+        }
+        var args = [1, 2, 3];
+        myFunction.apply(null, args.concat(4)); 
+
+    
+    ES6 provides an easy way to do the example above with spread operators
+
+
+        const myFunction = (w, x, y, z) => {
+            console.log(w + x + y + z);         // 10
+        };
+        let args = [1, 2, 3];
+        myFunction(...args, 4);
+
         
+    Example:
+
+
+        var dateFields = [1970, 0, 1];          // 1 Jan 1970
+        var date = new Date(...dateFields);
+        console.log(date);                      // 1969-12-31T20:30:00.000Z 
+
+
+    ---------------------------
+    Spread in array literals
+    ---------------------------
+    Before ES6, we used the following syntax to add an item at middle of an array:
+
+
+
+        var arr = ["One", "Two", "Five"];
+
+        arr.splice(2, 0, "Three");
+        arr.splice(3, 0, "Four");
+        console.log(arr);           // ["One", "Two", "Three", "Four", "Five"]
+
+
+    You can use methods such as :
+        push
+        splice 
+        concat
+
+    for example, to achieve this in different positions of the array. 
+    However, in ES6 the spread operator lets us do this more easily:
+
+
+        let newArr = ['Three', 'Four']; 
+        let arr = ['One', 'Two', ...newArr, 'Five'];
+        console.log(arr);           
         
+    
+    ---------------------------
+    Spread in object literals
+    ---------------------------
+    In objects it copies the own enumerable properties 
+    from the provided object onto a new object.
+
+
+        const obj1 = { foo: 'bar', x: 42 };
+        const obj2 = { foo: 'baz', y: 5 };
+
+        const clonedObj = { ...obj1 };              // { foo: "bar", x: 42 }
+        const mergedObj = { ...obj1, ...obj2 };     // { foo: "baz", x: 42, y: 5 }
+
+
+    However, if you try to merge them you will not get the result you expected:
+
+            
+        const obj1 = { foo: 'bar', x: 42 };
+        const obj2 = { foo: 'baz', y: 5 };
+
+        const merge = (...objects) => ({ ...objects });     //  merge is null
+
+        let mergedObj = merge (obj1, obj2);
+
+            // { 0: { foo: 'bar', x: 42 }, 1: { foo: 'baz', y: 5 } }
+
+        let mergedObj2 = merge ({}, obj1, obj2);
+
+            // { 0: {}, 1: { foo: 'bar', x: 42 }, 2: { foo: 'baz', y: 5 } }
 
     
 
+    Shallow cloning or merging objects is possible with 
+    another operator called Object.assign().   
+    
+    
+    
+    ---------------------------
+    Classes in ES6
+    ---------------------------
+    In this lesson we'll explain 
+    how to create a class 
+    that can be used to create multiple objects of the same structure.
+
+    A class uses the keyword class 
+    and contains a constructor method for initializing.
+
+
+    For example:
 
 
 
+        class Rectangle {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+        }
+
+    
+
+    A declared class can then be used to 
+    create multiple objects using the keyword new.
+
+    For example:
+
+
+
+        class Rectangle {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+        }
+
+        const square = new Rectangle(5, 5);
+        const poster = new Rectangle(2, 3); 
+
+        console.log(square.height);
+
+
+
+    Class Declarations are not hoisted 
+        while Function Declarations are. 
+    If you try to access your class before declaring it, 
+        ReferenceError will be returned.
+
+    
+    You can also define a class with a class expression, 
+    where the class can be named or unnamed.
+
+    A named class looks like:
+
+
+        var Square = class Rectangle {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+        };
+
+
+    In the unnamed class expression, 
+    a variable is simply assigned the class definition:
+
+
+        var Square = class {
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+        };
+    
+
+
+    The constructor is a special method 
+    which is used for creating and initializing an object created with a class.
+
+    There can be only one constructor in each class.
+
+
+    ---------------------------
+    Class Methods in ES6
+    ---------------------------
+    
 
 
 
