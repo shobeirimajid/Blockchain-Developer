@@ -892,8 +892,6 @@ document.write(" " + namevar + "! How are you today?");
 
 
 
-
-
     Image Slider
 
 
@@ -986,7 +984,7 @@ document.write(" " + namevar + "! How are you today?");
         Number: <input type="text" name="num1" id="num1" /> <br />
         Repeat: <input type="text" name="num2" id="num2" /> <br />
         <input type="submit" value="Submit" />
-        
+
     </form>
     
     
@@ -1010,10 +1008,818 @@ document.write(" " + namevar + "! How are you today?");
 
 
 
+    We return true only when the values are not blank and are equal.
+
+    The form will not get submitted if its onsubmit event returns false.
 
 
 */
     
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+    ECMAScript 6
+
+    ECMAScript (ES) is a scripting language specification created to standardize JavaScript.
+
+    The Sixth Edition, 
+        initially known as ECMAScript 6 (ES6) 
+        and later renamed to ECMAScript 2015, 
+    adds significant new syntax for writing complex applications, 
+
+    including :
+
+        classes 
+        modules
+        iterators 
+        for/of loops 
+        generators
+        arrow functions 
+        binary data
+        typed arrays
+        collections (maps, sets, weak maps)
+        promises
+        number and math enhancements
+        reflection
+        proxies
+
+    In other words, ES6 is a superset of JavaScript (ES5). 
+    The reason that ES6 became so popular is that 
+    it introduced new conventions and OOP concepts such as classes.
+
+    In this module, we cover the most important additions to ES6.
+
+    So, let's jump right in!
+
+
+    -------------------
+    var & let
+    -------------------
+    In ES6 we have three ways of declaring variables:
+
+        var a = 10;
+        const b = 'hello';
+        let c = true;
+    
+    The type of declaration used depends on the necessary scope. 
+    Scope is the fundamental concept in all programming languages 
+    that defines the visibility of a variable.
+
+    var 
+        defines a variable globally, or locally to an "entire function"
+        regardless of block scope
+    
+    let 
+        allows you to declare variables that are limited in scope 
+        to the block, statement, or expression in which they are used.
+
+    For example:
+
+        if (true) {
+            let name = 'Jack';
+        }
+        // name isn't reachable
+        alert(name);
+
+
+    In this case, 
+    the name variable is accessible only in the scope of the if statement 
+    because it was declared as let.
+
+    To demonstrate the difference in scope between var and let,
+    consider this example:
+
+
+        function varTest() {
+            var x = 1;
+            if (true) {
+                var x = 2;          // same variable
+                console.log(x);     // 2
+            }
+            console.log(x);         // 2
+        }
+
+        function letTest() {
+            let x = 1;
+            if (true) {
+                let x = 2;          // different variable
+                console.log(x);     // 2
+            }
+            console.log(x);         // 1
+        }
+
+        varTest();
+        letTest();
+
+
+    -------------------
+    const
+    -------------------
+    const variables have the same scope as variables declared using let.
+
+    The difference is that const variables are immutable 
+        - they are not allowed to be reassigned.
+    
+    For example, the following generates an exception:
+
+        const a = 'Hello';
+        a = 'Bye';
+
+        ERROR:
+        TypeError: Assignment to constant variable.
+ 
+
+    const is not subject to Variable Hoisting too, 
+    which means that const declarations do not move to the top of the current execution context.
+
+    Also note that ES6 code will run only in browsers that support it. 
+    Older devices and browsers that do not support ES6 will return a syntax error.
+
+
+
+    --------------------------------------
+    Template Literals in ES6
+    --------------------------------------
+
+    Template literals are a way to output variables in the string.
+
+    Prior to ES6 we had to break the string, 
+    for example:
+
+        let name = 'David';
+        let msg = 'Welcome ' + name + '!';
+        console.log(msg);
+
+
+    ES6 introduces a new way of outputting variable values in strings.
+
+    The same code above can be rewritten as:
+
+        let name = 'David';
+        let msg = `Welcome ${name}!`;
+        console.log(msg);
+
+
+    ----------
+    Notice
+    ----------
+    template literals are enclosed by the 
+        backtick (` `) character 
+    instead of double or single quotes.
+
+    The ${expression} is a placeholder, 
+    and can include any expression, 
+    which will get evaluated and inserted into the template literal.
+
+    For example:
+
+            let a = 8;
+            let b = 34;
+            let msg = `The sum is ${a+b}`;
+            console.log(msg);
+
+
+    To escape a backtick in a template literal, 
+    put a backslash \ before the backtick.
+
+
+    Example:
+
+            function main() {
+                var country = readLine();
+                var capital = readLine();
+                console.log(countryCard(country, capital));
+            }
+
+            function countryCard(country, capital){
+                var msg = `Name: ${country}, Capital: ${capital}`;
+                return msg;
+            }
+
+
+
+    -------------------------
+    Loops in ECMAScript 6
+    -------------------------
+    In JavaScript we commonly use the 'for' loop to iterate over values in a 'list':
+
+            let arr = [1, 2, 3];
+
+            for (let k = 0; k < arr.length; k++) {
+                console.log(arr[k]);
+            }
+
+
+    The for...in loop is intended for iterating over the enumerable 'keys' of an 'object'.
+
+    For example:
+
+            let obj = {a: 1, b: 2, c: 3};
+
+            for (let v in obj) {
+                console.log(v); 
+            }
+
+            Output: 
+            a
+            b
+            c
+
+
+    The for...in loop should NOT be used to iterate over arrays 
+        because, depending on the JavaScript engine, 
+        it could iterate in an arbitrary order. 
+    
+    Also, the iterating variable 
+        is a string, not a number, 
+        so if you try to do any math with the variable, 
+        you'll be performing string concatenation instead of addition.
+
+    
+    ES6 introduces the new for...of loop, 
+    which creates a loop iterating over iterable objects.
+
+    For example:
+
+            let list = ["x", "y", "z"];
+            for (let val of list) {
+                console.log(val);
+            }
+
+            Output: 
+            x
+            y
+            z
+
+    During each iteration 
+    the val variable is assigned the corresponding element in the list.
+
+    The for...of loop works for other iterable objects as well, 
+    including strings:
+
+            for (let ch of "Hello") {
+                console.log(ch);
+            }
+
+            Output: 
+                    H 
+                    e 
+                    l
+                    l 
+                    o 
+    
+    The 'for...of' loop also works on the newly introduced collections :
+        Map
+        Set
+        WeakMap
+        WeakSet
+    
+    We will learn about them in the upcoming lessons.
+
+    Note that ES6 code will run only in browsers that support it. 
+    Older devices and browsers that do not support ES6 will return a syntax error.
+
+
+
+    --------------------------------------
+    Functions in ECMAScript 6
+    --------------------------------------
+
+    Prior to ES6, a JavaScript function was defined like this:
+
+
+
+        function add(x, y) {
+            var sum = x+y;  
+            console.log(sum);
+        }
+
+        add(35, 7);
+
+
+
+    ES6 introduces a new syntax for writing functions. 
+    The same function from above can be written as:
+
+
+
+        const add = (x, y) => {
+            let sum = x + y;  
+            console.log(sum);
+        }
+
+        add(35, 7);
+
+
+
+    This new syntax is quite handy when 
+    you just need a simple function with one argument.
+        You can skip typing function and return, 
+        as well as some parentheses and braces.
+
+    For example:
+
+        const greet = x => "Welcome " + x;
+        alert(greet("David"));
+    
+
+    The code above defines 
+    a function named greet
+     that has one argument 
+     and returns a message.
+
+    If there are no parameters, 
+    an empty pair of parentheses should be used, 
+    as in:
+
+        const x = () => alert("Hi");
+        x();
+
+    
+    The syntax is very useful for inline functions. 
+    For example, let's say we have an array, 
+    and for each element of the array we need to execute a function. 
+    
+    We use the forEach method of the array 
+    to call a function for each element:
+
+
+        var arr = [2, 3, 7, 8];
+
+        arr.forEach(function(el) {
+            console.log(el * 2);
+        });
+
+
+    However, in ES6, the code above can be rewritten as following:
+
+
+        const arr = [2, 3, 7, 8];
+
+        arr.forEach(v => {
+            console.log(v * 2);
+        });
+
+    
+    The code is shorter and looks pretty nice, doesn't it?
+
+
+
+
+    an arrow function that takes an array and prints the odd elements.
+
+        const printOdds = (arr) => {
+            arr.forEach(el => {
+                if (el % 2 != 0) console.log(el);
+            });
+        }
+
+
+
+    ---------------------------
+    Default Parameters in ES6
+    ---------------------------
+    In ES6, we can put the default values right in the signature of the functions.
+
+    For example:
+
+    
+        function test(a, b = 3, c = 42) {
+            return a + b + c;
+        }
+        console.log(test(5));
+
+
+        // Full ES6 equivalent
+        const test = (a, b = 3, c = 42) => a + b + c;
+        console.log(test(5));
+
+
+
+    And here's an example of an arrow function with default parameters:
+
+        const test = (a, b = 3, c = 42) => {
+            return a + b + c;
+        }
+        console.log(test(5)); //50 
+
+
+    Default value expressions are evaluated at function call time 
+    from left to right. 
+    This also means that 
+    default expressions can use the values of previously-filled parameters.
+
+
+
+    ---------------------------
+    ES6 Objects
+    ---------------------------
+    JavaScript variables can be Object data types 
+    that contain many values called properties.
+
+    An object can also have properties that are 
+    function definitions called methods for performing actions on the object.
+
+    ES6 introduces shorthand notations and computed property names 
+    that make declaring and using objects easier to understand.
+
+    The new method definition shorthand 
+    does not require the colon (:) or function keyword, 
+    as in the grow function of the tree object declaration:
+
+
+        let tree = {
+            height: 10,
+            color: 'green',
+            grow() { 
+                this.height += 2;
+            }
+        };
+
+        tree.grow();
+        console.log(tree.height); // 12
+
+    
+    You can also use a property value shorthand 
+    when initializing properties with a variable by the same name.
+
+    For example, properties height and health 
+    are being initialized with variables named height and health
+
+
+        let height = 5;
+        let health = 100;
+
+        let athlete = {
+            height,     // height: height,
+            health      // health: health
+        };
+
+        console.log(athlete.height); // 5
+
+    
+    When creating an object by using duplicate property names, 
+    the last property will overwrite the prior ones of the same name.
+
+    For Example:
+
+        var a = {x: 1, x: 2, x: 3, x: 4};
+        console.log(a.x);   // 4 
+
+
+    Duplicate property names generated a SyntaxError in ES5 when using strict mode. 
+    However, ES6 removed this limitation.
+
+
+    
+    ---------------------------
+    Computed Property Names
+    ---------------------------
+    With ES6, you can now use computed property names. 
+    Using the square bracket notation [], 
+    we can use an expression for a property name, 
+    including concatenating strings. 
+    
+    This can be useful in cases where we want to 
+    create certain objects based on user data (e.g. id, email, and so on).
+
+    Here are three examples:
+
+        let prop = 'name';
+        let id = '1234';
+        let mobile = '08923';
+
+        let user = {
+            [prop]: 'Jack',
+            [`user_${id}`]: `${mobile}`
+        };
+
+        console.log(user.name);         // Jack
+        console.log(user.user_1234);    // 08923
+
+    
+    
+
+        var i = 0;
+`       var a = {
+            ['foo' + ++i]: i,
+            ['foo' + ++i]: i,
+            ['foo' + ++i]: i
+        };
+
+        console.log(a.foo1); // 1
+        console.log(a.foo2); // 2
+        console.log(a.foo3); // 3
+
+
+
+
+        var param = 'size';
+        var config = {
+            [param]: 12,
+            ['mobile' + param.charAt(0).toUpperCase() + param.slice(1)]: 4
+        };
+
+        console.log(config.mobileSize); // 4
+
+
+    It is very useful when you need to create custom objects based on some variables.
+
+
+
+    ---------------------------
+    Object.assign() in ES6
+    ---------------------------
+    ES6 adds a new Object method assign() that 
+    allows us to combine multiple sources into one target to create a single new object.
+
+        Object.assign() 
+    
+    is also useful for creating a duplicate of an existing object.
+
+    Let's look at the following example to see how to combine objects:
+
+
+        let person = {
+            name: 'Jack',
+            age: 18,
+            sex: 'male'
+        };
+
+        let student = {
+            name: 'Bob',
+            age: 20,
+            xp: '2'
+        };
+
+        let newStudent = Object.assign({}, person, student);
+
+        console.log(newStudent.name); // Bob
+        console.log(newStudent.age); // 20
+        console.log(newStudent.sex); // male
+        console.log(newStudent.xp); // 2
+
+
+    Here we used Object.assign() 
+    where the first parameter is the target object you want to apply new properties to.
+
+    Every parameter after the first will be used as sources for the target. 
+    There are no limitations on the number of source parameters. 
+    However, order is important because 
+    properties in the second parameter 
+    will be overridden by properties of the same name in third parameter, 
+    and so on.
+
+    In the example above, 
+    we used a new object {} as the target and used two objects as sources.
+
+
+    Try changing the order of second and third parameters to see what happens to the result.
+
+
+    Now, let's see how we can use assign() 
+    to create a duplicate object without creating a reference (mutating) to the base object.
+
+    In the following example, 
+    assignment was used to try to generate a new object. 
+    However, using = creates a reference to the base object. 
+    Because of this reference, 
+    changes intended for a new object mutate the original object:
+
+        
+        let person = {
+            name: 'Jack',
+            age: 18
+        };
+
+        let newPerson = person;
+        newPerson.name = 'Bob';
+
+        console.log(person.name);       // Bob
+        console.log(newPerson.name);    // Bob
+
+    
+    To avoid this (mutations), 
+    use Object.assign() to create a new object.
+
+    For example:
+
+
+        let person = {
+            name: 'Jack',
+            age: 18
+        };
+
+        let newPerson = Object.assign({}, person);
+        newPerson.name = 'Bob';
+
+        console.log(person.name);       // Jack
+        console.log(newPerson.name);    // Bob
+
+
+
+    Finally, you can assign a value to an object property in the Object.assign() statement.
+
+
+    For example:
+
+
+        let person = {
+            name: 'Jack',
+            age: 18
+        };
+
+        let newPerson = Object.assign({}, person, {name: 'Bob'});
+
+        console.log(newPerson.name);    // Bob
+
+
+
+        const obj1 = {
+            a: 0,
+            b: 2,
+            c: 4
+        };
+        const obj2 = Object.assign({c: 5, d: 6}, obj1);
+        console.log(obj2.c, obj2.d);
+
+        // output
+            46
+
+
+    
+    ---------------------------
+    Array Destructuring in ES6
+    ---------------------------
+    The destructuring assignment syntax is a JavaScript expression 
+    that makes it possible to unpack values from arrays, 
+    or properties from objects, 
+    into distinct variables.
+
+    ES6 has added a shorthand syntax for destructuring an array.
+
+    The following example demonstrates how to 
+    
+        unpack the elements of an array into distinct variables:
+
+        let arr = ['1', '2', '3'];
+
+        let [one, two, three] = arr;
+
+        console.log(one);       // 1
+        console.log(two);       // 2
+        console.log(three);     // 3    
+
+
+    We can use also destructure an array returned by a function.
+
+    For example:
+
+
+        let a = () => {
+            return [1, 3, 2];
+        };
+
+        let [one, , two] = a();
+
+        console.log(one); // 1
+        console.log(two); // 2
+
+    Notice that we left the second argument's place empty.
+
+
+
+    The destructuring syntax also simplifies assignment and swapping values:
+
+
+        let a, b, c = 4, d = 8;
+
+        [a, b = 6] = [2];
+
+        console.log(a);     // 2
+        console.log(b);     // 6
+
+        [c, d] = [d, c];
+
+        console.log(c);     // 8
+        console.log(d);     // 4
+
+
+    
+
+    ---------------------------   
+    Object Destructuring in ES6
+    ---------------------------
+    Similar to Array destructuring, 
+    Object destructuring unpacks properties into distinct variables.
+
+    For example:
+
+
+        let obj = {h:100, s: true};
+        let {h, s} = obj;
+
+        console.log(h); // 100
+        console.log(s); // true
+
+    
+    We can assign without declaration, 
+    but there are some syntax requirements for that:
+
+
+        let a, b;
+        ( {a, b} = {a: 'Hello ', b: 'Jack'} );
+
+        console.log(a + b);     // Hello Jack 
+
+
+
+    The () with a semicolon (;) 
+    at the end are mandatory when destructuring without a declaration. 
+    However, you can also do it as follows where the () are not required:
+
+
+        let {a, b} = {a: 'Hello ', b: 'Jack'};
+
+        console.log(a + b);     // Hello Jack 
+
+
+
+    You can also assign the object to new variable names.
+    For example:
+
+        
+        var o = {h: 42, s: true};
+        var {h: foo, s: bar} = o;
+
+        //console.log(h);   // Error
+        console.log(foo);   // 42
+
+
+    Finally you can assign default values to variables, 
+    in case the value unpacked from the object is undefined.
+    For example:
+
+        
+        var obj = {id: 42, name: "Jack"};
+        let {id = 10, age = 20} = obj;
+
+        console.log(id);    // 42
+        console.log(age);   // 20
+
+    
+
+    ---------------------------
+    ES6 Rest Parameters
+    ---------------------------
+    Prior to ES6, 
+    if we wanted to pass a variable number of arguments to a function,
+     we could use the 'arguments' object, 
+     an array-like object, to access the parameters passed to the function.
+
+    For example, let's write a function that checks 
+    if an array contains all the arguments passed:
+
+
+        function containsAll(arr) {
+            for (let k = 1; k < arguments.length; k++) {
+                let num = arguments[k];
+                if (arr.indexOf(num) === -1) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        let x = [2, 4, 6, 7];
+        console.log(containsAll(x, 2, 4, 7));   // true
+        console.log(containsAll(x, 6, 4, 9));   // false
+
+
+
+        
+        
+
+    
+
+
+
+
+
+
+
+
+*/
 
 
 
