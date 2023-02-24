@@ -13,6 +13,7 @@
 // Some JS implementations let you access an object's prototype on the magic property `__proto__`
 // While this is useful for explaining prototypes it's not part of the standard
 // we'll get to standard ways of using prototypes later.
+
 var myObj = {
     myString: "Hello world!"
 };
