@@ -2879,7 +2879,25 @@ There can be only one constructor in each class.
                     console.log('Light');
             }
 
-            
+
+
+            ------------------------------------------
+                            function
+            ------------------------------------------
+
+            function main() {
+                var num1 = parseInt(readLine(),10);
+                var num2 = parseInt(readLine(),10);
+                var num3 = parseInt(readLine(),10);
+                
+                var average = avg(num1, num2, num3)
+                console.log(average)
+            }
+
+            function avg(n1, n2, n3){
+                return ((n1+n2+n3)/3);
+            }
+
 
             ------------------------------------------
                             class
