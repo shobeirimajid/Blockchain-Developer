@@ -1980,18 +1980,18 @@ document.write(" " + namevar + "! How are you today?");
     
     
     
-    ---------------------------
-    Classes in ES6
-    ---------------------------
-    In this lesson we'll explain 
-    how to create a class 
-    that can be used to create multiple objects of the same structure.
+---------------------------
+Classes in ES6
+---------------------------
+In this lesson we'll explain 
+how to create a class 
+that can be used to create multiple objects of the same structure.
 
-    A class uses the keyword class 
-    and contains a constructor method for initializing.
+A class uses the keyword class 
+and contains a constructor method for initializing.
 
 
-    For example:
+For example:
 
 
 
@@ -2004,10 +2004,10 @@ document.write(" " + namevar + "! How are you today?");
 
     
 
-    A declared class can then be used to 
-    create multiple objects using the keyword new.
+A declared class can then be used to 
+create multiple objects using the keyword new.
 
-    For example:
+For example:
 
 
 
@@ -2025,16 +2025,16 @@ document.write(" " + namevar + "! How are you today?");
 
 
 
-    Class Declarations are not hoisted 
-        while Function Declarations are. 
-    If you try to access your class before declaring it, 
-        ReferenceError will be returned.
+Class Declarations are not hoisted 
+while Function Declarations are. 
+If you try to access your class before declaring it, 
+ReferenceError will be returned.
 
     
-    You can also define a class with a class expression, 
-    where the class can be named or unnamed.
+You can also define a class with a class expression, 
+where the class can be named or unnamed.
 
-    A named class looks like:
+A named class looks like:
 
 
         var Square = class Rectangle {
@@ -2045,8 +2045,8 @@ document.write(" " + namevar + "! How are you today?");
         };
 
 
-    In the unnamed class expression, 
-    a variable is simply assigned the class definition:
+In the unnamed class expression, 
+a variable is simply assigned the class definition:
 
 
         var Square = class {
@@ -2058,21 +2058,868 @@ document.write(" " + namevar + "! How are you today?");
     
 
 
-    The constructor is a special method 
-    which is used for creating and initializing an object created with a class.
+The constructor is a special method 
+which is used for creating and initializing an object created with a class.
 
-    There can be only one constructor in each class.
+There can be only one constructor in each class.
 
 
     ---------------------------
     Class Methods in ES6
     ---------------------------
+    ES6 introduced a shorthand 
+    that does not require the keyword function 
+    for a function assigned to a method's name. 
+    
+    One type of class method is the prototype method, 
+    which is available to objects of the class.
+
+    For Example:
+    
+
+
+        class Rectangle {
+
+            constructor(height, width) {
+                this.height = height;
+                this.width = width;
+            }
+            
+            get area() {
+                return this.calcArea();
+            }
+
+            calcArea() {
+                return this.height * this.width;
+            }
+        }
+
+        const square = new Rectangle(5, 5);
+        console.log(square.area); // 25
+
+        // In the code above, area is a getter, calcArea is a method.
+
+
+
+    Another type of method is the "static method"
+    which cannot be called through a class instance. 
+    Static methods are often used to create utility functions for an application.
+
+    For Example:
+
+
+
+        class Point {
+
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+            }
+
+            static distance(a, b) {
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+
+                return Math.hypot(dx, dy);
+            }
+        }
+
+        const p1 = new Point(7, 2);
+        const p2 = new Point(3, 8);
+
+        console.log(Point.distance(p1, p2));    // 7.211102550927979
+
+
+
+    As you can see, 
+    the static distance method is called directly using the class name, 
+    without an object.
+
+
+
+        function main() {
+            var exam1 = parseInt(readLine(), 10);
+            var exam2 = parseInt(readLine(), 10);
+            var exam3 = parseInt(readLine(), 10);
+            console.log(Exams.average(exam1,exam2,exam3));
+        }
+
+        class Exams{
+            static average(e1, e2, e3) {
+                return Math.round((e1 + e2 + e3)/3);
+            }
+        }
+
+    
+
+    ---------------------------
+    Inheritance in ES6
+    ---------------------------
+    The 'extends' keyword is used in class declarations or class expressions 
+    to create a child of a class. 
+    The child inherits the properties and methods of the parent.
+
+    For example:
+
+
+
+
+        class Animal {
+            constructor(name) {
+                this.name = name;
+            }
+            speak() {
+                console.log(this.name + ' makes a noise.');
+            }
+        }
+
+        class Dog extends Animal {
+            speak() {
+                console.log(this.name + ' barks.');
+            }
+        }
+
+        let dog = new Dog('Rex');
+        dog.speak();                // Rex barks.
+
+
+    In the code above, 
+    the Dog class is a child of the Animal class, 
+    inheriting its properties and methods.
+
+
+    If there is a constructor present in the subclass, 
+    it needs to first call super() before using this. 
+    Also, the super keyword is used to call parent's methods.
+
+
+    For example, we can modify the program above to the following:
+
+
+
+        class Animal {
+            constructor(name) {
+                this.name = name;
+            }
+            speak() {
+                console.log(this.name + ' makes a noise.');
+            }
+        }
+
+        class Dog extends Animal {
+            speak() {
+                super.speak();      // Super
+                console.log(this.name + ' barks.');
+            }
+        }
+
+        let dog = new Dog('Rex');
+        dog.speak();
+
+            // Rex makes a noise.
+            // Rex barks.
+
+
+        
+    In the code above, 
+    the parent's speak() method is called using the super keyword.
+
+
+                
+        class Human {
+            constructor(name) {
+                this.name = name;
+            }
+        }
+
+        class Student extends Human {
+
+            constructor(name, age) {
+                super(name);
+                this.age = age;
+            }
+        }
+
+
+    
+    ---------------------------
+    ES6 Map
+    ---------------------------
+    A Map object can be used to hold `key/value` pairs. 
+    A `key` or `value` in a map can be anything (objects and primitive values).
+
+        new Map([iterable]) 
+
+    creates a Map object where iterable is an array or any other iterable object 
+    whose elements are arrays (with a key/value pair each).
+
+    An  `Object`  is similar to  `Map`  
+    but there are important differences that make using a Map preferable in certain cases:
+        
+
+        1) The keys can be any type including functions, objects, and any primitive.
+        2) You can get the size of a Map.
+        3) You can directly iterate over Map.
+        4) Performance of the Map is better in scenarios involving 
+            frequent addition and removal of key/value pairs.
+
+
+    The size property returns the number of key/value pairs in a map.
+
+    For example:
+
+
+        let map = new Map([['k1', 'v1'], ['k2', 'v2']]);
+
+        console.log(map.size); // 2
+
+
+
+
+    Methods:
+
+        set(key, value) 
+        
+            Adds a specified key/value pair to the map. 
+            If the specified key already exists, 
+            value corresponding to it is replaced with the specified value.
+
+        get(key) 
+        
+            Gets the value corresponding to a specified key in the map. 
+            If the specified key doesn't exist, 
+            undefined is returned.
+
+        has(key) 
+        
+            Returns true if a specified key exists in the map and false otherwise.
+
+        delete(key) 
+        
+            Deletes the key/value pair with a specified key from the map and returns true. 
+            Returns false if the element does not exist.
+
+        clear() 
+        
+            Removes all key/value pairs from map.
+
+        keys() 
+        
+            Returns an Iterator of keys in the map for each element.
+
+        values() 
+        
+            Returns an Iterator of values in the map for each element.
+
+        entries() 
+        
+            Returns an Iterator of array[key, value] in the map for each element.
+            
+
+
+
+    For example:
+
+     
+            let map = new Map();
+            map.set('k1', 'v1').set('k2', 'v2');
+
+            console.log(map.get('k1'));     // v1
+            console.log(map.has('k2'));     // true
+
+            for (let kv of map.entries())
+                console.log(kv[0] + " : " + kv[1]);
+
+                // k1 : v1 
+                // k2 : v2 
+    
+
+    The above example demonstrates some of the ES6 Map methods.
+
+    Map supports different data types 
+    i.e. 1 and "1" are two different keys/values.
+
+
+
+
+            function main() {
+
+                var name = readLine();
+                var position = readLine();
+
+                let employees = new Map([
+                    ["Richard", "Developer"],
+                    ["Maria", "SEO Specialist"],
+                    ["Tom", "Product Manager"],
+                    ["David", "Accountant"],
+                    ["Sophia", "HR Manager"]
+                ]);
+
+                // add the new pair to the map
+                employees.set(name, position);
+
+                for (var i of employees.entries()){
+                    console.log(i[0] + " : " + i[1]);
+                } 
+            }
+
+
+
+
+    ---------------------------
+    ES6 Set
+    ---------------------------
+    Set object can be used to hold unique values (no repetitions are allowed).
+    A value in a set can be anything (objects and primitive values).
+
+    creates a Set object 
+    
+        new Set([iterable]) 
+
+        iterable is an array or any other iterable object of values.
+
+        The size property returns the number of `distinct` values in a set.
+
+
+
+    For example:
+
+        let set = new Set([1, 2, 4, 2, 59, 9, 4, 9, 1]);
+        console.log(set.size); // 5
+
+
+    Methods
+
+        add(value) 
+            Adds a new element with the given value to the Set.
+
+        delete(value) 
+            Deletes a specified value from the set.
+
+        has(value) 
+            Returns true if a specified value exists in the set and false otherwise.
+
+        clear() 
+            Clears the set.
+
+        values() 
+            Returns an Iterator of values in the set.
+
+    
+
+    let set = new Set();
+    set.add(5).add(9).add(59).add(9);
+
+    console.log(set.has(9));        // true
+
+    for (let v of set.values())
+        console.log(v);             //  5
+                                    //  9
+                                    //  59
+
+        
+    The above example demonstrates some of the ES6 Set methods.
+
+    Set supports different data types 
+    i.e. 1 and "1" are two different values.
+
+    NaN and undefined can also be stored in Set.
+
+
+
+    ---------------------------
+    ES6 Promises
+    ---------------------------
+    A `Promise` is a better way for `asynchronous programming` 
+    when compared to the common way of using method `setTimeout()`
+    
+
+    Consider this example:
+
+
+
+            setTimeout(function() {
+                console.log("Work 1");
+                setTimeout(function() {
+                    console.log("Work 2");
+                }, 2000);
+            }, 1000);
+
+            console.log("End");
+
+            
+
+    // Output:  End 
+                Work 1      // after 1000 ms
+                Work 2      // after 2000 ms
+
+
+    It prints "End", "Work 1" and "Work 2" in that order (the work is done asynchronously). 
+
+
+    But if there are more events like this, 
+    the code becomes very complex.
+
+    ES6 comes to the rescue in such situations. 
+
+
+    A promise can be created as follows:
+
+
+
+        new Promise(function(resolve, reject) {
+
+            // Work
+
+            if (success)
+                resolve(result);
+            else
+                reject(Error("failure"));
+        });
+    
+        // resolve is the method for success 
+        // reject is the method for failure.
+
+
+
+        or
+
+
+        
+        function foo() {
+            return new Promise((resolve, reject) => {
+                let result = getSomeResult();
+                if (result)
+                    resolve('Success');
+                else
+                    reject('Something went wrong');
+            });
+        }
+
+
+    
+
+
+    If a method returns a `promise`
+
+        its calls should use the `then` 
+
+        which takes `two methods` as input:
+
+            one for `success` 
+            the other for the `failure`.
+
+
+    For Example:
+
+
+        function asyncFunc(work) {
+
+            return new Promise(function(resolve, reject) {
+                if (work === "")
+                    reject(Error("Nothing"));
+                setTimeout(function() {
+                    resolve(work);
+                }, 1000);
+            });
+        }
+
+        asyncFunc("Work 1")                 // ----- task I -----
+        .then(function(result) {
+            console.log(result);            // Work 1
+            return asyncFunc("Work 2");     // ----- task II -----
+        }, function(error) {
+            console.log(error);
+        })
+        .then(function(result) {
+            console.log(result);            // Work 2     
+        }, function(error) {
+            console.log(error);
+        });
+
+        console.log("End");
+
+
+                            
+        // Output:  End 
+                    Work 1
+                    Work 2 
+
+
+
+    It also prints "End", "Work 1" and "Work 2" 
+    (the work is done asynchronously). 
+    
+    But, this is clearly more readable than the previous example 
+    and in more complex situations it is easier to work with.
+
+
+
+    ---------------------------
+    Iterators & Generators
+    ---------------------------
+    Symbol.iterator is the default iterator for an object. 
+    
+    The for...of loops are based on this type of iterator.
+
+    In the example below, we will see how we should implement it 
+    and how `generator functions` are used.
+
+    Example:
+
+            let myIterableObj = { 
+
+                [Symbol.iterator] : function* () {
+                    yield 1; 
+                    yield 2; 
+                    yield 3;
+                }
+
+            };
+
+            console.log([...myIterableObj]);    // [ 1, 2, 3 ]
+
+
+            First, we create an object, and use the Symbol.iterator 
+            
+            and `generator function` to fill it with some values.
+
+    In the second line of the code, we use a * with the function keyword. 
+            
+    It's called a `generator function` (or `gen` function).
+
+    For example, here is a simple case of how gen functions can be useful:
+
+
+            function* idMaker() {
+
+                let index = 0;
+
+                while (index < 5)
+                    yield index++;
+
+            }
+            var gen = idMaker();
+
+            console.log(gen.next().value);
+            console.log(gen.next().value);
+            console.log(gen.next().value);
+            console.log(gen.next().value);
+            console.log(gen.next().value);
+
+            // Try to add one more console.log, just like the above see what happens.
+
+
+    We can exit and re-enter generator functions later. 
+
+    Their variable bindings (context) will be saved across re-entrances. 
+    
+    They are a very powerful tool for asynchronous programming, 
+    especially when combined with Promises. 
+    
+    They can also be useful for creating loops with special requirements.
+
+    We can nest generator functions inside each other 
+      to create more complex structures 
+      and pass them arguments while we are calling them.
+
+    The example below will show a useful case of 
+    how we can use generator functions and Symbol.iterators together.
+
+    Example:
+
+            const arr = ['0', '1', '4', 'a', '9', 'c', '16'];
+            const my_obj = {
+            [Symbol.iterator]: function*() {
+                for(let index of arr) {
+                yield `${index}`;
+                }
+            }
+            };
+
+            const all = [...my_obj]             // Here you can replace the '[...my_obj]' with 'arr'. 
+                .map(i => parseInt(i, 10))
+                .map(Math.sqrt)
+                .filter((i) => i < 5)               // try changing the value of 5 to 4 see what happens.
+                .reduce((i, d) => i + d);           // comment this line while you are changing the value of the line above
+
+            console.log(all);   // 10
+
+
+    We create an object of 7 elements 
+    by using `Symbol.iterator` and `generator functions` 
+
+    In the second part, 
+    we assign our object to a constant all. 
+    
+    At the end, we print its value.
+
+
+
+    ---------------------------
+    Modules
+    ---------------------------
+    It is a good practice to divide your related code into modules.
+
+    Before ES6 there were some libraries which made this possible (e.g., RequireJS, CommonJS). 
+    
+    ES6 is now supporting this feature natively.
+
+    Considerations when using modules:
+
+        (1) The first consideration is maintainability. 
+            A module is independent of other modules,
+            making improvements and expansion possible without any dependency on code in other modules.
+
+        (2) The second consideration is namespacing. 
+            In an earlier lesson, we talked about variables and scope. 
+            As you know, vars are globally declared, 
+            so it's common to have namespace pollution 
+            where unrelated variables are accessible all over our code.
+            Modules solve this problem by creating a private space for variables.
+
+        (3) Another important consideration is reusability. 
+            When we write code that can be used in other projects, 
+            modules make it possible to easily reuse the code 
+            without having to rewrite it in a new project.
+
+    Let's see how we should use modules in JS files.
+
+    For Example:
+
+            
+            // lib/math.js
+            export let sum = (x, y) => { return x + y; }
+            export let pi = 3.14;
+
+            // app.js
+            import * as math from "lib/math"
+            console.log(`2p = + ${math.sum(math.pi, math.pi)}`)
+
+
+    Here we are exporting the sum function and the pi variable 
+    so we can use them in different files.
+
+
+    ES6 supports modules officially, 
+    however, some browsers are not supporting modules natively yet. 
+    So, we should use bundlers (builders) such as Webpack or Browserify to run our code.
+
+
+
+    ---------------------------
+    Built-in Methods
+    ---------------------------
+    ES6 also introduced new built-in methods to make several tasks easier. 
+    Here we will cover the most common ones.
+
+
+    Array Element Finding
+
+    The legacy way to find the first element of an array 
+    by its value and a rule was the following:
+
+
+            let res = [4, 5, 1, 8, 2, 0].filter(function (x) {
+                return x > 3;
+            })[0];
+
+            console.log(res);   // 4
+
+
+
+    The new syntax is cleaner and more robust:
+
+            let res = [4, 5, 1, 8, 2, 0].find(x => x > 3);
+
+            console.log(res);   // 4
+
+
+
+    You can also get the index of the item above by using the findIndex() method:   
+
+            
+            let res = [4, 5, 1, 8, 2, 0].findIndex(x => x > 3);
+
+            console.log(res);   // 0
+
+
+    Repeating Strings
+
+        Before ES6 
+        the following syntax was the correct way 
+        to repeat a string multiple times:
+
+            console.log(Array(3 + 1).join("foo"));
+
+
+
+        With the new syntax, it becomes:
+
+            console.log("foo".repeat(3));
+
+
+
+    Searching Strings
+
+    Before ES6 we only used the indexOf() method 
+    to find the position of the text in the string. 
+    
+    For example:
+
+            console.log("SoloLearn".indexOf("Solo") === 0);                     // true
+            console.log("SoloLearn".indexOf("Solo") === (4 - "Solo".length));   // true
+            console.log("SoloLearn".indexOf("loLe") !== -1);                    // true
+            console.log("SoloLearn".indexOf("olo", 1) !== -1);                  // true
+            console.log("SoloLearn".indexOf("olo", 2) !== -1);                  // false
+
+
+
+    ES6 has replaced this with a version that 
+    has cleaner and more simplified syntax:
+
+    
+            console.log("SoloLearn".startsWith("Solo", 0));     // true
+            console.log("SoloLearn".endsWith("Solo", 4));       // true
+            console.log("SoloLearn".includes("loLe"));          // true
+            console.log("SoloLearn".includes("olo", 1));        // true
+            console.log("SoloLearn".includes("olo", 2));        // false
+
+
+
+
+    It is always a good practice to refactor your code
+     with the new syntax to learn new things and make your code more understandable.
+
+
+            const arr = ['3', '5', '8'];
+            console.log(
+                arr.find(x => x == 8).repeat(2)   // 88
+            );
+
+
     
 
 
 
+    Recap Examples:
+
+
+
+            ------------------------------------------
+                            if-else-for
+            ------------------------------------------
+
+            var countOfRooms = 15;
+            // Your code here
+            var floor  = 1;
+            for(let i=1; i<=countOfRooms; i++) {
+
+                if(i<13) {
+                    console.log(floor);
+                    floor ++;
+                }
+                    
+                else if(i>=13) {
+                    floor ++;
+                    console.log(floor);
+                }
+            }
+
+
+
+            ------------------------------------------
+                        loop - break
+            ------------------------------------------
+
+            The snail climbs up 7 feet each day and slips back 2 feet each night.
+            How many days will it take the snail to get out of a well with the given depth?
+
+            function main() {
+                var depth = parseInt(readLine(), 10);
+                var distance=0;
+                var day=0;
+                while(true) {
+                    day++;
+                    distance += 7;
+                    if(distance >= depth) {
+                        console.log(day);
+                        break;
+                    } 
+                    else {
+                        distance -= 2;
+                    }
+                }
+            }
+
+
+
+  
+            ------------------------------------------
+                            switch case
+            ------------------------------------------
+
+            switch(themeNumber) {
+                case 1:
+                    console.log('Light');
+                    break;
+                case 2:
+                    console.log('Dark');
+                    break;
+                case 3:
+                    console.log('Nocturne');
+                    break;
+                case 4:
+                    console.log('Terminal');
+                    break;
+                case 5:
+                    console.log('Indigo');
+                    break;
+                default:
+                    console.log('Light');
+            }
+
+            
+
+            ------------------------------------------
+                            class
+            ------------------------------------------
+
+            class Add {
+                constructor(...words) {
+                    this.words = words;
+                }
+                print() {
+                    var msg='$';
+                    for (var word of this.words) {
+                        msg += word +'$';
+                    }
+                    console.log(msg);
+                }
+            }
+
+            var x = new Add("hehe", "hoho", "haha", "hihi", "huhu");
+            var y = new Add("this", "is", "awesome");
+            var z = new Add("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit");
+
+            x.print();
+            y.print();
+            z.print();
+
+
+            Output:
+
+                $hehe$hoho$haha$hihi$huhu$
+                $this$is$awesome$
+                $lorem$ipsum$dolor$sit$amet$consectetur$adipiscing$elit$
+
+
+    
+    
 
 */
+
+
 
 
 
