@@ -523,9 +523,7 @@ and focus is lost from the element.
 */
 
     Example:
-
     // <input type="text" id="name" onchange="change()">
-
     function change() {
         var x = document.getElementById('name');
         x.value = x.value.toUpperCase();
@@ -533,153 +531,146 @@ and focus is lost from the element.
 
 
 /*  
-Event Listeners
+Add Event Listeners
 --------------------
-addEventListener() 
-this method attaches an event handler to an element without overwriting existing event handlers. 
 You can add many event handlers to one element.
+You can also add many event handlers of the same type to one element (i.e., two "click" events).
 
-You can also add many event handlers of the same type to one element, 
-i.e., two "click" events.
+addEventListener() 
+element.addEventListener(event, function, useCapture);
+
+this method attaches an event handler to an element without overwriting existing event handlers. 
+    
+    `event`:        the event's type, like "click" or "mousedown"
+    `function`:     the function we want to call when the event occurs.
+    `useCapture`:   an optional Boolean value specifying whether to use event "bubbling" or "capturing" 
+
+Note that you don't use the "on" prefix for this event. use "click" instead of "onclick"
 */
 
     Example:
-    element.addEventListener(event, function, useCapture);
+    // add two event listeners to one element
+    element.addEventListener("click", myFunction);
+    element.addEventListener("mouseover", myFunction);
+
+    function myFunction() {
+        alert("Hello World!");
+    }
+
+/*
+Remove Event Listeners
+-------------------------
+removeEventListener()
+element.removeEventListener("mouseover", myFunction);
     
-            The first parameter is the event's type (like "click" or "mousedown").
-
-            The second parameter is the function we want to call when the event occurs.
-
-            The third parameter is a Boolean value specifying whether to use 
-            event bubbling or event capturing. 
-            This parameter is optional, and will be described in the next lesson.
-    
-
-    Note that you don't use the "on" prefix for this event; 
-    use "click" instead of "onclick".
+*/
 
     Example:
-
-        element.addEventListener("click", myFunction);
-        element.addEventListener("mouseover", myFunction);
-
-        function myFunction() {
-            alert("Hello World!");
-        }
-    
-    This adds two event listeners to the element.
-    We can remove one of the listeners:
-
-        element.removeEventListener("mouseover", myFunction);
-    
-    Let's create an event handler that removes itself after being executed:
-
-
+    // an event handler that removes itself after being executed
+    // After clicking the button, an alert with a random number displays 
+    // and the event listener is removed.
     window.onload = function() {
 
         var btn = document.getElementById("demo");
 
+        // add EventListener
         btn.addEventListener("click", myFunction);
 
         function myFunction() {
             alert(Math.random());
+
+            // remove EventListener
             btn.removeEventListener("click", myFunction);
         }
     };
 
+/*
+IE8 and lower do not support this methods:
 
-    After clicking the button,
-     an alert with a random number displays 
-     and the event listener is removed.
-
-    
-
-    Internet Explorer version 8 and lower do not support this methods:
-
-        addEventListener() 
-        removeEventListener()
+    element.addEventListener() 
+    element.removeEventListener()
         
-    However, you can use the 
+However, you can use the attachEvent to attach event handlers in IE
     
-        document.attachEvent() 
+    document.attachEvent() 
+
+
+Event Propagation
+-------------------------
+Event propagation allows for the definition of the element order when an event occurs. 
+
+This is particularly useful when you have the same event handled 
+for multiple elements in the DOM hierarchy.
+
+Suppose same `click` event have been handled for both `div` and `p` elements
+
+    <div>
+        <p>Some Text</p>
+    </div>
+
+If user clicks on the <p> element, which element's `click` event should be handled first?
+
+There are two ways of event propagation in the HTML DOM: 
     
-    method to attach event handlers in Internet Explorer.
+    - Bubbling    -  goes up the DOM 
+    - Capturing   -  goes down the DOM
+
+addEventListener allows you to specify the propagation type with the "useCapture" parameter
 
 
+addEventListener(event, function, useCapture)
 
+default value of useCapture : false
 
+useCapture : 
 
-    Event Propagation
-
-    There are two ways of event propagation in the HTML DOM: 
+        false : bubbling
+                the `bubbling` propagation is used
+                the innermost element's event is handled first 
+                then the outer element's event is handled
+                    Ex:
+                    The <p> element's click event is handled first, 
+                    followed by the <div> element's click event.
     
-        - bubbling 
-        - capturing
+        true :  capturing
+                the 'capturing' propagation is used
+                the outermost element's event is handled first
+                then the inner element's event is handled
+                    Ex:
+                    The <div> element's click event is handled first, 
+                    followed by the <p> element's click event.
+*/
 
-    Event propagation allows for the definition of the element order when an event occurs. 
-    If you have a <p> element inside a <div> element, 
-    and the user clicks on the <p> element, 
-    which element's "click" event should be handled first?
+    Example:
+    <div id="divElement">
+        <p id="Parag">Some Text</p>
+    </div>
 
+    var div = document.getElementById('divElement');
+    var p = document.getElementById('Parag');
 
-    In bubbling, the innermost element's event is handled first 
-    and then the outer element's event is handled. 
+    // Capturing propagation
+    div.addEventListener("click", myFunction, true); 
 
-        The <p> element's click event is handled first, 
-        followed by the <div> element's click event.
-
-
-    In capturing, the outermost element's event is handled first
-     and then the inner. 
-     
-        The <div> element's click event is handled first, 
-        followed by the <p> element's click event.
-
-
-        Capturing   goes down the DOM
-        Bubbling    goes up the DOM 
-    
-    
-    Capturing vs. Bubbling
-
-
-    The addEventListener() method allows you to specify the propagation type 
-    with the "useCapture" parameter.
-
-        addEventListener(event, function, useCapture)
+    // Bubbling propagation
+    p.addEventListener("click", myFunction, false);
     
 
-    The default value is false,
-     which means the bubbling propagation is used; 
-     when the value is set to true, the event uses the capturing propagation.
-    
-        // Capturing propagation
-            elem1.addEventListener("click", myFunction, true); 
+/*
+Image Slider
+------------------
+Now we can create a sample image slider project. 
+The images will be changed using "Next" and "Prev" buttons.
+Now, let’s create our HTML, which includes an image and the two navigation buttons:
 
-        // Bubbling propagation
-            elem2.addEventListener("click", myFunction, false);
-    
-    This is particularly useful when you have the same event handled 
-    for multiple elements in the DOM hierarchy.
+We are going to use three sample images that we have uploaded to our server. 
+You can use any number of images.
 
-
-
-    Image Slider
-
-
-    Now we can create a sample image slider project. The images will be changed using "Next" and "Prev" buttons.
-    Now, let’s create our HTML, which includes an image and the two navigation buttons:
-
-
-    We are going to use three sample images that we have uploaded to our server. 
-    You can use any number of images.
-
-
-    Now we need to handle the Next and Prev button clicks 
-    and call the corresponding functions to change the image.
+Now we need to handle the Next and Prev button clicks 
+and call the corresponding functions to change the image.
 
     -----------------
-    HTML
+           HTML
     -----------------
 
     	<button onclick="prev()"> Prev </button>
@@ -687,7 +678,7 @@ i.e., two "click" events.
         <button onclick="next()"> Next </button>
 
     -----------------
-    CSS
+           CSS
     -----------------
 
         button {
@@ -700,10 +691,10 @@ i.e., two "click" events.
             margin-right:10px;
             margin-left:10px;
         }
-
-    -----------------
-    JS
-    -----------------
+*/
+    //-----------------
+    //      JS
+    //-----------------
 
         var images = [
             'http://www.sololearn.com/uploads/slider/1.jpg', 
@@ -732,37 +723,39 @@ i.e., two "click" events.
         }
 
 
+/*
+Form Validation
+------------------
+HTML5 adds some attributes that allow form validation. 
 
+For example:
 
-
-    Form Validation
-
-    HTML5 adds some attributes that allow form validation. 
-    For example, the required attribute can be added to an input field 
+    the `required` attribute can be added to an input field 
     to make it mandatory to fill in.
 
-    More complex form validation can be done using JavaScript.
+More complex form validation can be done using JavaScript.
 
-    The form element has an onsubmit event that can be handled to perform validation.
+The form element has an `onsubmit` event 
+that can be handled to perform validation.
 
-    For example, 
-        let's create a form with two inputs and one button. 
-    
-    The text in both fields should be the same and not blank to pass the validation.
+Example:
+
+    let's create a form with two inputs and one button. 
+    to pass the validation:
+
+        - The text in both fields should be the same 
+        - The text should not blank
 
 
     <form onsubmit="return validate()" method="post">
-
         Number: <input type="text" name="num1" id="num1" /> <br />
         Repeat: <input type="text" name="num2" id="num2" /> <br />
         <input type="submit" value="Submit" />
-
     </form>
-    
-    
-    Now we need to define the validate() function:
 
+*/
 
+    Example:
     function validate() {
 
         var n1 = document.getElementById('num1');
@@ -770,20 +763,11 @@ i.e., two "click" events.
 
         if(n1.value != '' && n2.value != '') {
             if(n1.value == n2.value)
+                // We return true only when the values are not blank and are equal.
                 return true;
         }
 
         alert("The values should be equal and not blank");
-
+        // The form will not get submitted if its onsubmit event returns false.
         return false;
     }
-
-
-
-    We return true only when the values are not blank and are equal.
-
-    The form will not get submitted if its onsubmit event returns false.
-
-
-*/
-    
