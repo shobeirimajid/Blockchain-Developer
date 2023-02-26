@@ -53,9 +53,9 @@ console.log(courses3);
 
 
 
-// Ex: Write a program to creates the corresponding array of points 
-// and output the sum of all gained points.
+Examples:
 
+// Creates the corresponding array of points and output the sum of all gained points.
 function main() {
     //take the number of passed levels
     var levels = parseInt(readLine(),10);
@@ -74,44 +74,43 @@ function main() {
         return a + b;
     },0)
 
-    
     //output
     console.log(sum);
 }
 
 
+/*
+Associative Arrays
+----------------------
+While many programming languages support arrays with named indexes (text instead of numbers), 
+called associative arrays JavaScript does not.
+However, you still can use the named array syntax, which will produce an object.
+*/
 
+    Example:
+    var person = []; //empty array
+    person["name"] = "John";
+    person["age"] = 46;
+    console.log(person["age"]);
 
 /*
-    ----------------------
-    Associative Arrays
-    ----------------------
-    While many programming languages support arrays with named indexes (text instead of numbers), 
-        called associative arrays JavaScript does not.
-    However, you still can use the named array syntax, which will produce an object.
-    For example:
+Now, person is treated as an object, instead of being an array.
+The named indexes "name" and "age" become properties of the person object.
 
-        var person = []; //empty array
-        person["name"] = "John";
-        person["age"] = 46;
-        document.write(person["age"]);
+As the person array is treated as an object, 
+the standard array methods and properties will produce incorrect results. 
+*/
 
-    Now, person is treated as an object, instead of being an array.
-    The named indexes "name" and "age" become properties of the person object.
+    Example:
+    console.log(person.length);     // will return 0
 
-    As the person array is treated as an object, 
-    the standard array methods and properties will produce incorrect results. 
-    For example, 
-        person.length will return 0.
+/*
+Remember that JavaScript does not support arrays with named indexes.
+In JavaScript, arrays always use numbered indexes.
 
+It is better to use an object when you want the index to be a string (text).
 
-    Remember that JavaScript does not support arrays with named indexes.
-    In JavaScript, arrays always use numbered indexes.
-    It is better to use an object when you want the index to be a string (text).
-    Use an array when you want the index to be a number.
+Use an array when you want the index to be a number.
 
-    If you use a named index, 
-    JavaScript will redefine the array to a standard object.
-
-    
+If you use a named index, JavaScript will redefine the array to a standard object.
 */

@@ -39,24 +39,20 @@ console.log(volume);
 
 
 /*
-    Sometimes, we need to set an "object type" 
-        that can be used to create a number of objects of a single type.
+Sometimes, we need to set an "object type" that can be used to 
+create a number of objects of a single type.
 
-    The standard way to create an "object type" 
-        is to use an object constructor function.
+The standard way to create an "object type" is to use an object constructor function.
 */
 
 
+// function (person) is an object constructor
+// which takes parameters and assigns them to the object properties
 function person(name, age, color) {
     this.name = name;
     this.age = age;
     this.favColor = color;
-  }
-
-  /*
-    The above function (person) is an object constructor, 
-        which takes parameters and assigns them to the object properties.
-  */
+}
 
 //                   name,  age, color
 var p1 = new person("John", 42, "green");
@@ -67,7 +63,7 @@ console.log("p2.name", p2.name);
 
 
 
-// example 1
+Example1:
 function person(name, age, color) {
     this.name = name;
     this.age = age;
@@ -86,9 +82,7 @@ console.log("p2.name: ", p2.name);
 
 
 
-
-// Example2
-
+Example2:
 function main() {
     //take flight number and its status
     var flightNumber = prompt("Please enter flightNumber", "1000");
@@ -112,10 +106,7 @@ main();
 
 
 
-
-
-
-// example 3
+Example3:
 
 function main2() {
     var prodID = prompt("Please enter prodID");
@@ -142,25 +133,24 @@ function Product(prodID, price) {
 
 
 /*
-    ------------
-    Methods
-    ------------
-    Methods are functions that are stored as object properties.
+Methods
+------------
+Methods are functions that are stored as object properties.
 
-    Use the following syntax to create an object method:
+Use the following syntax to create an object method:
 
-        methodName = function() { code lines }
-        
-    Access an object method using the following syntax:
-
-        objectName.methodName()
+    methodName = function() { code lines }
     
-    A method is a function, belonging to an object. It can be referenced using the this keyword.
-    The this keyword is used as a reference to the current object, meaning that you can access the objects properties and methods using it.
+Access an object method using the following syntax:
 
-    Defining methods is done inside the constructor function.
+    objectName.methodName()
 
-    For Example:
+A method is a function, belonging to an object. It can be referenced using the this keyword.
+The this keyword is used as a reference to the current object, meaning that you can access the objects properties and methods using it.
+
+Defining methods is done inside the constructor function.
+
+For Example:
 */
 
     function person(name, age) {
@@ -177,18 +167,15 @@ function Product(prodID, price) {
     document.write(p.name);
 
 /*
-    In the example above, we have defined a method named changeName for our person, 
-    which is a function, that takes a parameter name and assigns it 
-    to the name property of the object.
-    this.name refers to the name property of the object.
-    The changeName method changes the object's name property to its argument.
+In the example above, we have defined a method named changeName for our person, 
+which is a function, that takes a parameter name and assigns it 
+to the name property of the object.
+this.name refers to the name property of the object.
+The changeName method changes the object's name property to its argument.
 
-
-
-    You can also define the function outside of the constructor function 
-    and associate it with the object.
+You can also define the function outside of the constructor function 
+and associate it with the object.
 */
-
 
     function person2(name, age) {
         this.name= name;  
@@ -199,19 +186,16 @@ function Product(prodID, price) {
         return 2023 - this.age;
     }
  
-    /*
-    As you can see, we have assigned the object's yearOfBirth property to the bornYear function.
-    The this keyword is used to access the age property of the object, 
-    which is going to call the method.
+/*
+As you can see, we have assigned the object's yearOfBirth property to the bornYear function.
+The this keyword is used to access the age property of the object, 
+which is going to call the method.
 
-    Note that it's not necessary to write the function's parentheses 
-    when assigning it to an object.
+Note that it's not necessary to write the function's parentheses 
+when assigning it to an object.
 */
 
-
     // Call the method as usual.
-
-
     function person3(name, age) {
         this.name= name;
         this.age = age;
@@ -225,17 +209,16 @@ function Product(prodID, price) {
     document.write(p.yearOfBirth());
 
 /*
-    Call the method by the property name you specified in the constructor function, 
-    rather than the function name.
+Call the method by the property name you specified in the constructor function, 
+rather than the function name.
 */
-
-
 
 
 
 /*
     Example:
-    We have created the contact object constructor, which has two arguments, name and number.
+    We have created the contact object constructor, 
+    which has two arguments, name and number.
     We add a print() method to the object, 
     which will output the contact data to the console 
     in the following format: name: number
@@ -257,15 +240,14 @@ b.print();
 
 
 /*
-    ------------------
-    Math Object
-    ------------------
-    The Math object allows you to perform mathematical tasks, 
-    and includes several properties.
+Math Object
+------------------
+The Math object allows you to perform mathematical tasks, 
+and includes several properties.
 
-    document.write(Math.PI);
+document.write(Math.PI);
 
-    Math has no constructor. There's no need to create a Math object first.
+Math has no constructor. There's no need to create a Math object first.
 */
 
     var number = Math.sqrt(4); 
@@ -292,44 +274,38 @@ b.print();
 
 
 /*
-    ------------------
-    Date Object
-    ------------------
+Date Object
+------------------
+The Date object enables us to work with dates.
+A date object consists of:
 
-    The Date object enables us to work with dates.
+    year
+    month
+    day
+    hour
+    minute
+    second
+    milliseconds
 
-    A date object consists of:
+We can create a new date object with the current date and time Using new.
 
-        year
-        month
-        day
-        hour
-        minute
-        second
-        milliseconds
-
-   We can create a new date object with the current date and time Using new.
-
-   ex:
-
+ex:
     var d = new Date();     //d stores the current date and time
 
-
-    The other ways to initialize dates allow for the 
-    creation of new date objects from the specified date and time
+The other ways to initialize dates allow for the 
+creation of new date objects from the specified date and time
 
     new Date(milliseconds)
     new Date(dateString)
     new Date(year, month, day, hours, minutes, seconds, milliseconds)
 
-    JavaScript dates are calculated in milliseconds from 
-    01 January, 1970 00:00:00 Universal Time (UTC). 
-    
-    One day contains 86,400,000 millisecond.
+JavaScript dates are calculated in milliseconds from 
+01 January, 1970 00:00:00 Universal Time (UTC). 
 
-    Ex:
-    */
+One day contains 86,400,000 millisecond.
+*/
 
+    Example:
     //Fri Jan 02 1970 00:00:00
     var d1 = new Date(86400000); 
 
@@ -339,60 +315,48 @@ b.print();
     //Sat Jun 11 1988 11:42:00
     var d3 = new Date(88,5,11,11,42,0,0);
 
-    /*
-    JavaScript counts months from 0 to 11. 
+/*
+JavaScript counts months from 0 to 11. 
 
-    January is 0
-    December is 11
+January is 0
+December is 11
 
-    Date objects are static, rather than dynamic. 
-    
-    The computer time is ticking, but date objects don't change, once created.
+Date objects are static, rather than dynamic. 
 
-    
-    Date Methods
-    ----------------
+The computer time is ticking, but date objects don't change, once created.
 
-    When a Date object is created, 
-    a number of methods make it possible to perform operations on it:
 
+Date Methods
+----------------
+
+When a Date object is created, 
+a number of methods make it possible to perform operations on it:
 */
-        var d = new Date();
-        var hours = d.getHours();
 
-        console.log(hours);
+    var d = new Date();
+    var hours = d.getHours();
+    console.log(hours);
 
-//  Let's create a program that prints the current time to the browser once every second.
-
-
+//  prints the current time to the browser once every second.
     function printTime() {
         var d = new Date();
         var hours = d.getHours();
         var mins = d.getMinutes();
         var secs = d.getSeconds();
-
         console.log (hours + ":" + mins + ":" + secs);
     }
     setInterval(printTime, 1000);
-
-
 
     function main() {
         var year = parseInt(prompt(), 10);
         var month = parseInt(prompt(), 10);
         var day = parseInt(prompt(), 10);
-         
         console.log(getWeekDay(year, month, day)); 
     }
      
-
     function getWeekDay(year, month, day) {
-
         var names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
         var d = new Date(year, month, day);
-       
         var day = d.getDay();
-
         return names[day];
     }
