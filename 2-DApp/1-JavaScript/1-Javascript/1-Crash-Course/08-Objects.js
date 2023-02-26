@@ -2,41 +2,54 @@
 //                      Objects
 ///////////////////////////////////////////////////////
 
-// JavaScript's objects are equivalent to "dictionaries" or "maps" in other languages.
+// JavaScript's objects are equivalent to 
+// "dictionaries" or "maps" in other languages.
 //  maps: an unordered collection of key-value pairs.
-var myObj = {key1: "Hello", key2: "World"};
+
+    var myObj = {key1: "Hello", key2: "World"};
+
 
 // Keys are strings, but quotes aren't required if they're a valid JavaScript identifier.
 // Values can be any type.
-var myObj = {
-    myKey: "myValue", 
-    "my other key": 4
-};
 
-// Object attributes can also be accessed using the subscript syntax,
-myObj["my other key"]; // = 4
-
-// ... or using the dot syntax, provided the key is a valid identifier.
-myObj.myKey; // = "myValue"
-
-// Objects are mutable; values can be changed and new keys added.
-myObj.myThirdKey = true;
-
-// If you try to access a value that's not yet set, you'll get undefined.
-myObj.myFourthKey; // = undefined
+    var myObj = {
+        myKey: "myValue", 
+        "my other key": 4
+    };
 
 
-var cuboid = {
-    length: 25,
-    width: 50,
-    height: 200
-};
+// Object attributes can also be accessed 
+// using the subscript syntax,
 
-//your code goes here
-let volume = cuboid.length * cuboid.width * cuboid.height;
-console.log(volume);
+    myObj["my other key"]; // = 4
 
 
+// ... or using the dot syntax, 
+// provided the key is a valid identifier.
+
+    myObj.myKey; // = "myValue"
+
+
+// Objects are mutable; 
+// values can be changed and new keys added.
+
+    myObj.myThirdKey = true;
+
+
+// If you try to access a value that's not yet set, 
+// you'll get undefined.
+
+    myObj.myFourthKey; // = undefined
+
+    Example:
+    var cuboid = {
+        length: 25,
+        width: 50,
+        height: 200
+    };
+
+    let volume = cuboid.length * cuboid.width * cuboid.height;
+    console.log(volume);
 
 /*
 Sometimes, we need to set an "object type" that can be used to 
@@ -45,91 +58,84 @@ create a number of objects of a single type.
 The standard way to create an "object type" is to use an object constructor function.
 */
 
-
-// function (person) is an object constructor
-// which takes parameters and assigns them to the object properties
-function person(name, age, color) {
-    this.name = name;
-    this.age = age;
-    this.favColor = color;
-}
-
-//                   name,  age, color
-var p1 = new person("John", 42, "green");
-var p2 = new person("Amy", 21, "red");
-
-console.log("p1.age", p1.age); 
-console.log("p2.name", p2.name);
-
-
-
-Example1:
-function person(name, age, color) {
-    this.name = name;
-    this.age = age;
-    this.favColor = color;
-  }
-
-// The above function (person) is an object constructor, 
-// which takes parameters and assigns them to the object properties.
-
-//                   name,  age, color
-var p1 = new person("John", 42, "green");
-var p2 = new person("Amy", 21, "red");
-
-console.log("p1.age: ", p1.age); 
-console.log("p2.name: ", p2.name);
-
-
-
-Example2:
-function main() {
-    //take flight number and its status
-    var flightNumber = prompt("Please enter flightNumber", "1000");
-    var flightStatus = prompt("Please enter flightStatus", "Landed");
-    
-    var flight1 = new Flight(flightNumber, flightStatus);
-    //assign a flight object to flight1 variable
-    
-    //output
-    console.log('The flight ' + flight1.number + ' is ' + flight1.status)
-    
-}
-
-function Flight(flightNumber, status) {
-    //fix the constructor
-    this.number = flightNumber;
-    this.status = status;
-};
-
-main();
-
-
-
-Example3:
-
-function main2() {
-    var prodID = prompt("Please enter prodID");
-    var price = prompt("Please enter price");
-    var discount = prompt("Please enter discount");
-    
-    var prod1= new Product(prodID, price);
-    console.log(prod1.prodID + " price: " + prod1.price);
-    
-    prod1.changePrice(discount);
-    console.log(prod1.prodID + " new price: " + prod1.price);
-}
-
-function Product(prodID, price) {
-    this.prodID = prodID;
-    this.price = price;
-
-    this.changePrice = function(discount) {
-        //your code goes here
-        this.price = price - ((discount/100) * price);
+    // function (person) is an object constructor
+    // which takes parameters and assigns them to the object properties
+    function person(name, age, color) {
+        this.name = name;
+        this.age = age;
+        this.favColor = color;
     }
-}
 
+    //                   name,  age, color
+    var p1 = new person("John", 42, "green");
+    var p2 = new person("Amy", 21, "red");
+
+    console.log("p1.age", p1.age); 
+    console.log("p2.name", p2.name);
+
+
+    Example1:
+    // person is an object constructor
+    // which takes parameters and assigns them to the object properties.
+    function person(name, age, color) {
+        this.name = name;
+        this.age = age;
+        this.favColor = color;
+    }
+
+    //                   name,  age, color
+    var p1 = new person("John", 42, "green");
+    var p2 = new person("Amy", 21, "red");
+
+    console.log("p1.age: ", p1.age); 
+    console.log("p2.name: ", p2.name);
+
+
+    Example2:
+    function main() {
+        //take flight number and its status
+        var flightNumber = prompt("Please enter flightNumber", "1000");
+        var flightStatus = prompt("Please enter flightStatus", "Landed");
+        
+        var flight1 = new Flight(flightNumber, flightStatus);
+        //assign a flight object to flight1 variable
+        
+        //output
+        console.log('The flight ' + flight1.number + ' is ' + flight1.status)
+        
+    }
+
+    function Flight(flightNumber, status) {
+        //fix the constructor
+        this.number = flightNumber;
+        this.status = status;
+    };
+
+    main();
+
+
+    Example3:
+    function main2() {
+        var prodID = prompt("Please enter prodID");
+        var price = prompt("Please enter price");
+        var discount = prompt("Please enter discount");
+        
+        var prod1= new Product(prodID, price);
+        console.log(prod1.prodID + " price: " + prod1.price);
+        
+        prod1.changePrice(discount);
+        console.log(prod1.prodID + " new price: " + prod1.price);
+    }
+
+    function Product(prodID, price) {
+        this.prodID = prodID;
+        this.price = price;
+
+        this.changePrice = function(discount) {
+            //your code goes here
+            this.price = price - ((discount/100) * price);
+        }
+    }
 
 
 /*
@@ -149,10 +155,9 @@ A method is a function, belonging to an object. It can be referenced using the t
 The this keyword is used as a reference to the current object, meaning that you can access the objects properties and methods using it.
 
 Defining methods is done inside the constructor function.
-
-For Example:
 */
 
+    Example:
     function person(name, age) {
         this.name = name;  
         this.age = age;
@@ -213,30 +218,21 @@ Call the method by the property name you specified in the constructor function,
 rather than the function name.
 */
 
-
-
-/*
     Example:
-    We have created the contact object constructor, 
-    which has two arguments, name and number.
-    We add a print() method to the object, 
-    which will output the contact data to the console 
-    in the following format: name: number
-*/
-
-function contact(name, number) {
-    this.name = name;
-    this.number = number;
-    this.print = function() {
-        console.log(name + ": " + number);
+    // contact object constructor has two arguments: name and number
+    // print() method will output the contact data to the console in the `name: number` format
+    function contact(name, number) {
+        this.name = name;
+        this.number = number;
+        this.print = function() {
+            console.log(name + ": " + number);
+        }
     }
-}
 
-var a = new contact("David", 12345);
-var b = new contact("Amy", 987654321);
-a.print();
-b.print();
-
+    var a = new contact("David", 12345);
+    var b = new contact("Amy", 987654321);
+    a.print();
+    b.print();
 
 
 /*
@@ -252,7 +248,6 @@ Math has no constructor. There's no need to create a Math object first.
 
     var number = Math.sqrt(4); 
     document.write(number);
-
 
     function main() {
         var year = parseInt(readLine(), 10)
@@ -288,19 +283,24 @@ A date object consists of:
     milliseconds
 
 We can create a new date object with the current date and time Using new.
+*/
 
-ex:
+    Example:
     var d = new Date();     //d stores the current date and time
 
+/*
 The other ways to initialize dates allow for the 
 creation of new date objects from the specified date and time
+*/
 
     new Date(milliseconds)
     new Date(dateString)
     new Date(year, month, day, hours, minutes, seconds, milliseconds)
 
-JavaScript dates are calculated in milliseconds from 
-01 January, 1970 00:00:00 Universal Time (UTC). 
+/*
+JavaScript dates are calculated in milliseconds from :
+
+    01 January, 1970 00:00:00 Universal Time (UTC)
 
 One day contains 86,400,000 millisecond.
 */
@@ -328,7 +328,6 @@ The computer time is ticking, but date objects don't change, once created.
 
 Date Methods
 ----------------
-
 When a Date object is created, 
 a number of methods make it possible to perform operations on it:
 */
@@ -337,7 +336,7 @@ a number of methods make it possible to perform operations on it:
     var hours = d.getHours();
     console.log(hours);
 
-//  prints the current time to the browser once every second.
+    // prints the current time to the browser once every second.
     function printTime() {
         var d = new Date();
         var hours = d.getHours();

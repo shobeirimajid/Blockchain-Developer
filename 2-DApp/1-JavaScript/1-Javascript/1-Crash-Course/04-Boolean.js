@@ -3,12 +3,14 @@
 ///////////////////////////////////////////////////////
 
 // There's also a boolean type.
-true;
-false;
+
+    true;
+    false;
 
 // Negation uses the ! symbol
-!true; // = false
-!false; // = true
+
+    !true;      // = false
+    !false;     // = true
 
 // false, null, undefined, NaN, 0 and "" are falsy; 
 // everything else is truthy.
