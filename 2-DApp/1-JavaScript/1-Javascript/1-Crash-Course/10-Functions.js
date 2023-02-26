@@ -28,11 +28,23 @@ setTimeout(myFunction, 5000);
 // Note: setTimeout isn't part of the JS language, but is provided by browsers
 // and Node.js.
 
-// Another function provided by browsers is setInterval
+/* 
+    setInterval
+    Another function provided by browsers is setInterval
+    The setInterval() method calls a function or evaluates an expression 
+    at specified intervals (in milliseconds).
+*/
 function myFunction(){
     // this code will be called every 5 seconds
+    alert('setInterval');
 }
-setInterval(myFunction, 5000);
+// This will call the myFunction every 5 seconds (1000 ms = 1 second).
+var h = setInterval(myFunction, 5000);
+
+// It will continue calling the function until  
+//   clearInterval() is called or the window is closed.
+clearInterval(h);
+
 
 // Function objects don't even have to be declared with a name - you can write
 // an anonymous function definition directly into the arguments of another.
@@ -79,7 +91,6 @@ sayHelloInFiveSeconds("Adam"); // will open a popup with "Hello, Adam!" in 5s
 
 
 /* functions can be inside an object */
-
 
 var myObj = {
     myFunc: function(){
@@ -147,7 +158,6 @@ doubler(8); // = 16
 
 
 /* constructors */
-
 
 // When you call a function with the `new` keyword, a new object is created, and
 // made available to the function via the `this` keyword. Functions designed to be

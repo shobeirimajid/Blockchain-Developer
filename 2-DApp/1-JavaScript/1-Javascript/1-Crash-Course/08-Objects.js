@@ -255,9 +255,10 @@ a.print();
 b.print();
 
 
+
 /*
     ------------------
-    The Math Object
+    Math Object
     ------------------
     The Math object allows you to perform mathematical tasks, 
     and includes several properties.
@@ -265,11 +266,10 @@ b.print();
     document.write(Math.PI);
 
     Math has no constructor. There's no need to create a Math object first.
-
+*/
 
     var number = Math.sqrt(4); 
     document.write(number);
-
 
 
     function main() {
@@ -285,16 +285,114 @@ b.print();
         return Math.ceil(x/100);
     }
 
-
-
-
     var n = prompt("Enter a number", "");
     var answer = Math.sqrt(n);
     alert("The square root of " + n + " is " + answer);
 
 
-    
 
+/*
+    ------------------
+    Date Object
+    ------------------
+
+    The Date object enables us to work with dates.
+
+    A date object consists of:
+
+        year
+        month
+        day
+        hour
+        minute
+        second
+        milliseconds
+
+   We can create a new date object with the current date and time Using new.
+
+   ex:
+
+    var d = new Date();     //d stores the current date and time
+
+
+    The other ways to initialize dates allow for the 
+    creation of new date objects from the specified date and time
+
+    new Date(milliseconds)
+    new Date(dateString)
+    new Date(year, month, day, hours, minutes, seconds, milliseconds)
+
+    JavaScript dates are calculated in milliseconds from 
+    01 January, 1970 00:00:00 Universal Time (UTC). 
+    
+    One day contains 86,400,000 millisecond.
+
+    Ex:
+    */
+
+    //Fri Jan 02 1970 00:00:00
+    var d1 = new Date(86400000); 
+
+    //Fri Jan 02 2015 10:42:00
+    var d2 = new Date("January 2, 2015 10:42:00");
+
+    //Sat Jun 11 1988 11:42:00
+    var d3 = new Date(88,5,11,11,42,0,0);
+
+    /*
+    JavaScript counts months from 0 to 11. 
+
+    January is 0
+    December is 11
+
+    Date objects are static, rather than dynamic. 
+    
+    The computer time is ticking, but date objects don't change, once created.
+
+    
+    Date Methods
+    ----------------
+
+    When a Date object is created, 
+    a number of methods make it possible to perform operations on it:
 
 */
+        var d = new Date();
+        var hours = d.getHours();
 
+        console.log(hours);
+
+//  Let's create a program that prints the current time to the browser once every second.
+
+
+    function printTime() {
+        var d = new Date();
+        var hours = d.getHours();
+        var mins = d.getMinutes();
+        var secs = d.getSeconds();
+
+        console.log (hours + ":" + mins + ":" + secs);
+    }
+    setInterval(printTime, 1000);
+
+
+
+    function main() {
+        var year = parseInt(prompt(), 10);
+        var month = parseInt(prompt(), 10);
+        var day = parseInt(prompt(), 10);
+         
+        console.log(getWeekDay(year, month, day)); 
+    }
+     
+
+    function getWeekDay(year, month, day) {
+
+        var names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        var d = new Date(year, month, day);
+       
+        var day = d.getDay();
+
+        return names[day];
+    }

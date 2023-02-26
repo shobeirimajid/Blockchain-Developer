@@ -49,3 +49,7 @@
 Infinity;   // result of e.g.   1/0
 -Infinity;  // result of e.g.   -1/0
 NaN;        // result of e.g.   0/0    stands for 'Not a Number'
+
+
+var num = parseInt(10);
+console.log(num);
