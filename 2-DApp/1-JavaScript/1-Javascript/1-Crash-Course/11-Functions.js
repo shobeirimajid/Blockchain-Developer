@@ -25,17 +25,33 @@
 
 // JavaScript functions are first class objects, so they can be reassigned to
 // different variable names and passed to other functions as arguments - for
-// example, when supplying an event handler:
+// example: when supplying an event handler.
 
+
+
+/*
+----------------
+setTimeout
+----------------
+setTimeout isn't part of the JS language, but is provided by browsers and Node.js.
+*/
     function myFunction(){
         // this code will be called in 5 seconds' time
     }
     setTimeout(myFunction, 5000);
-    // Note: setTimeout isn't part of the JS language, but is provided by browsers and Node.js.
+
+
+    // Function objects don't even have to be declared with a name - 
+    // you can write an anonymous function definition directly into the arguments of another.
+
+    setTimeout(function(){
+        // this code will be called in 5 seconds' time
+    }, 5000);
 
 
 
 /* 
+----------------
 setInterval
 ----------------
 Another function provided by browsers is setInterval
@@ -50,19 +66,10 @@ at specified intervals (in milliseconds).
     // This will call the myFunction every 5 seconds (1000 ms = 1 second).
     var h = setInterval(myFunction, 5000);
 
-// It will continue calling the function until  
-// clearInterval() is called or the window is closed.
+    // It will continue calling the function until  
+    // clearInterval() is called or the window is closed.
 
     clearInterval(h);
-
-
-
-// Function objects don't even have to be declared with a name - 
-// you can write an anonymous function definition directly into the arguments of another.
-
-    setTimeout(function(){
-        // this code will be called in 5 seconds' time
-    }, 5000);
 
 
 
@@ -92,9 +99,15 @@ at specified intervals (in milliseconds).
 
 
 
-// One of JavaScript's most powerful features is closures. If a function is
-// defined inside another function, the inner function has access to all the
-// outer function's variables, even after the outer function exits.
+/* 
+----------------
+closures
+----------------
+One of JavaScript's most powerful features is closures. 
+If a function is defined inside another function, 
+the inner function has access to all the outer function's variables, 
+even after the outer function exits.
+*/
 
     function sayHelloInFiveSeconds(name){
         var prompt = "Hello, " + name + "!";
@@ -114,19 +127,30 @@ at specified intervals (in milliseconds).
 
 
 
-/* functions can be inside an object */
+/* 
+--------------------
+function in object
+--------------------
+functions can be inside an object
+*/
 
     var myObj = {
         myFunc: function(){
             return "Hello world!";
         }
     };
+
     myObj.myFunc(); // = "Hello world!"
 
 
 
-// When functions attached to an object are called, they can access the object
-// they're attached to using the `this` keyword.
+/*
+--------------------
+this
+--------------------
+When functions attached to an object are called, they can access the object
+they're attached to using the `this` keyword.
+*/
 
     myObj = {
         myString: "Hello world!",
@@ -134,13 +158,15 @@ at specified intervals (in milliseconds).
             return this.myString;
         }
     };
+
     myObj.myFunc(); // "Hello world!"
 
 
 
-// What this is set to has to do with how the function is called, not where
-// it's defined. So, our function doesn't work if it isn't called in the
-// context of the object.
+// What `this` is set to has to do with 
+// how the function is called, 
+// not where it's defined. 
+// So, our function doesn't work if it isn't called in the context of the object.
 
     var myFunc = myObj.myFunc;
     myFunc(); // = undefined
@@ -157,9 +183,13 @@ at specified intervals (in milliseconds).
     myObj.myOtherFunc(); // "HELLO WORLD!"
 
 
-
-// We can also specify a context for a function to execute in when we invoke it
-// using `call` or `apply`.
+/*
+---------------------------------
+context : call , apply, bind
+---------------------------------
+We can also specify a context for a function to execute in when we invoke it
+using `call` or `apply`.
+*/
 
     var anotherFunc = function(s){
         return this.myString + s;
@@ -168,8 +198,7 @@ at specified intervals (in milliseconds).
 
 
 
-// The `apply` function is nearly identical, but takes an array for an argument
-// list.
+// The `apply` function is nearly identical, but takes an array for an argument list.
 
     anotherFunc.apply(myObj, [" And Hello Sun!"]); // = "Hello World! And Hello Sun!"
 
@@ -184,8 +213,8 @@ at specified intervals (in milliseconds).
 
 
 
-// But, `call` and `apply` are only temporary. When we want it to stick, we can
-// use `bind`.
+// But, `call` and `apply` are only temporary. 
+// When we want it to stick, we can use `bind`.
 
     var boundFunc = anotherFunc.bind(myObj);
     boundFunc(" And Hello Saturn!"); // = "Hello World! And Hello Saturn!"
@@ -200,11 +229,14 @@ at specified intervals (in milliseconds).
 
 
 
-/* constructors */
-
-// When you call a function with the `new` keyword, a new object is created, and
-// made available to the function via the `this` keyword. Functions designed to be
-// called like that are called constructors.
+/*
+---------------------------------
+constructors
+---------------------------------
+When you call a function with the `new` keyword, a new object is created, and
+made available to the function via the `this` keyword. Functions designed to be
+called like that are called constructors.
+*/
 
     var MyConstructor = function(){
         this.myNumber = 5;
@@ -212,3 +244,23 @@ at specified intervals (in milliseconds).
     
     myNewObj = new MyConstructor(); // = {myNumber: 5}
     myNewObj.myNumber; // = 5
+
+
+
+//---------------------------------
+//          Examples
+//---------------------------------
+
+function main() {
+    var num1 = parseInt(readLine(),10);
+    var num2 = parseInt(readLine(),10);
+    var num3 = parseInt(readLine(),10);
+    var average = avg(num1, num2, num3)
+    console.log(average)
+}
+
+function avg(n1, n2, n3){
+    return ((n1+n2+n3)/3);
+}
+
+main();

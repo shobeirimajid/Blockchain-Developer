@@ -6,10 +6,12 @@
 
     var myArray = ["Hello", 45, true];
 
+
 // Their members can be accessed using the square-brackets subscript syntax.
 // Array indices start at zero.
 
     myArray[1];             // = 45
+
 
 
 // Arrays are mutable and of variable length.
@@ -18,17 +20,21 @@
     myArray.length;         // = 4
 
 
+
 // Add/Modify at specific index
 
     myArray[3] = "Hello";
+
 
 
 // Add and remove element from front or back end of an array
 
     myArray.unshift(3);             // Add as the first element
     someVar = myArray.shift();      // Remove first element and return it
+
     myArray.push(3);                // Add as the last element
     someVar = myArray.pop();        // Remove last element and return it
+
 
 
 // Join all elements of an array with semicolon
@@ -37,16 +43,18 @@
     myArray0.join(";");                         // = "32;false;js;12;56;90"
 
 
+
 // Get subarray of elements from index 1 (include) to 4 (exclude)
 
     myArray0.slice(1,4);            // = [false,"js",12]
 
 
+
 // Remove 4 elements starting from index 2, and insert there strings
 // "hi","wr" and "ld"; return removed subarray
-
-                                            // myArray0 === [32,false,"hi","wr","ld"]
+                                            
     myArray0.splice(2,4,"hi","wr","ld");    // = ["js",12,56,90]
+
 
 
 // declare array by new keyword
@@ -57,12 +65,11 @@
     courses1[2] = "JS";
 
 
+
 // The array literal syntax is the recommended way to declare arrays.
 
     var courses2 = ["HTML 5", "CSS 3", "ES6"]; 
-
     var courses3 = courses1.concat(courses2);
-
 
     console.log(courses1);
     console.log(courses2);
@@ -95,6 +102,7 @@
     }
 
 
+    
 /*
 Associative Arrays
 ----------------------

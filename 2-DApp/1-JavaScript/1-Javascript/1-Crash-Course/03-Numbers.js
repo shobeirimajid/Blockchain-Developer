@@ -10,6 +10,7 @@
     1.5;        // = 1.5
 
 
+
 // Some basic arithmetic works as you'd expect.
 
     1 + 1;          // = 2
@@ -19,9 +20,11 @@
     35 / 5;         // = 7
 
 
+
 // Including uneven division.
 
     5 / 2;          // = 2.5
+
 
 
 // And modulo division.
@@ -31,15 +34,18 @@
     18.5 % 7;       // = 4.5
 
 
-// Bitwise operations also work; when you perform a bitwise operation your float
-// is converted to a signed int *up to* 32 bits.
+
+// Bitwise operations also work; 
+// when you perform a bitwise operation your float is converted to a signed int *up to* 32 bits.
 
     1 << 2;         // = 4
+
 
 
 // Precedence is enforced with parentheses.
 
     (1 + 3) * 2;    // = 8
+
 
 
 // Equality is ===
@@ -48,10 +54,12 @@
     2 === 1;        // = false
 
 
+
 // Inequality is !==
 
     1 !== 1;        // = false
     2 !== 1;        // = true
+
 
 
 // More comparisons
@@ -62,6 +70,7 @@
     2 >= 2;          // = true
 
 
+
 // There are three special not-a-real-number values:
 
     Infinity;       // result of e.g.   1/0
@@ -69,5 +78,6 @@
     NaN;            // result of e.g.   0/0    stands for 'Not a Number'
 
 
+    
 var num = parseInt(10);
 console.log(num);

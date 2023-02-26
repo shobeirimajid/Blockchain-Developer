@@ -9,6 +9,7 @@
     var myObj = {key1: "Hello", key2: "World"};
 
 
+
 // Keys are strings, but quotes aren't required if they're a valid JavaScript identifier.
 // Values can be any type.
 
@@ -18,26 +19,26 @@
     };
 
 
-// Object attributes can also be accessed 
-// using the subscript syntax,
+
+// Object attributes can also be accessed using the subscript syntax
 
     myObj["my other key"]; // = 4
 
 
-// ... or using the dot syntax, 
-// provided the key is a valid identifier.
+
+// ... or using the dot syntax, provided the key is a valid identifier.
 
     myObj.myKey; // = "myValue"
 
 
-// Objects are mutable; 
-// values can be changed and new keys added.
+
+// Objects are mutable; values can be changed and new keys added.
 
     myObj.myThirdKey = true;
 
 
-// If you try to access a value that's not yet set, 
-// you'll get undefined.
+
+// If you try to access a value that's not yet set, you'll get undefined.
 
     myObj.myFourthKey; // = undefined
 
@@ -51,6 +52,8 @@
     let volume = cuboid.length * cuboid.width * cuboid.height;
     console.log(volume);
 
+
+
 /*
 Sometimes, we need to set an "object type" that can be used to 
 create a number of objects of a single type.
@@ -60,6 +63,7 @@ The standard way to create an "object type" is to use an object constructor func
 
     // function (person) is an object constructor
     // which takes parameters and assigns them to the object properties
+
     function person(name, age, color) {
         this.name = name;
         this.age = age;
@@ -74,9 +78,11 @@ The standard way to create an "object type" is to use an object constructor func
     console.log("p2.name", p2.name);
 
 
+
     Example1:
     // person is an object constructor
     // which takes parameters and assigns them to the object properties.
+
     function person(name, age, color) {
         this.name = name;
         this.age = age;
@@ -89,6 +95,7 @@ The standard way to create an "object type" is to use an object constructor func
 
     console.log("p1.age: ", p1.age); 
     console.log("p2.name: ", p2.name);
+
 
 
     Example2:
@@ -112,6 +119,7 @@ The standard way to create an "object type" is to use an object constructor func
     };
 
     main();
+
 
 
     Example3:
@@ -138,6 +146,7 @@ The standard way to create an "object type" is to use an object constructor func
     }
 
 
+
 /*
 Methods
 ------------
@@ -151,7 +160,8 @@ Access an object method using the following syntax:
 
     objectName.methodName()
 
-A method is a function, belonging to an object. It can be referenced using the this keyword.
+A method is a function, belonging to an object. 
+It can be referenced using the this keyword.
 The this keyword is used as a reference to the current object, meaning that you can access the objects properties and methods using it.
 
 Defining methods is done inside the constructor function.
@@ -178,6 +188,8 @@ to the name property of the object.
 this.name refers to the name property of the object.
 The changeName method changes the object's name property to its argument.
 
+
+
 You can also define the function outside of the constructor function 
 and associate it with the object.
 */
@@ -191,6 +203,8 @@ and associate it with the object.
         return 2023 - this.age;
     }
  
+
+
 /*
 As you can see, we have assigned the object's yearOfBirth property to the bornYear function.
 The this keyword is used to access the age property of the object, 
@@ -213,6 +227,8 @@ when assigning it to an object.
 
     document.write(p.yearOfBirth());
 
+
+
 /*
 Call the method by the property name you specified in the constructor function, 
 rather than the function name.
@@ -234,6 +250,7 @@ rather than the function name.
     a.print();
     b.print();
 
+    
 
 /*
 Math Object
