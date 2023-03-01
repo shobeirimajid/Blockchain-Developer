@@ -54,7 +54,6 @@ JavaScript is:
     - Supported by all major browsers and enabled by default
 
 
-
 --------------------------
 frameworks and libraries
 --------------------------
