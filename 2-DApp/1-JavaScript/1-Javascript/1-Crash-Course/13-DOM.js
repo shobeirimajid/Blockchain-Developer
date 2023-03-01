@@ -207,6 +207,8 @@ All style attributes can be accessed using the style object of the element.
             var x = document.getElementById("demo");
             x.style.color = '#6600FF';
             x.style.width = '100px';
+            // x.style.display = "none";
+            // x.style.display = "block";
         };
 
 /*

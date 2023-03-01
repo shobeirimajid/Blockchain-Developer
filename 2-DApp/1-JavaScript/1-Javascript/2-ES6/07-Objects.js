@@ -14,7 +14,7 @@ ES6 Objects
     The new method definition shorthand 
     does not require the colon (:) or function keyword, 
     as in the grow function of the tree object declaration:
-
+*/
 
         let tree = {
             height: 10,
@@ -27,13 +27,13 @@ ES6 Objects
         tree.grow();
         console.log(tree.height); // 12
 
-    
+/*  
     You can also use a property value shorthand 
     when initializing properties with a variable by the same name.
 
     For example, properties height and health 
     are being initialized with variables named height and health
-
+*/
 
         let height = 5;
         let health = 100;
@@ -45,32 +45,54 @@ ES6 Objects
 
         console.log(athlete.height); // 5
 
-    
+/*    
     When creating an object by using duplicate property names, 
     the last property will overwrite the prior ones of the same name.
 
     For Example:
+*/
 
         var a = {x: 1, x: 2, x: 3, x: 4};
         console.log(a.x);   // 4 
 
-
+/*
     Duplicate property names generated a SyntaxError in ES5 when using strict mode. 
     However, ES6 removed this limitation.
+*/
 
 
-    ---------------------------
-    Computed Property Names
-    ---------------------------
-    With ES6, you can now use computed property names. 
-    Using the square bracket notation [], 
-    we can use an expression for a property name, 
-    including concatenating strings. 
+/*
+    You can change the properties of a constant object:
+*/
+    Example
+    // You can create a const object:
+    const car = {type:"Fiat", model:"500", color:"white"};
+
+    // You can change a property:
+    car.color = "red";
+
+    // You can add a property:
+    car.owner = "Johnson";
+
+    // But you can NOT reassign the object:
+    car = {type:"Volvo", model:"EX60", color:"red"};    // ERROR
+
+
+
+/*
+---------------------------
+Computed Property Names
+---------------------------
+With ES6, you can now use computed property names. 
+Using the square bracket notation [], 
+we can use an expression for a property name, 
+including concatenating strings. 
     
-    This can be useful in cases where we want to 
-    create certain objects based on user data (e.g. id, email, and so on).
+This can be useful in cases where we want to 
+create certain objects based on user data (e.g. id, email, and so on).
 
-    Here are three examples:
+Here are three examples:
+*/
 
         let prop = 'name';
         let id = '1234';
@@ -88,7 +110,7 @@ ES6 Objects
     
 
         var i = 0;
-`       var a = {
+        var a = {
             ['foo' + ++i]: i,
             ['foo' + ++i]: i,
             ['foo' + ++i]: i
@@ -97,7 +119,6 @@ ES6 Objects
         console.log(a.foo1); // 1
         console.log(a.foo2); // 2
         console.log(a.foo3); // 3
-
 
 
 
@@ -110,22 +131,25 @@ ES6 Objects
         console.log(config.mobileSize); // 4
 
 
-    It is very useful when you need to create custom objects based on some variables.
+    // It is very useful when you need to create custom objects based on some variables.
 
 
 
+/*
     ---------------------------
     Object.assign() in ES6
     ---------------------------
     ES6 adds a new Object method assign() that 
     allows us to combine multiple sources into one target to create a single new object.
+*/
 
         Object.assign() 
-    
+  
+/*
     is also useful for creating a duplicate of an existing object.
 
     Let's look at the following example to see how to combine objects:
-
+*/
 
         let person = {
             name: 'Jack',
@@ -147,6 +171,7 @@ ES6 Objects
         console.log(newStudent.xp); // 2
 
 
+/*
     Here we used Object.assign() 
     where the first parameter is the target object you want to apply new properties to.
 
@@ -172,6 +197,7 @@ ES6 Objects
     However, using = creates a reference to the base object. 
     Because of this reference, 
     changes intended for a new object mutate the original object:
+*/
 
         
         let person = {
@@ -185,12 +211,13 @@ ES6 Objects
         console.log(person.name);       // Bob
         console.log(newPerson.name);    // Bob
 
-    
+ 
+/*
     To avoid this (mutations), 
     use Object.assign() to create a new object.
 
     For example:
-
+*/
 
         let person = {
             name: 'Jack',
@@ -204,11 +231,10 @@ ES6 Objects
         console.log(newPerson.name);    // Bob
 
 
-
+/*
     Finally, you can assign a value to an object property in the Object.assign() statement.
-
-
     For example:
+*/
 
 
         let person = {
@@ -234,7 +260,7 @@ ES6 Objects
             46
 
 
-
+/*
     ---------------------------
     Array Destructuring in ES6
     ---------------------------
@@ -248,6 +274,7 @@ ES6 Objects
     The following example demonstrates how to 
     
         unpack the elements of an array into distinct variables:
+*/
 
         let arr = ['1', '2', '3'];
 
@@ -257,10 +284,11 @@ ES6 Objects
         console.log(two);       // 2
         console.log(three);     // 3    
 
-
+/*
     We can use also destructure an array returned by a function.
 
     For example:
+*/
 
 
         let a = () => {
@@ -272,11 +300,13 @@ ES6 Objects
         console.log(one); // 1
         console.log(two); // 2
 
+/*
     Notice that we left the second argument's place empty.
 
 
 
     The destructuring syntax also simplifies assignment and swapping values:
+*/
 
 
         let a, b, c = 4, d = 8;
@@ -293,7 +323,7 @@ ES6 Objects
 
 
     
-
+/*
     ---------------------------   
     Object Destructuring in ES6
     ---------------------------
@@ -301,7 +331,7 @@ ES6 Objects
     Object destructuring unpacks properties into distinct variables.
 
     For example:
-
+*/
 
         let obj = {h:100, s: true};
         let {h, s} = obj;
@@ -309,10 +339,10 @@ ES6 Objects
         console.log(h); // 100
         console.log(s); // true
 
-    
+/*   
     We can assign without declaration, 
     but there are some syntax requirements for that:
-
+*/
 
         let a, b;
         ( {a, b} = {a: 'Hello ', b: 'Jack'} );
@@ -320,21 +350,21 @@ ES6 Objects
         console.log(a + b);     // Hello Jack 
 
 
-
+/*
     The () with a semicolon (;) 
     at the end are mandatory when destructuring without a declaration. 
     However, you can also do it as follows where the () are not required:
-
+*/
 
         let {a, b} = {a: 'Hello ', b: 'Jack'};
 
         console.log(a + b);     // Hello Jack 
 
 
-
+/*
     You can also assign the object to new variable names.
     For example:
-
+*/
         
         var o = {h: 42, s: true};
         var {h: foo, s: bar} = o;
@@ -342,11 +372,11 @@ ES6 Objects
         //console.log(h);   // Error
         console.log(foo);   // 42
 
-
+/*
     Finally you can assign default values to variables, 
     in case the value unpacked from the object is undefined.
     For example:
-
+*/
         
         var obj = {id: 42, name: "Jack"};
         let {id = 10, age = 20} = obj;
@@ -355,7 +385,7 @@ ES6 Objects
         console.log(age);   // 20
 
     
-
+/*
     ---------------------------
     ES6 Rest Parameters
     ---------------------------
@@ -366,7 +396,7 @@ ES6 Objects
 
     For example, let's write a function that checks 
     if an array contains all the arguments passed:
-
+*/
 
         function containsAll(arr) {
             for (let k = 1; k < arguments.length; k++) {
@@ -383,7 +413,7 @@ ES6 Objects
         console.log(containsAll(x, 6, 4, 9));   // false
 
 
-
+/*
     We can pass any number of arguments to the function 
     and access it using the 'arguments' object.
 
@@ -391,7 +421,7 @@ ES6 Objects
     While this does the job, 
     ES6 provides a more readable syntax to achieve variable number of parameters 
     by using a rest parameter
-
+*/
 
         function containsAll(arr, ...nums) {
             for (let num of nums) {
@@ -407,7 +437,7 @@ ES6 Objects
         console.log(containsAll(x, 6, 4, 9));   // false
 
 
-
+/*
     The '...nums' parameter is called a 'rest' parameter
         It takes all the "extra" arguments passed to the function
     
@@ -419,11 +449,11 @@ ES6 Objects
     the rest parameter will simply be an empty array; 
     
     the rest parameter will never be undefined.
+*/
 
 
 
-
-    Example:  calculate the sum of any number of values
+    // Example:  calculate the sum of any number of values
 
         //complete the function
         function Add(...nums){
@@ -441,7 +471,7 @@ ES6 Objects
 
 
 
-    Example:  calculate the sum of even number of input values
+    // Example:  calculate the sum of even number of input values
 
         function magic(...nums) {
             let sum = 0;
@@ -451,7 +481,7 @@ ES6 Objects
         console.log(magic(1, 2, 3, 4, 5, 6));
 
 
-
+/*
     ---------------------------
     The Spread Operator
     ---------------------------
@@ -465,7 +495,7 @@ ES6 Objects
 
 
     Before ES6, we used the following method:
-
+*/
 
         function myFunction(w, x, y, z) {
             console.log(w + x + y + z);
@@ -474,7 +504,7 @@ ES6 Objects
         myFunction.apply(null, args.concat(4)); 
 
     
-    ES6 provides an easy way to do the example above with spread operators
+    // ES6 provides an easy way to do the example above with spread operators
 
 
         const myFunction = (w, x, y, z) => {
@@ -491,13 +521,12 @@ ES6 Objects
         var date = new Date(...dateFields);
         console.log(date);                      // 1969-12-31T20:30:00.000Z 
 
-
+/*
     ---------------------------
     Spread in array literals
     ---------------------------
     Before ES6, we used the following syntax to add an item at middle of an array:
-
-
+*/
 
         var arr = ["One", "Two", "Five"];
 
@@ -506,6 +535,7 @@ ES6 Objects
         console.log(arr);           // ["One", "Two", "Three", "Four", "Five"]
 
 
+/*
     You can use methods such as :
         push
         splice 
@@ -513,19 +543,19 @@ ES6 Objects
 
     for example, to achieve this in different positions of the array. 
     However, in ES6 the spread operator lets us do this more easily:
-
+*/
 
         let newArr = ['Three', 'Four']; 
         let arr = ['One', 'Two', ...newArr, 'Five'];
         console.log(arr);           
         
-    
+/*  
     ---------------------------
     Spread in object literals
     ---------------------------
     In objects it copies the own enumerable properties 
     from the provided object onto a new object.
-
+*/
 
         const obj1 = { foo: 'bar', x: 42 };
         const obj2 = { foo: 'baz', y: 5 };
@@ -534,7 +564,7 @@ ES6 Objects
         const mergedObj = { ...obj1, ...obj2 };     // { foo: "baz", x: 42, y: 5 }
 
 
-    However, if you try to merge them you will not get the result you expected:
+    // However, if you try to merge them you will not get the result you expected:
 
             
         const obj1 = { foo: 'bar', x: 42 };
@@ -551,9 +581,7 @@ ES6 Objects
             // { 0: {}, 1: { foo: 'bar', x: 42 }, 2: { foo: 'baz', y: 5 } }
 
     
-
+/*
     Shallow cloning or merging objects is possible with 
     another operator called Object.assign().      
-
-
 */

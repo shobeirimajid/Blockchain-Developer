@@ -4,33 +4,6 @@
 ///////////////////////////////////////////////////////
 
 ----------------------
-History
-----------------------
- 
-core JavaScript language invented by Brendan to “make web pages alive” 
-    was named as "scripts" or "LiveScript"
-
-in 1995 Netscape changed its name to "JavaScript" 
-    and support it in Netscape 2.0 browser
-
-in 1997 ECMA-262 Edition 1 (ES1) was released as a standard version of JavaScript 
-    and was supported by IE4 browser
-
-    
-The ECMAScript Edition 5 standard will be the first update to be released in over four years. 
-
-
-JavaScript 2.0 conforms to Edition 5 of the ECMAScript standard, 
-    and the difference between the two is extremely minor.
-
-The specification for JavaScript 2.0 can be found on the following site: http://www.ecmascript.org/
-
-Today, Netscape's JavaScript and Microsoft's JScript conform to the ECMAScript standard, 
-    although both the languages still support the features that are not a part of the standard.
-
-
-    
-----------------------
 What is Javascript
 ----------------------
 JavaScript is the world's most popular programming language of the Web.
@@ -52,6 +25,33 @@ JavaScript is:
     - cross-platform
     - Full integration with HTML/CSS
     - Supported by all major browsers and enabled by default
+
+
+
+----------------------
+History
+----------------------
+ 
+in 1995 core JavaScript language invented by Brendan to “make web pages alive” 
+    was named as "scripts" or "LiveScript"
+
+
+in 1997 Netscape changed its name to "JavaScript" 
+    and became an ECMA standard "standard version of JavaScript" 
+    ECMA-262 Edition 1 (ES1) was released and support it in Netscape 2.0 browser
+    and then was supported by IE4 browser.
+        * `ECMA-262` is the official name of the standard
+        * `ECMAScript` is the official name of the language
+
+
+The ECMAScript 5 standard will be the first update to be released in over 4 years. 
+    and the difference between the two is extremely minor.
+    JavaScript 2.0 conforms to Edition 5 of the ECMAScript standard, 
+    The specification for JavaScript 2.0 can be found on the following site: http://www.ecmascript.org/
+
+Today, Netscape's JavaScript and Microsoft's JScript conform to the ECMAScript standard, 
+    although both the languages still support the features that are not a part of the standard.
+
 
 
 --------------------------
