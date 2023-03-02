@@ -30,11 +30,12 @@ the first item is [0], second is [1], and so on.
 Their members can be accessed using the square-brackets subscript syntax.
 */
 
-    cars.length             // Returns the number of elements ~~ length = (highest array index + 1)
-    cars[0];                // Accessing the First Array Element
-    cars[cars.length - 1]   // Accessing the Last Array Element
+    cars.length                     // Returns the number of elements ~~ length = (highest array index + 1)
+    cars[0];                        // Accessing the First Array Element
+    cars[cars.length - 1]           // Accessing the Last Array Element
     cars[2];   // "BMW"
-    cars[2] = "Ford";       // Modify at specific index
+    cars[2] = "Ford";               // Modify at specific index
+    cars[cars.length] = "Lemon";    // Add new data as the last element
 
 
 
@@ -122,43 +123,152 @@ The real strength of JavaScript arrays are the built-in array methods:
 
     fruits = ["Banana", "Orange", "Apple", "Mango"];
 
-
-    // Add as the last element - by push
-    fruits.push("Pinapple");                  
-
-    // Add as the last element - by length property
-    myArray[myArray.length] = "Pinapple";
-
-    
-    // remove element from front or back end of an array
-
-    someVar = myArray.shift();      // Remove first element and return it             
-    someVar = myArray.pop();        // Remove last element and return it
-
-
-    // toString() - converts array to a string of (comma separated) array values
-    fruits.toString();  
-    // Result: Banana,Orange,Apple,Mango
-
-
     // Join() - join all elements of an array into a string
     fruits.join("*");    
     // Result: "Banana*Orange*Apple*Mango"
 
+    // pop() - Remove last element and return it
+    someVar = fruits.pop();   
+    
+    // shift() - Remove first element and return it.
+    someVar = myArray.shift();  
+    
+    // push() - Add as the last element
+    fruits.push("Lemon");   
 
-    // concat() - 
-    var courses2 = ["HTML 5", "CSS 3", "ES6"]; 
-    var courses3 = courses1.concat(courses2);
+    // unshift() adds a new element at the beginning of array and "unshifts" older elements
+    fruits.unshift("Lemon");
+    
+    // delete(i) - delete element in the index 'i' of array
+    delete fruits[0];   // delete() leaves undefined holes in the array - Use pop() or shift() instead.
+    
+    // concat() - creates a new array by merging (concatenating) existing arrays - without changing the existing arrays
+    const myGirls = ["Cecilie", "Lone"];
+    const myBoys = ["Emil", "Tobias", "Linus"];
+    const myChildren = myGirls.concat(myBoys);          // [Cecilie,Lone,Emil,Tobias,Linus]
+    
+    // concat() can take any number of array arguments:
+    const arr1 = ["Robin", "Morgan"];
+    const myChildren2 = myGirls.concat(myBoys, arr1);   // [Cecilie,Lone,Emil,Tobias,Linus,Robin,Morgan]
+
+    // can also take strings as arguments:
+    const myChildren3 = myBoys.concat("Peter");         // [Emil,Tobias,Linus,Peter]
+
+    // splice(p, n, ...)
+    // p : defines the position where new elements should be added (spliced in)
+    // n : defines how many elements should be removed
+    // ..: The rest of the parameters define the new elements to be added.
+    // splice() returns an subarray with the deleted items
+
+    fruits = ["Banana", "Orange", "Apple", "Mango"];                           
+    fruits.splice(2, 0, "Lemon", "Kiwi");                       
+    // fruits =         [Banana,Orange,Lemon,Kiwi,Apple,Mango]
+
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    var remoedItems = fruits.splice(2, 2, "Lemon", "Kiwi");     
+    // fruits =         [Banana,Orange,Lemon,Kiwi]  
+    // remoedItems =    [Apple,Mango]
+
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    var remoedItems = fruits.splice(0, 1);  
+    // Remove first element and return it.
+    // fruits =             [Orange,Apple,Mango]
+    // remoedItems =        [Banana]
 
 
-    // Get subarray of elements from index 1 (include) to 4 (exclude)
-    myArray0.slice(1,4);            // = [false,"js",12]
+    // slice(p1, [p2]) - selects and returns elements from an array, starting from p1 (include) up to p2 (not include)
+    // p2 is optional
+    // slice() creates a new array.
+    // slice() does not remove any elements from the source array.
+
+    fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+
+    citrus = fruits.slice(1);
+    // citrus =     [Orange,Lemon,Apple,Mango]
+
+    citrus = fruits.slice(2);
+    // citrus =     [Lemon,Apple,Mango]
+
+    citrus = fruits.slice(3);
+    // citrus =     [Apple,Mango]
+
+    citrus = fruits.slice(4);
+    // citrus =     [Mango]
+
+    citrus = fruits.slice(1, 3);
+    // citrus =     [Orange,Lemon]
+
+
+    // toString() - automatically converts an array to a comma separated string
+    // This is always the case when you try to output an array.
+    // All JavaScript objects have a toString() method
+
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.toString();  
+    // fruits =     Banana,Orange,Apple,Mango
+
+
+    // sort() - sorts an array alphabetically
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.sort();
+    // fruits =     [Apple,Banana,Mango,Orange]
+
+
+    // reverse() - reverses the elements in an array
+    // You can use it to sort an array in descending order
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    fruits.sort();      // [Apple,Banana,Mango,Orange]
+    fruits.reverse();   // [Orange,Mango,Banana,Apple]
 
 
 
-    // Remove 4 elements starting from index 2, and insert there strings
-    // "hi","wr" and "ld"; return removed subarray                                 
-    myArray0.splice(2,4,"hi","wr","ld");    // = ["js",12,56,90]
+
+
+
+
+
+
+
+
+    https://www.w3schools.com/js/js_array_sort.asp
+
+
+
+                        Numeric Sort
+
+
+
+
+
+
+
+
+
+
+ /*
+ ----------------------------
+ Max/Min Values of Array
+-----------------------------
+There are no built-in functions for finding the highest or lowest value in a JavaScript array.
+
+    max
+    ---------------------
+    1.sort()    // Ascending
+    2.pop()     // max
+
+    min
+    ---------------------
+    1.sort()    // Ascending
+    2.reverse() // Descending
+    2.pop()     // min
+
+
+
+
+*/
+
+
+
 
 
 
