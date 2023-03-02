@@ -288,3 +288,62 @@ Strings are immutable: Strings cannot be changed, only replaced.
                             is case sensitive.
                             is an ES6 feature and not supported in Internet Explorer.
 */
+
+
+
+
+
+/*
+-----------------------
+Template Literals
+----------------------
+ES6 feature (JavaScript 2015)
+*/
+text = `Hello World!`;
+text = `He's often called "Johnny"`;
+text =
+        `The quick
+        brown fox
+        jumps over
+        the lazy dog`;
+
+/*
+string  Interpolation
+------------------------------
+Automatic replacing of variables with real values
+${...}
+
+Variable Substitutions
+------------------------------
+*/
+var firstName = "John";
+var lastName = "Doe";
+var text = `Welcome ${firstName}, ${lastName}!`;
+
+/*
+Expression Substitution
+------------------------------
+*/
+var price = 10;
+var VAT = 0.25;
+var total = `Total: ${(price * (1 + VAT)).toFixed(2)}`;
+
+
+/*
+HTML Templates
+------------------------------
+*/
+
+var header = "Templates Literals";
+    var tags = ["template literals", "javascript", "es6"];
+
+    var html = '';
+    
+    html +=`<h2>${header}</h2>`;
+    html +=`<ul>`;
+
+    for (const x of tags) {
+        html += `<li>${x}</li>`;
+    }
+
+    html += `</ul>`;

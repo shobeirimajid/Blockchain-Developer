@@ -18,6 +18,17 @@ To be able to operate on variables, it is important to know something about the 
         16 + 4 + "Volvo"    // ~   20 + "Volvo"            ->  "20Volvo"
         "Volvo" + 16 + 4    // ~   "Volvo" + "16" + "4"    -> "Volvo164"
 
+        // JavaScript will try to convert strings to numbers in numeric operations
+        100 / "20"          // 5
+        "100"/"20"          // 5   
+        "100"*"20"          // 2000
+        "100"-"20"          // 80
+        // But it will not work about `+` operator
+        // JavaScript uses the + operator to concatenate the strings.
+        "100"+"20"          // "10020"
+
+
+
 /*
 JavaScript has 8 Datatypes
     1. String
@@ -31,9 +42,9 @@ JavaScript has 8 Datatypes
 
 The object data type can contain:
 
-    1. An object
-    2. An array
-    3. A date
+    - object
+    - array
+    - date
 
 
 JavaScript has dynamic types. 
