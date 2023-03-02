@@ -1,13 +1,107 @@
 ///////////////////////////////////////////////////////
-//                      Variables
+//               Data Types and Variables
 ///////////////////////////////////////////////////////
+
 
 /*
 -----------------
-What is Variabl
+Data Types
+-----------------
+In programming, data types is an important concept.
+To be able to operate on variables, it is important to know something about the type.
+    * When adding a number and a string, JavaScript will treat the number as a string.
+    * JavaScript evaluates expressions from left to right. 
+        Different sequences can produce different results:
+*/
+
+        16 + "Volvo" + 4    // ~  "16" + "Volvo" + "4"     ->  "16Volvo4"
+        16 + 4 + "Volvo"    // ~   20 + "Volvo"            ->  "20Volvo"
+        "Volvo" + 16 + 4    // ~   "Volvo" + "16" + "4"    -> "Volvo164"
+
+/*
+JavaScript has 8 Datatypes
+    1. String
+    2. Number
+    3. Bigint
+    4. Boolean
+    5. Undefined
+    6. Null
+    7. Symbol
+    8. Object
+
+The object data type can contain:
+
+    1. An object
+    2. An array
+    3. A date
+
+
+JavaScript has dynamic types. 
+This means that the same variable can be used to hold different data types:
+*/
+    var x;       // Now x is undefined
+    x = 5;       // Now x is a Number
+    x = "John";  // Now x is a String
+
+
+
+/*
+-------------
+ typeof
+-------------
+You can use the JavaScript typeof operator to find the type of a JavaScript variable.
+The typeof operator returns the type of a variable or an expression
+*/
+
+    typeof ""             // Returns "string"
+    typeof "John"         // Returns "string"
+    typeof "John Doe"     // Returns "string"
+    typeof 0              // Returns "number"
+    typeof 314            // Returns "number"
+    typeof 3.14           // Returns "number"
+    typeof (3)            // Returns "number"
+    typeof (3 + 4)        // Returns "number"
+
+
+
+/*
+--------------------
+null & undefined
+--------------------
+There's also `null` and `undefined`.
+
+In JavaScript, a variable without a value, has the value undefined. 
+The type is also undefined.
+*/
+
+null;                   // used to indicate a deliberate non-value
+undefined;              // used to indicate a value is not currently present 
+                        // (although `undefined` is actually a value itself)
+
+null == undefined;      // = true
+null === undefined;     // = false
+
+var car;                // Value is undefined, type is undefined
+
+// Any variable can be emptied, by setting the value to undefined. The type will also be undefined.
+
+car = undefined;        // Value is undefined, type is undefined
+
+// An empty value has nothing to do with undefined!
+// An empty string has both a legal value and a type.
+
+var car = "";           // The value is "", the typeof is "string"
+
+
+
+/*
+-----------------
+Variabls
 -----------------
 Variables are containers for storing data values.
+A JavaScript variable can hold any type of data.
 */
+
 
 
 /*
@@ -58,20 +152,6 @@ Identifiers
     Using the underscore is not very common in JavaScript,
     but a convention among professional programmers is to use it 
     as an alias for "private (hidden)" variables.
-*/
-
-
-
-/*
--------------------
-Data Types
--------------------
-JavaScript variables can hold numbers like 100 and text values like "John Doe".
-JavaScript can handle many types of data, but for now, just think of `numbers` and `strings`
-    - Strings   are written inside double or single quotes. 
-    - Numbers   are written without quotes.
-If you put a number in quotes, it will be treated as a text string.
-
 */
 
 
@@ -142,20 +222,6 @@ Redeclaring a variable inside a block will also redeclare the variable outside t
 
     var x = 3;
     // Now x is 3
-
-
-
-/*
---------------------------
-Case Sensitivity
---------------------------
-All JavaScript identifiers are case sensitive. 
-The variables `lastName` and `lastname`, are two different variables:
-*/
-
-var lastname, lastName;
-lastName = "Doe";
-lastname = "Peterson";
 
 
 
@@ -287,6 +353,20 @@ Val	Operator	Description	                Example
 
 
 /*
+--------------------------
+Case Sensitivity
+--------------------------
+All JavaScript identifiers are case sensitive. 
+The variables `lastName` and `lastname`, are two different variables:
+*/
+
+var lastname, lastName;
+lastName = "Doe";
+lastname = "Peterson";
+
+
+
+/*
 ------------------------------------
 Variable Naming Style
 ------------------------------------
@@ -313,6 +393,4 @@ Historically, programmers have used different ways of joining multiple words int
 
     JavaScript programmers tend to use camel case that starts with a lowercase letter:
     firstName, lastName, masterCard, interCity.
-
-
 */

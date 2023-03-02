@@ -1,13 +1,47 @@
 ///////////////////////////////////////////////////////
 //                      Numbers
 ///////////////////////////////////////////////////////
+/*
+Most programming languages have many number types:
 
-// JavaScript has one number type (which is a 64-bit IEEE 754 double).
-// Doubles have a 52-bit mantissa, which is enough to store integers
-// up to about 9✕10¹⁵ precisely.
+Whole numbers (integers):
+    byte (8-bit)
+    short (16-bit)
+    int (32-bit)
+    long (64-bit)
 
-    3;          // = 3
-    1.5;        // = 1.5
+Real numbers (floating-piont):
+    float (32-bit) 
+    double (64-bit)
+
+Javascript are always one type:   double (64-bit floating point - 64-bit IEEE 754 double).
+All JavaScript numbers are stored as decimal numbers (floating point).
+Doubles have a 52-bit mantissa, which is enough to store integers up to about 9✕10¹⁵ precisely.
+Numbers can be written with, or without decimals:
+*/
+    // With decimals:
+    var x1 = 34.00;
+
+    // Without decimals:
+    var x2 = 34;
+
+
+// Extra large or extra small numbers can be written with scientific (exponential) notation:
+
+    var y = 123e5;    // 12300000
+    var z = 123e-5;   // 0.00123
+
+
+/*
+JavaScript BigInt
+
+All JavaScript numbers are stored in a a 64-bit floating-point format.
+JavaScript BigInt is a new datatype (2020) 
+that can be used to store integer values 
+that are too big to be represented by a normal JavaScript Number.
+Example:
+*/
+    let x = BigInt("123456789012345678901234567890");
 
 
 

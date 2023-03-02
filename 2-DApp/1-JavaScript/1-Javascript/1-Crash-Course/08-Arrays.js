@@ -2,13 +2,24 @@
 //                      Arrays
 ///////////////////////////////////////////////////////
 
-// Arrays are ordered lists of values, of any type.
+/*
+Arrays are ordered lists of values, of any type.
+JavaScript arrays are written with square brackets.
+Array items are separated by commas
+*/
 
     var myArray = ["Hello", 45, true];
 
 
-// Their members can be accessed using the square-brackets subscript syntax.
-// Array indices start at zero.
+
+/*
+Array indexes are zero-based, 
+which means Array indices start at zero.
+the first item is [0], 
+second is [1], 
+and so on.
+Their members can be accessed using the square-brackets subscript syntax.
+*/
 
     myArray[1];             // = 45
 

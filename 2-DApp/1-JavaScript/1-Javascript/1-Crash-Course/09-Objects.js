@@ -2,9 +2,48 @@
 //                      Objects
 ///////////////////////////////////////////////////////
 
-// JavaScript's objects are equivalent to 
-// "dictionaries" or "maps" in other languages.
-//  maps: an unordered collection of key-value pairs.
+
+/*
+-------------------
+Real Life Objects
+-------------------
+In real life, a car is an object.
+A car has properties like weight and color
+A car has methods like start and stop
+
+All cars have the same properties, but the property values differ from car to car.
+All cars have the same methods, but the methods are performed at different times.
+
+
+Object	            Properties	                Methods
+------              -----------------           --------------
+	
+car                 car.name = Fiat             car.start()
+
+                    car.model = 500             car.drive()
+
+                    car.weight = 850kg          car.brake()
+
+                    car.color = white	        car.stop()
+*/
+
+
+
+
+/*
+----------------------
+JavaScript's objects
+----------------------
+You have already learned that JavaScript variables are containers for data values.
+Objects are variables too. 
+But objects can contain many values.
+
+ JavaScript's objects are equivalent to "dictionaries" or "maps" in other languages.
+    maps: an unordered collection of key-value pairs.
+
+JavaScript objects are written with curly braces {}.
+`Object properties` are written as name:value pairs, separated by commas.
+*/
 
     var myObj = {key1: "Hello", key2: "World"};
 
@@ -43,6 +82,7 @@
     myObj.myFourthKey; // = undefined
 
     Example:
+
     var cuboid = {
         length: 25,
         width: 50,
@@ -54,7 +94,56 @@
 
 
 
+    Example:
+
+    const person = {
+        firstName: "John",
+        lastName : "Doe",
+        id       : 5566,
+        fullName : function() {
+          return this.firstName + " " + this.lastName;
+        }
+    };
+
 /*
+
+In the example above, `this` keyword refers to the `person` object.
+
+    this.firstName : the firstName property of this.
+    this.firstName : the firstName property of person.
+*/
+
+
+
+
+/*
+--------------
+this keyword
+--------------
+In JavaScript, the `this` keyword refers to an object.
+`Which object` depends on how this is being invoked (used or called).
+
+this is not a variable. 
+It is a keyword. 
+You cannot change the value of this.
+
+The this keyword refers to different objects depending on how it is used:
+
+    - In an object method            this refers to the object.
+    - Alone                          this refers to the global object.
+    - In a function                  this refers to the global object.
+    - In a function, in strict mode  this is undefined.
+    - In an event                    this refers to the element that received the event.
+
+Methods like call(), apply(), and bind() can refer this to any object.
+*/
+
+
+
+/*
+---------------------
+Object Constructor
+--------------------
 Sometimes, we need to set an "object type" that can be used to 
 create a number of objects of a single type.
 
@@ -162,7 +251,10 @@ Access an object method using the following syntax:
 
 A method is a function, belonging to an object. 
 It can be referenced using the this keyword.
-The this keyword is used as a reference to the current object, meaning that you can access the objects properties and methods using it.
+The this keyword is used as a reference to the current object, 
+    meaning that you can access the objects properties and methods using it.
+
+If you access a method without the () parentheses, it will return the function definition:
 
 Defining methods is done inside the constructor function.
 */
@@ -183,8 +275,7 @@ Defining methods is done inside the constructor function.
 
 /*
 In the example above, we have defined a method named changeName for our person, 
-which is a function, that takes a parameter name and assigns it 
-to the name property of the object.
+which is a function, that takes a parameter name and assigns it to the name property of the object.
 this.name refers to the name property of the object.
 The changeName method changes the object's name property to its argument.
 
@@ -207,23 +298,24 @@ and associate it with the object.
 
 /*
 As you can see, we have assigned the object's yearOfBirth property to the bornYear function.
-The this keyword is used to access the age property of the object, 
-which is going to call the method.
+`this` keyword refers to the person object. This keyword is used to 
+    access the properties of the object, which is going to call the method.
 
 Note that it's not necessary to write the function's parentheses 
 when assigning it to an object.
 */
 
     // Call the method as usual.
-    function person3(name, age) {
-        this.name= name;
+    function person3(firstName, lastName, age) {
+        this.firstName= firstName;
+        this.lastName= lastName;
         this.age = age;
         this.yearOfBirth = bornYear;
     }
     function bornYear() {
         return 2016 - this.age;
     }
-    var p = new person3("A", 22);
+    var p = new person3("A", "B", 22);
 
     document.write(p.yearOfBirth());
 
@@ -235,18 +327,24 @@ rather than the function name.
 */
 
     Example:
-    // contact object constructor has two arguments: name and number
+    // contact object constructor has 3 arguments: firstName, lastName and number
     // print() method will output the contact data to the console in the `name: number` format
-    function contact(name, number) {
-        this.name = name;
-        this.number = number;
+    function contact(firstName, lastName, number) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = number;
+
+        lastName = function() {
+            return this.firstName + " " + this.lastName;
+        }
+
         this.print = function() {
-            console.log(name + ": " + number);
+            console.log(firstName + ": " + number);
         }
     }
 
-    var a = new contact("David", 12345);
-    var b = new contact("Amy", 987654321);
+    var a = new contact("Vitalic", "Butrin", 12345);
+    var b = new contact("Elon", "Mask", 987654321);
     a.print();
     b.print();
 
@@ -376,3 +474,20 @@ a number of methods make it possible to perform operations on it:
         var day = d.getDay();
         return names[day];
     }
+
+
+// NOTE: It is a common practice to declare objects with the const keyword.
+const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+
+// Spaces and line breaks are not important. 
+// An object definition can span multiple lines:
+
+    const person = {
+        firstName:"John", 
+        lastName:"Doe", 
+        age:50, 
+        eyeColor:"blue"
+    }
+
+
+

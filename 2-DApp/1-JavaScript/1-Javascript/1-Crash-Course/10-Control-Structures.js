@@ -150,59 +150,60 @@
 
 
 
-//------------------------------
-//    Recap Examples
-//------------------------------
+//-------------------------------------------
+//                Examples
+//-------------------------------------------
 
 
-    //------------------------------------------
-    //              if-else-for
-    //------------------------------------------
+//------------------------------------------
+//              if-else-for
+//------------------------------------------
 
-    // Numbering floors of building with omitting number 13
+// Numbering floors of building with omitting number 13
 
-    var countOfRooms = 15;
-    var floor  = 1;
+var countOfRooms = 15;
+var floor  = 1;
 
-    for(let i=1; i<=countOfRooms; i++) {
+for(let i=1; i<=countOfRooms; i++) {
 
-        if(i<13) {
-            console.log(floor);
-            floor ++;
-        }
-            
-        else if(i>=13) {
-            floor ++;
-            console.log(floor);
+    if(i<13) {
+        console.log(floor);
+        floor ++;
+    }
+        
+    else if(i>=13) {
+        floor ++;
+        console.log(floor);
+    }
+}
+
+
+
+//------------------------------------------
+//              loop - break
+//------------------------------------------
+
+// The snail climbs up 7 feet each day and slips back 2 feet each night.
+// How many days will it take the snail to get out of a well with the given depth?
+
+
+function main() {
+
+    var depth = parseInt(readLine(), 10);
+    var distance=0;
+    var day=0;
+
+    while(true) {
+
+        day++;
+        distance += 7;
+
+        if(distance >= depth) {
+            console.log(day);
+            break;
+        } 
+        else {
+            distance -= 2;
         }
     }
-
-
-
-    //------------------------------------------
-    //              loop - break
-    //------------------------------------------
-
-    // The snail climbs up 7 feet each day and slips back 2 feet each night.
-    // How many days will it take the snail to get out of a well with the given depth?
-
-    function main() {
-
-        var depth = parseInt(readLine(), 10);
-        var distance=0;
-        var day=0;
-
-        while(true) {
-
-            day++;
-            distance += 7;
-
-            if(distance >= depth) {
-                console.log(day);
-                break;
-            } 
-            else {
-                distance -= 2;
-            }
-        }
-    }
+}
