@@ -15,10 +15,10 @@ It is a common practice to declare arrays with the const keyword.
 */
 
     // The array literal syntax is the recommended way to declare arrays.
-    const cars1 = ["Saab", "Volvo", "BMW"];
+    cars1 = ["Saab", "Volvo", "BMW"];
 
     // You can also create an array, and then provide the elements:
-    const cars = [];
+    cars = [];
     cars[0]= "Saab";
     cars[1]= "Volvo";
     cars[2]= "BMW";
@@ -376,29 +376,195 @@ Array Iteration
 
 
     //----------  forEach  ------------
-    // The forEach() calls a function (a callback function) once for each array element.
+    // calls a function (a callback function) once for each array element.
+
     text = "<ul>";
     cars.forEach(myFunction);
     text += "</ul>";
 
-    function myFunction(value) {
+    function myFunction(value, index, array) {
         text += "<li>" + value + "</li>";
     }
 
 
-    //----------  map  ------------
-    // map() creates a new array by performing a function on each array element.
-    // map() does not execute the function for array elements without values.
-    // map() does not change the original array.
+    //----------  map()  ------------
+    // creates a new array by performing a callback function on each array element.
+    // does not execute the callback function for array elements without values.
+    // does not change the original array.
 
     //  multiplies each array element by 2
     numbers1 = [45, 4, 9, 16, 25];
     numbers2 = numbers1.map(myFunction);
 
-    function myFunction(value) {
-    return value * 2;
+    function myFunction(value, index, array) {
+        return value * 2;
     }
-    console.log(numbers2);
+    console.log(numbers2);  // 90,8,18,32,50
+
+
+
+    //----------  filter()  ------------
+    // creates a new array with array elements that pass a test.
+
+    // creates a new array from elements with a value larger than 20
+    numbers = [45, 4, 9, 16, 25];
+    over20 = numbers.filter(myFunction);
+
+    function myFunction(value, index, array) {
+        return value > 20;
+    }
+    console.log(over20);  // 45,25
+
+
+
+    //----------  reduce()  ------------
+    // runs a function on each array element to produce (reduce it to) a single value
+    // does not modify the original array
+    // works from `left-to-right` in the array
+    
+
+    // finds the sum of all numbers in an array
+    numbers = [45, 4, 9, 16, 25];
+    sum = numbers.reduce(myFunction);
+
+    function myFunction(total, value, index, array) {
+        return total + value;
+    }
+    console.log(sum);  // 99
+
+
+
+    //----------  reduceRight()  ------------
+    // runs a function on each array element to produce (reduce it to) a single value
+    // does not modify the original array
+    // works from `right-to-left` in the array.
+
+    // finds the sum of all numbers in an array
+    numbers = [45, 4, 9, 16, 25];
+    sum = numbers.reduceRight(myFunction);
+
+    function myFunction(total, value, index, array) {
+        return total + value;
+    }
+    console.log(sum);  // 99
+
+
+
+    //----------  every()  ------------
+    // checks wether all array values pass a test or not
+    // returns true, If all the array values pass the test
+    // returns false, If at least one of the array values doesn't pass the test
+
+    // checks wether all array values are larger than 20 or not
+    numbers = [45, 4, 9, 16, 25];
+    allOver20 = numbers.every(myFunction);
+
+    function myFunction(value, index, array) {
+        return value > 20;
+    }
+    console.log(allOver20);  // false
+
+
+
+    //----------  some()  ------------
+    // checks if some array values pass a test
+
+    // checks if some array values are larger than 20
+    numbers = [45, 4, 9, 16, 25];
+    someOver18 = numbers.some(myFunction);
+
+    function myFunction(value, index, array) {
+        return value > 20;
+    }
+    console.log(someOver18);  // true
+
+
+
+    //----------- indexOf(item, i) -------------
+    // item :   The item to search for (Required)
+    // i    :   Optional
+    // starts from index 'i' and searches an array for value 'item' and returns found element's index                  
+    // Negative values for 'i' will start at the given position counting from the end, and search to the end.
+    // returns -1 if the item is not found.
+    // If the item is present more than once, it returns the index of the first occurrence.
+    
+    // Search an array for the item "Apple":
+    fruits = ["Apple", "Orange", "Apple", "Mango"];
+    position = fruits.indexOf("Apple"); // 0
+
+
+
+    //----------  lastIndexOf(item, i)  ------------
+    // is the same as indexOf(), but :
+    // returns the index of the last occurrence of the specified value.
+    // Negative values for 'i' will start at the given position counting from the end, and search to the beginning
+
+    // Search an array for the item "Apple":
+    fruits = ["Apple", "Orange", "Apple", "Mango"];
+    position = fruits.lastIndexOf("Apple"); // 2
+
+
+
+    //----------  find()  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // returns the value of the first array element that passes a test function
+
+    //  finds (returns the value of) the first element that is larger than 20
+    numbers = [4, 9, 16, 25, 29];
+    first = numbers.find(myFunction);
+
+    function myFunction(value, index, array) {
+        return value > 20;
+    }
+    console.log(first); // 25
+
+
+
+    //----------  findIndex()  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // returns the index of the first array element that passes a test function
+
+    // finds the index of the first element that is larger than 20
+    numbers = [4, 9, 16, 25, 29];
+    first = numbers.findIndex(myFunction);
+
+    function myFunction(value, index, array) {
+        return value > 20;
+    }
+    console.log(first); // 3
+
+
+
+    //----------  from()  ------------
+    // returns an Array object from any object with a length property or any iterable object
+
+    // Create an Array from a String
+    Array.from("ABCDEFG");
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
