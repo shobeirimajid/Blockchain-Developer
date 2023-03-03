@@ -15,7 +15,7 @@ It is a common practice to declare arrays with the const keyword.
 */
 
     // The array literal syntax is the recommended way to declare arrays.
-    cars1 = ["Saab", "Volvo", "BMW"];
+    var cars = ["Saab", "Volvo", "BMW"];
 
     // You can also create an array, and then provide the elements:
     cars = [];
@@ -424,6 +424,8 @@ Array Iteration
     
 
     // finds the sum of all numbers in an array
+
+    // way 1
     numbers = [45, 4, 9, 16, 25];
     sum = numbers.reduce(myFunction);
 
@@ -431,6 +433,16 @@ Array Iteration
         return total + value;
     }
     console.log(sum);  // 99
+
+    
+    // way 2
+    numbers = [45, 4, 9, 16, 25];
+    sum = numbers.reduce(function(total, value){
+        return total + value;
+    },0)
+
+    // sum of points
+    console.log(sum);   // 99
 
 
 
@@ -536,64 +548,208 @@ Array Iteration
 
 
     //----------  from()  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // is not supported in Internet Explorer
     // returns an Array object from any object with a length property or any iterable object
 
     // Create an Array from a String
-    Array.from("ABCDEFG");
+    myArr = Array.from("ABCDEFG");
+    console.log(myArr); // [A,B,C,D,E,F,G]
+
+
+
+    //----------  Keys()  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // is not supported in Internet Explorer
+    // returns an Array Iterator object with the keys of an array
+
+    // Create an Array Iterator object, containing the index of array elements
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    keys = fruits.keys();
+
+    text = "";
+    for (let x of keys) {
+        text += x + ",";
+    }
+    console.log(text); // 0,1,2,3,
+
+
+
+    //----------  entries()  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // is not supported in Internet Explorer
+    // returns an Array Iterator object with the key-value pairs
+    // does not change the original array
+
+    // Create an Array Iterator, and then iterate over the key/value pairs:
+    fruits = ["Banana", "Orange", "Apple", "Mango"];
+    f = fruits.entries();
+
+    for (let x of f) {
+        console.log(x); 
+    }
+    /*
+        [0, "Banana"]
+        [1, "Orange"]
+        [2, "Apple"]
+        [3, "Mango"]
+    */
 
     
+    //----------  includes(search-item)  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // is not supported in Internet Explorer
+    // allows us to check if `search-item` is present in array (including NaN, unlike indexOf)
+
+    // Search an array for the item "Apple":
+    fruits = ["Apple", "Orange", "Apple", "Mango"];
+    result = fruits.includes("Mango"); 
+    console.log(result); // true
 
 
 
+    //----------  Spread  ------------
+    // is an ES6 feature (JavaScript 2015) - It is supported in all modern browsers
+    // is not supported in Internet Explorer
+    // The `...` operator expands an iterable (like an array) into more elements
 
+    const q1 = ["Jan", "Feb", "Mar"];
+    const q2 = ["Apr", "May", "Jun"];
+    const q3 = ["Jul", "Aug", "Sep"];
+    const q4 = ["Oct", "Nov", "May"];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    const months = [...q1, ...q2, ...q3, ...q4];
+    console.log(months); // Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,May
 
 
 
 
 /*
 ---------------------------------
-Final Examples
+Const Arrays
 ---------------------------------
+It has become a common practice to declare arrays using `const`
+`const` introduced In ECMAScript 2015 (ES6)
+The const keyword is not supported in Internet Explorer 10 or earlier.
+
+first browser versions with full support for the const keyword
+-------------------------------------------------------------------
+Chrome 49	IE 11 / Edge	Firefox 36	Safari 10	Opera 36
+---------   ------------    ----------  ---------   ---------
+Mar, 2016	Oct, 2013	    Feb, 2015	Sep, 2016	Mar, 2016
+
+
+An array declared with `const` cannot be reassigned
+
+    NOTE:
+
+    It does NOT define a constant array. 
+    It defines a constant `reference` to an array.
+
+    Because of this, we can still change the elements of a constant array!
+    We are just unable to reassigne the whole array
+    But Elements of the array Can be Reassigned yet
 */
 
-    // Creates the corresponding array of points and output the sum of all gained points.
-    function main() {
-        //take the number of passed levels
-        var levels = parseInt(readLine(),10);
-        var points = new Array();
-        
-        var count = 0;
-        while(count<levels){
-            var elem = parseInt(readLine(),10);
-            points[count] = elem;
-            count++;
-        }
-        
-        var sum = 0;
-        //calculate the sum of points 
-        sum = points.reduce(function(a, b){
-            return a + b;
-        },0)
+    const someCars = ["Saab", "Volvo", "BMW"];
 
-        //output
-        console.log(sum);
+    // Error:  An array declared with `const` cannot be reassigned
+    someCars = ["Toyota", "Volvo", "Audi"];    // ERROR
+
+    // You can change an element:
+    someCars[0] = "Toyota";
+    console.log(someCars);
+
+    // You can add an element:
+    someCars.push("Audi");
+    console.log(someCars);
+
+    // Error:  An array declared with const must be initialized when it is declared.
+    const someCars2;
+    cars = ["Saab", "Volvo", "BMW"];
+
+
+    // An array declared with const has `Block Scope` and 
+    //  is not the same as an array declared outside the block:
+
+    const cars = ["Saab", "Volvo", "BMW"];
+    // Here cars[0] is "Saab"
+
+    {
+        const cars = ["Toyota", "Volvo", "BMW"];
+        // Here cars[0] is "Toyota"
     }
+
+    // Here cars[0] is "Saab"
+
+
+
+    // Redeclaring or reassigning an array to const, in the same scope,
+    //   or in the same block, is not allowed:
+
+    var cars = ["Volvo", "BMW"];     // Allowed
+
+    const cars = ["Volvo", "BMW"];   // Not allowed
+
+    {
+        var cars = ["Volvo", "BMW"];   // Allowed
+        const cars = ["Volvo", "BMW"]; // Not allowed
+    }
+
+
+
+    // Redeclaring or reassigning an existing const array, 
+    //  in the same scope, or in the same block, is not allowed:
+
+    const cars = ["Volvo", "BMW"];   // Allowed
+    const cars = ["Volvo", "BMW"];   // Not allowed
+
+    var cars = ["Volvo", "BMW"];     // Not allowed
+    cars = ["Volvo", "BMW"];         // Not allowed
+
+    {
+        const cars = ["Volvo", "BMW"]; // Allowed
+        const cars = ["Volvo", "BMW"]; // Not allowed
+
+        var cars = ["Volvo", "BMW"];   // Not allowed
+        cars = ["Volvo", "BMW"];       // Not allowed
+    }
+
+
+
+    // Redeclaring an array with const, 
+    //  in another scope, or in another block, is allowed:
+
+    const cars = ["Volvo", "BMW"];   // Allowed
+
+    {
+        const cars = ["Volvo", "BMW"]; // Allowed
+    }
+
+    {
+        const cars = ["Volvo", "BMW"]; // Allowed
+    }
+
+
+
+
+    // Arrays declared with var can be initialized at any time.
+    // You can even use the array before it is declared:
+    varCars = ["Saab", "Volvo", "BMW"];
+    var varCars;
+
+
+    // An array declared with var does not have block scope:
+    var cars = ["Saab", "Volvo", "BMW"];
+    // Here cars[0] is "Saab"
+    {
+    var cars = ["Toyota", "Volvo", "BMW"];
+    // Here cars[0] is "Toyota"
+    }
+    // Here cars[0] is "Toyota"
+
+
+    // Redeclaring an array declared with var is allowed anywhere in a program:
+    var cars = ["Volvo", "BMW"];   // Allowed
+    var cars = ["Toyota", "BMW"];  // Allowed
+    cars = ["Volvo", "Saab"];      // Allowed
