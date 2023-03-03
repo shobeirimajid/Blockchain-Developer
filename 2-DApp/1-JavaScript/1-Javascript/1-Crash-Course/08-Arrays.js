@@ -208,11 +208,23 @@ The real strength of JavaScript arrays are the built-in array methods:
     // fruits =     Banana,Orange,Apple,Mango
 
 
+
+/*
+-----------------------
+Sorting an Array
+-----------------------
+*/
+
+
+    //------------ Alphabetically ----------
+
     // sort() - sorts an array alphabetically
     fruits = ["Banana", "Orange", "Apple", "Mango"];
     fruits.sort();
     // fruits =     [Apple,Banana,Mango,Orange]
 
+    
+    //-------------- Descending -------------
 
     // reverse() - reverses the elements in an array
     // You can use it to sort an array in descending order
@@ -221,6 +233,126 @@ The real strength of JavaScript arrays are the built-in array methods:
     fruits.reverse();   // [Orange,Mango,Banana,Apple]
 
 
+    //-------------- Numerically -------------
+    /*
+    By default, the sort() function sorts values as strings.
+    This works well for strings ("Apple" comes before "Banana").
+
+    However, if numbers are sorted as strings, "25" is bigger than "100", 
+        because "2" is bigger than "1".
+
+    Because of this, the sort() method will produce incorrect result when sorting numbers.
+
+    You can fix this by providing a compare function for sort():
+
+    function(a, b){return a - b}
+
+    The compare function compares all the values in the array, two values at a time (a, b).
+
+    The compare function should return a negative, zero, or positive value, 
+        depending on the arguments.
+
+    When the sort() function compares two values, it sends the values to the compare function, 
+        and sorts the values according to the returned (negative, zero, positive) result:
+
+        result < 0      ->      a < b       ->      a is sorted before b
+
+        result > 0      ->      b < a       ->      b is sorted before a
+
+        result == 0     ->      a == b      ->      no changes are done
+    */
+
+    // Ascending
+    points = [40, 100, 1, 5, 25, 10];
+    points.sort(function(a, b){return a - b});  // 1,5,10,25,40,100
+    // points[0]                    min value
+    // points[points.length-1]      max value
+
+
+    // Descending
+    points = [40, 100, 1, 5, 25, 10];
+    points.sort(function(a, b){return b - a});  // 40,1,25,5,100,10
+    // points[0]                    max value
+    // points[points.length-1]      min value
+
+
+    // Randomly
+    points = [40, 100, 1, 5, 25, 10];
+    points.sort(function(){return 0.5 - Math.random()});    // Ex. 40,1,5,25,10,100
+
+    /*
+        The above example, is not accurate. It will favor some numbers over the others.
+        The most popular correct method, is `Math.random()`
+        Math.random() give a random number in range [0 .. 1)
+    */
+
+    // 
+    points = [40, 100, 1, 5, 25, 10];
+
+    for (let i = points.length -1; i > 0; i--) {
+        // following line give a random number in range [0 .. i+1) 
+        let j = Math.floor(Math.random() * (i+1));
+        randElem = points[j];   // randomly selected element placed in [0 .. i+1) 
+
+        // swap element points[i] and randomly selected element
+        let k = points[i];
+        points[i] = randElem;
+        points[j] = k;
+    }
+
+
+    // Sorting Object Arrays
+    students = [
+        {name:"Volvo", mark:80},
+        {name:"Saab", mark:96},
+        {name:"BMW", mark:72}
+    ];
+
+    // sorting the array Ascending, based on students `marks`
+    cars.sort(function(a, b){return a.mark - b.mark});
+
+    // sorting the array Ascending, based on students `names`
+    cars.sort(function(a, b){
+        let x = a.name.toLowerCase();
+        let y = b.name.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+      });
+
+
+
+
+/*
+-----------------------
+Find Max / Min
+-----------------------  
+if you only want to find the max or min value, 
+    Sorting a whole array is a very inefficient method.
+
+We can use Math.max.apply() instead of Sorting an array
+
+    Math.max.apply(null, [1, 2, 3]) ~ Math.max(1, 2, 3)
+*/
+
+    function myArrayMax(arr) {
+        return Math.max.apply(null, arr);
+    }
+
+
+    // method to achieve more `fast` solution
+    function myArrayMax(arr) {
+
+        let len = arr.length;
+        let max = -Infinity;        // let min = Infinity;
+
+        while (len--) {
+          if (arr[len] > max) {     // if (arr[len] < min) {
+            max = arr[len];        
+          }
+        }
+        return max;                 
+    }
 
 
 
@@ -230,11 +362,24 @@ The real strength of JavaScript arrays are the built-in array methods:
 
 
 
-    https://www.w3schools.com/js/js_array_sort.asp
 
 
 
-                        Numeric Sort
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
 
 
 
@@ -266,13 +411,6 @@ There are no built-in functions for finding the highest or lowest value in a Jav
 
 
 */
-
-
-
-
-
-
-    cars.sort()             // Sorts the array
 
 
 
