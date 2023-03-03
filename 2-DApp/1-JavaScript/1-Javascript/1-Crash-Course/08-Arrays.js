@@ -108,7 +108,7 @@ The typeof operator returns object because a JavaScript array is an object.
 
     // Solution 2:
     // The instanceof operator returns true if an object is created by a given constructor:
-    const fruits = ["Banana", "Orange", "Apple"];
+    fruits = ["Banana", "Orange", "Apple"];
     fruits instanceof Array;        // true
 
 
@@ -131,7 +131,7 @@ The real strength of JavaScript arrays are the built-in array methods:
     someVar = fruits.pop();   
     
     // shift() - Remove first element and return it.
-    someVar = myArray.shift();  
+    someVar = fruits.shift();  
     
     // push() - Add as the last element
     fruits.push("Lemon");   
@@ -302,23 +302,25 @@ Sorting an Array
 
 
     // Sorting Object Arrays
-    students = [
-        {name:"Volvo", mark:80},
-        {name:"Saab", mark:96},
-        {name:"BMW", mark:72}
+    myCars = [
+        {car:"Volvo", speed:260},
+        {car:"Saab", speed:200},
+        {car:"BMW", speed:300}
     ];
 
     // sorting the array Ascending, based on students `marks`
-    cars.sort(function(a, b){return a.mark - b.mark});
+    myCars.sort(function(a, b){return a.speed - b.speed});
+    console.log(myCars);
 
     // sorting the array Ascending, based on students `names`
-    cars.sort(function(a, b){
-        let x = a.name.toLowerCase();
-        let y = b.name.toLowerCase();
+    myCars.sort(function(a, b){
+        let x = a.car.toLowerCase();
+        let y = b.car.toLowerCase();
         if (x < y) {return -1;}
         if (x > y) {return 1;}
         return 0;
       });
+      console.log(myCars);
 
 
 
@@ -356,74 +358,16 @@ We can use Math.max.apply() instead of Sorting an array
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
-
-
-
-
-
-
-
-
- /*
- ----------------------------
- Max/Min Values of Array
------------------------------
-There are no built-in functions for finding the highest or lowest value in a JavaScript array.
-
-    max
-    ---------------------
-    1.sort()    // Ascending
-    2.pop()     // max
-
-    min
-    ---------------------
-    1.sort()    // Ascending
-    2.reverse() // Descending
-    2.pop()     // min
-
-
-
-
-*/
-
-
-
-
-
-
 /*
 ---------------------------------
-Looping Array Elements
+Array Iteration
 ---------------------------------
 */
 
-    // for
+    cars = ["Saab", "Volvo", "BMW"];
+
+
+    //------------  for  --------------
     text = "<ul>";
     for (let i = 0; i<cars.length; i++) {
         text += "<li>" + cars[i] + "</li>";
@@ -431,7 +375,9 @@ Looping Array Elements
     text += "</ul>";
 
 
-    // forEach
+    //----------  forEach  ------------
+    // The forEach() calls a function (a callback function) once for each array element.
+    text = "<ul>";
     cars.forEach(myFunction);
     text += "</ul>";
 
@@ -440,7 +386,29 @@ Looping Array Elements
     }
 
 
-    Examples:
+    //----------  map  ------------
+    // map() creates a new array by performing a function on each array element.
+    // map() does not execute the function for array elements without values.
+    // map() does not change the original array.
+
+    //  multiplies each array element by 2
+    numbers1 = [45, 4, 9, 16, 25];
+    numbers2 = numbers1.map(myFunction);
+
+    function myFunction(value) {
+    return value * 2;
+    }
+    console.log(numbers2);
+
+
+
+
+/*
+---------------------------------
+Final Examples
+---------------------------------
+*/
+
     // Creates the corresponding array of points and output the sum of all gained points.
     function main() {
         //take the number of passed levels
