@@ -31,25 +31,145 @@ for (let i = 0; i < cars.length; i++) {
 //  for
 //----------------
 
-// The `for` loop is the same as C and Java:
-// initialization; continue condition; iteration.
+// The for statement creates a loop with 3 optional expressions:
+
+// for (expression 1; expression 2; expression 3) {
+//     // code block to be executed
+// }
+
+// Expression 1 : is executed (one time) before the execution of the code block.
+// Expression 2 : defines the condition for executing the code block.
+// Expression 3 : is executed (every time) after the code block has been executed.
 
 for (var i = 0; i < 5; i++){
     // will run 5 times
 }
 
+// (let i = 0)   :  sets a variable before the loop starts 
+// (i < 5)       :  defines the condition for the loop to run 
+// (i++)         :  increases the value of `i` each time the code block in the loop has been executed 
+
+
+// You can initiate many values in expression 1 (separated by comma)
+
+for (let i = 0, len = cars.length, text = ""; i < len; i++) {
+    text += cars[i] + "<br>";
+}
+
+// Expression 1 is optional
+// And you can omit expression 1 (like when your values are set before the loop starts)
+
+i = 2;
+len = cars.length;
+text = "";
+
+for (; i < len; i++) {
+  text += cars[i] + "<br>";
+}
+
+// Expression 2 is also optional
+// You can omit expression 2
+// If you omit expression 2, you must provide a break inside the loop. 
+//  Otherwise the loop will never end. This will crash your browser.
+
+// Expression 3 is optional
+// You can omit expression 2 (like when you update your values inside the loop)
+// Expression 3 can do anything like negative increment (i--), positive increment (i = i + 15)
+
+i = 0;
+len = cars.length;
+text = "";
+for (; i < len; ) {
+  text += cars[i] + "<br>";
+  i++;
+}
+
+
+// Using var in a loop
+var i = 5;
+for (var i = 0; i < 10; i++) {
+  // some code
+}
+// Here i is 10
+
+
+// Using let in a loop
+// When let is used to declare the i variable in a loop, 
+//  the i variable will only be visible within the loop
+let i = 5;
+for (let i = 0; i < 10; i++) {
+  // some code
+}
+// Here i is 5
+
+
     
 //----------------
 //  for-in
 //----------------
-// The for/in statement allows iteration over properties of an object.
 
-var description = "";
+// for-in can loop over properties of an object
+
+// for (key in object) {
+//     // code block to be executed
+// }
+
+
 var person = {fname:"Paul", lname:"Ken", age:18};
 
+var text = "";
 for (var x in person){
-    description += person[x] + " ";
-} // description = 'Paul Ken 18 '
+    text += person[x] + " ";
+} 
+// text : 'Paul Ken 18 '
+
+// The for in loop iterates over the person object
+// Each iteration returns a key (x)
+// The key is used to access the value of the key
+// The value of the key is person[x]
+
+
+// for-in can also loop over the properties of an Array
+
+// for (variable in array) {
+//      // code block to be executed
+// }
+
+const numbers = [45, 4, 9, 16, 25];
+
+let txt = "";
+for (let x in numbers) {
+  txt += numbers[x];
+}
+// txt : 99
+
+// Do not use for-in over an Array if the index order is important.
+// The index order is implementation-dependent, and array values may not be accessed in the order you expect.
+
+// It is better to use following loops when the order is important :
+    // for loop
+    // for-of loop
+    // Array.forEach() 
+
+
+//----------------
+//  .forEach()
+//----------------
+// forEach() calls a function (a callback function) once for each array element
+
+numbers = [45, 4, 9, 16, 25];
+
+txt = "";
+numbers.forEach(myFunction);
+
+function myFunction(value, index, array) {
+  txt += value;
+}
+
+
+
+
+
 
 
 //----------------
