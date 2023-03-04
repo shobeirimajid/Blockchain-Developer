@@ -1,7 +1,7 @@
 /*
-    -------------------
-    var & let
-    -------------------
+///////////////////////////////////////////////////////
+//    var & let
+///////////////////////////////////////////////////////
     The let keyword was introduced in ES6 (2015).
     In ES6 we have three ways of declaring variables to store data values:
 */

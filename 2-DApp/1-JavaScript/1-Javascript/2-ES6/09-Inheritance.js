@@ -1,7 +1,8 @@
 /*
----------------------------
-Inheritance in ES6
----------------------------
+///////////////////////////////////////////////////////
+//  Inheritance in ES6
+///////////////////////////////////////////////////////
+
 The 'extends' keyword is used in class declarations or class expressions 
 to create a child of a class. 
 The child inherits the properties and methods of the parent.

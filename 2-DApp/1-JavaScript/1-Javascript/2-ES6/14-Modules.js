@@ -1,8 +1,9 @@
 /*
----------------------------
-    Modules
-    ---------------------------
-    It is a good practice to divide your related code into modules.
+///////////////////////////////////////////////////////
+//  Modules
+///////////////////////////////////////////////////////
+
+It is a good practice to divide your related code into modules.
 
     Before ES6 there were some libraries which made this possible (e.g., RequireJS, CommonJS). 
     

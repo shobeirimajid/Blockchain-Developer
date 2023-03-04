@@ -1,8 +1,9 @@
 /*
-    -------------------------
-    Loops in ECMAScript 6
-    -------------------------
-    In JavaScript we commonly use the 'for' loop to iterate over values in a 'list':
+///////////////////////////////////////////////////////
+//    Loops in ES6
+///////////////////////////////////////////////////////
+
+In JavaScript we commonly use the 'for' loop to iterate over values in a 'list':
 
             let arr = [1, 2, 3];
 

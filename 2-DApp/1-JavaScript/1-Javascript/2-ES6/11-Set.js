@@ -1,7 +1,8 @@
 /*
----------------------------
-    ES6 Set
-    ---------------------------
+///////////////////////////////////////////////////////
+//  ES6 Set
+///////////////////////////////////////////////////////
+
     Set object can be used to hold unique values (no repetitions are allowed).
     A value in a set can be anything (objects and primitive values).
 

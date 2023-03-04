@@ -1,7 +1,8 @@
 /*
----------------------------
-Classes in ES6
----------------------------
+///////////////////////////////////////////////////////
+//  Classes in ES6
+///////////////////////////////////////////////////////
+
 In this lesson we'll explain 
 how to create a class 
 that can be used to create multiple objects of the same structure.

@@ -1,8 +1,8 @@
 /*
+///////////////////////////////////////////////////////
+//  Built-in Methods
+///////////////////////////////////////////////////////
 
----------------------------
-Built-in Methods
----------------------------
 ES6 also introduced new built-in methods to make several tasks easier. 
 Here we will cover the most common ones.
 

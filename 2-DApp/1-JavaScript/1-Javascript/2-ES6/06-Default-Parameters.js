@@ -1,8 +1,9 @@
 /*
----------------------------
-Default Parameters in ES6
----------------------------
-    In ES6, we can put the default values right in the signature of the functions.
+///////////////////////////////////////////////////////
+//  Default Parameters in ES6
+///////////////////////////////////////////////////////
+
+In ES6, we can put the default values right in the signature of the functions.
 
     For example:
 

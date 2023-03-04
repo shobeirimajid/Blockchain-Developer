@@ -2,7 +2,8 @@
 //                 Loop
 ///////////////////////////////////////////////////////
 
-// Loops are handy, if you want to run the same code over and over again, each time with a different value.
+// Loops are handy, if you want to run the same code over and over again, 
+// each time with a different value.
 
 // Instead of writing:
 text += cars[0] + "<br>";
@@ -103,6 +104,26 @@ for (let i = 0; i < 10; i++) {
 // Here i is 5
 
 
+
+// Numbering floors of building with omitting number 13
+
+var countOfRooms = 15;
+var floor  = 1;
+
+for(let i=1; i<=countOfRooms; i++) {
+
+    if(i<13) {
+        console.log(floor);
+        floor ++;
+    }
+        
+    else if(i>=13) {
+        floor ++;
+        console.log(floor);
+    }
+}
+
+
     
 //----------------
 //  for-in
@@ -122,6 +143,7 @@ for (var x in person){
     text += person[x] + " ";
 } 
 // text : 'Paul Ken 18 '
+
 
 // The for in loop iterates over the person object
 // Each iteration returns a key (x)
@@ -143,6 +165,7 @@ for (let x in numbers) {
 }
 // txt : 99
 
+
 // Do not use for-in over an Array if the index order is important.
 // The index order is implementation-dependent, and array values may not be accessed in the order you expect.
 
@@ -150,6 +173,7 @@ for (let x in numbers) {
     // for loop
     // for-of loop
     // Array.forEach() 
+
 
 
 //----------------
@@ -167,39 +191,78 @@ function myFunction(value, index, array) {
 }
 
 
-
-
-
-
-
 //----------------
 //  for-of
 //----------------
-// The for/of statement allows iteration over iterable objects 
-// including the built-in String, Array e.g. the Array-like arguments
-// or NodeList objects, TypedArray, Map and Set, and user-defined iterables.
+// For/of was added to JavaScript in 2015 (ES6)
+// lets you loop over iterable data structures such as: 
+    
+    // Arrays
+    // Strings
+    // Maps
+    // Set
+    // NodeLists
+    // objects
+    // user-defined iterables
 
-var myPets = "";
-var pets = ["cat", "dog", "hamster", "hedgehog"];
+for (variable of iterable) {
+    // code block to be executed
+}
 
-for (var pet of pets){
-    myPets += pet + " ";
-} // myPets = 'cat dog hamster hedgehog '
+// variable : 
+// For every iteration the value of the next property is assigned to the variable. 
+// Variable can be declared with const, let, or var.
+
+// iterable : 
+// An object that has iterable properties. Like an array.
+// Iterables can be accessed with simple and efficient code.
+// Iterables can be iterated over with for-of loops
 
 
-//----------------
-//  break
-//----------------
-// Breaking out of labeled loops is similar to Java
+// Iterating
+// terating is simply means looping over a sequence of elements.
+// Ex.
+//    Iterating over a String
+//    Iterating over an Array
 
-outer:
-for (var i = 0; i < 10; i++) {
-    for (var j = 0; j < 10; j++) {
-        if (i == 5 && j ==5) {
-            break outer;
-            // breaks out of outer loop instead of only the inner one
-        }
-    }
+
+// Iterating over an Array
+const cars = ["BMW", "Volvo", "Mini"];
+
+let text = "";
+for (let x of cars) {
+    text += x;
+}
+
+
+// Iterating over a String
+let language = "JavaScript";
+
+let text = "";
+for (let x of language) {
+    text += x;
+}
+
+
+// Iterating over a Set
+const letters = new Set(["a","b","c"]);
+
+let text = "";
+for (const x of letters) {
+  text += x;
+}
+
+
+// Iterating over a Map
+const fruits = new Map([
+    ["apples", 500],
+    ["bananas", 300],
+    ["oranges", 200]
+]);
+  
+let text = "";
+for (const x of fruits) {
+text += x;
 }
 
 
@@ -207,9 +270,47 @@ for (var i = 0; i < 10; i++) {
 //----------------
 //  while
 //----------------
+// loops through a block of code as long as a specified condition is true
+
+while (condition) {
+    // code block to be executed
+}
+
 
 while (true){
     // An infinite loop!
+}
+
+
+// will run as long as variable `i` is less than 10
+// If you forget to increase the variable used in the condition, the loop will never end. 
+// This will crash your browser.
+
+while (i < 10) {
+    text += "The number is " + i;
+    i++;
+}
+
+
+// The snail climbs up 7 feet each day and slips back 2 feet each night.
+// How many days will it take the snail to get out of a well with the given depth?
+
+var depth = parseInt(readLine(), 10);
+var distance=0;
+var day=0;
+
+while(true) {
+
+    day++;
+    distance += 7;
+
+    if(distance >= depth) {
+        console.log(day);
+        break;
+    } 
+    else {
+        distance -= 2;
+    }
 }
 
 
@@ -217,60 +318,97 @@ while (true){
 //----------------
 //  do-while
 //----------------
+// a variant of the while loop
+// This loop will execute the code block once, before checking if the condition is true
+//  So, the code block always run at least once.
+// then it will repeat the loop as long as the condition is true
 
-// Do-while loops are like while loops, except they always run at least once.
-
-var input;
 do {
-    input = getInput();
-} while (!isValid(input));
+    // code block to be executed
+}
+while (condition);
+
+
+// The loop will always be executed at least once, even if the condition is false, 
+// because the code block is executed before the condition is tested
+// Do not forget to increase the variable used in the condition, 
+// otherwise the loop will never end!
+
+do {
+    text += "The number is " + i;
+    i++;
+}
+while (i < 10);
+
+
 
 
 
 //----------------
-// Examples
+//  break
 //----------------
+// It was used to :
+// "jump out" of a loop
+// "jump out" of a switch statement
 
-// Numbering floors of building with omitting number 13
-
-var countOfRooms = 15;
-var floor  = 1;
-
-for(let i=1; i<=countOfRooms; i++) {
-
-    if(i<13) {
-        console.log(floor);
-        floor ++;
+// the break statement ends the loop ("breaks" the loop) when the loop counter (i) is 5
+text = "";
+for (let i = 0; i < 10; i++) {
+    if (i === 5) { 
+        break; 
     }
-        
-    else if(i>=13) {
-        floor ++;
-        console.log(floor);
-    }
+    text += "i is " + i + "<br>";
 }
 
 
 
-// The snail climbs up 7 feet each day and slips back 2 feet each night.
-// How many days will it take the snail to get out of a well with the given depth?
+//----------------
+//  continue
+//----------------
+// "jumps over" one iteration in the loop
+// breaks one iteration (in the loop), if a specified condition occurs, 
+//  and continues with the next iteration in the loop.
 
-function main() {
-
-    var depth = parseInt(readLine(), 10);
-    var distance=0;
-    var day=0;
-
-    while(true) {
-
-        day++;
-        distance += 7;
-
-        if(distance >= depth) {
-            console.log(day);
-            break;
-        } 
-        else {
-            distance -= 2;
-        }
+for (let i = 0; i < 10; i++) {
+    if (i === 3) { 
+        continue; 
     }
+    text += "The number is " + i + "<br>";
+}
+
+
+//----------------
+//  Labels
+//----------------
+// To label JavaScript statements you precede the statements with a label name and a colon
+// The `break` and the `continue` statements are the only JavaScript statements 
+//  that can "jump out" of a `code block` to a lable.
+// A code block is a block of code between {  }
+
+labelname:
+
+while(condition) {
+    break labelname;
+    // or
+    continue labelname;
+}
+
+// continue (with or without a label reference) 
+//    can only be used to skip one loop iteration.
+
+// break without a label reference, 
+//    can only be used to jump out of a loop or a switch.
+
+// break With a label reference 
+//    can be used to jump out of any code block
+
+
+cars = ["BMW", "Volvo", "Saab", "Ford"];
+
+list: {
+  text += cars[0] + "<br>";
+  text += cars[1] + "<br>";
+  break list;
+  text += cars[2] + "<br>";
+  text += cars[3] + "<br>";
 }

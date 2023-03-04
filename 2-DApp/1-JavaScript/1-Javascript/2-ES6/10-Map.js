@@ -1,7 +1,8 @@
 /*
----------------------------
-ES6 Map
----------------------------
+///////////////////////////////////////////////////////
+//  ES6 Map
+///////////////////////////////////////////////////////
+
     A Map object can be used to hold `key/value` pairs. 
     A `key` or `value` in a map can be anything (objects and primitive values).
 

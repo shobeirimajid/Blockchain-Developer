@@ -1,8 +1,9 @@
 /*
----------------------------
-    ES6 Promises
-    ---------------------------
-    A `Promise` is a better way for `asynchronous programming` 
+///////////////////////////////////////////////////////
+//  ES6 Promises
+///////////////////////////////////////////////////////
+
+A `Promise` is a better way for `asynchronous programming` 
     when compared to the common way of using method `setTimeout()`
     
 

@@ -1,7 +1,7 @@
 /*
-    --------------------------------------
-    Template Literals in ES6
-    --------------------------------------
+///////////////////////////////////////////////////////
+//   Template Literals in ES6
+///////////////////////////////////////////////////////
 
     Template literals are a way to output variables in the string.
 

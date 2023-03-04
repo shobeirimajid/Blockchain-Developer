@@ -1,7 +1,8 @@
 /*
----------------------------
-ES6 Objects
----------------------------
+///////////////////////////////////////////////////////
+//  ES6 Objects
+///////////////////////////////////////////////////////
+
     JavaScript variables can be Object data types 
     that contain many values called properties.
 
