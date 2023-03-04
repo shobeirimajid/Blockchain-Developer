@@ -308,11 +308,14 @@ text =
         the lazy dog`;
 
 /*
+------------------------------
 string  Interpolation
 ------------------------------
 Automatic replacing of variables with real values
 ${...}
 
+
+------------------------------
 Variable Substitutions
 ------------------------------
 */
@@ -320,7 +323,9 @@ var firstName = "John";
 var lastName = "Doe";
 var text = `Welcome ${firstName}, ${lastName}!`;
 
+
 /*
+------------------------------
 Expression Substitution
 ------------------------------
 */
@@ -330,20 +335,21 @@ var total = `Total: ${(price * (1 + VAT)).toFixed(2)}`;
 
 
 /*
+------------------------------
 HTML Templates
 ------------------------------
 */
 
 var header = "Templates Literals";
-    var tags = ["template literals", "javascript", "es6"];
+var tags = ["template literals", "javascript", "es6"];
 
-    var html = '';
-    
-    html +=`<h2>${header}</h2>`;
-    html +=`<ul>`;
+var html = '';
 
-    for (const x of tags) {
-        html += `<li>${x}</li>`;
-    }
+html +=`<h2>${header}</h2>`;
+html +=`<ul>`;
 
-    html += `</ul>`;
+for (const x of tags) {
+    html += `<li>${x}</li>`;
+}
+
+html += `</ul>`;
