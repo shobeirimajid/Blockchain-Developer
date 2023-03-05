@@ -1,7 +1,49 @@
+///////////////////////////////////////////////////////
+//                      Scope
+///////////////////////////////////////////////////////
+
 /*
-///////////////////////////////////////////////////////
-//    var & let
-///////////////////////////////////////////////////////
+------------------
+What is Scope
+------------------
+Scope determines the accessibility (visibility) of variables.
+
+JavaScript has 3 types of scope:
+
+    - Block scope
+    - Function scope
+    - Global scope
+
+*/
+
+
+/*
+------------------
+Block Scope
+------------------
+Before ES6 (2015), JavaScript had only Global Scope and Function Scope.
+
+ES6 introduced two important new JavaScript keywords: `let` and `const`
+
+These two keywords provide `Block Scope` in JavaScript.
+
+Variables declared inside a block cannot be accessed from outside the block:
+*/
+
+
+{
+    let x = 2;
+}
+// x can NOT be used here
+
+
+// Variables declared with the `var` can NOT have `block scope`
+
+// Variables declared inside a block, can be accessed from outside the block.
+
+
+
+/*
     The let keyword was introduced in ES6 (2015).
     In ES6 we have three ways of declaring variables to store data values:
 */
@@ -26,23 +68,23 @@
     let 
         allows you to declare variables that are limited in scope 
         to the block, statement, or expression in which they are used.
-
-    For example:
 */
 
+
+        // example:
         if (true) {
             let name = 'Jack';
         }
         // name isn't reachable
         alert(name);
 
-/*
-    In this case, 
-    the name variable is accessible only in the scope of the if statement 
-    because it was declared as let.
 
-    To demonstrate the difference in scope between var and let,
-    consider this example:
+/*
+    // Example :  difference in scope between ``var`` and ``let``
+
+    In this case, the `x` variable is accessible only in the scope of the if statement 
+    because it was declared as `let`
+
 */
 
         function varTest() {
@@ -67,10 +109,13 @@
         letTest();
 
 
+
 /*
-        Variables defined with let cannot be Redeclared  /  With var you can!
-        Variables defined with let must be Declared before use.
-        Variables defined with let have Block Scope.
+        Variables defined with let :
+        
+            cannot be Redeclared  (With var you can!)
+            must be Declared before use
+            have Block Scope
 */
 
 
