@@ -324,7 +324,6 @@ function myFunction() {
 
 
 
-
 //------------------------
 // Variables Lifetime
 //------------------------
