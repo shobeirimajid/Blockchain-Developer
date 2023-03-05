@@ -25,9 +25,9 @@
 
 {
     "employees":[
-      {"firstName":"John", "lastName":"Doe"},
-      {"firstName":"Anna", "lastName":"Smith"},
-      {"firstName":"Peter", "lastName":"Jones"}
+      {"firstName": "John", "lastName": "Doe"},
+      {"firstName": "Anna", "lastName": "Smith"},
+      {"firstName": "Peter", "lastName": "Jones"}
     ]
 }
 
@@ -96,9 +96,9 @@
 // Each object is a record of a person (with a first name and a last name).
 
 "employees":[
-    {"firstName":"John", "lastName":"Doe"},
-    {"firstName":"Anna", "lastName":"Smith"},
-    {"firstName":"Peter", "lastName":"Jones"}
+    {"firstName": "John", "lastName": "Doe"},
+    {"firstName": "Anna", "lastName": "Smith"},
+    {"firstName": "Peter", "lastName": "Jones"}
 ]
 
 
@@ -115,9 +115,9 @@
 // First, create a JavaScript string containing JSON syntax:
 let text = '{' + 
     '"employees" : [' +
-        '{ "firstName":"John" , "lastName":"Doe" },' +
-        '{ "firstName":"Anna" , "lastName":"Smith" },' +
-        '{ "firstName":"Peter" , "lastName":"Jones" }' +
+        '{ "firstName": "John" , "lastName": "Doe" },' +
+        '{ "firstName": "Anna" , "lastName": "Smith" },' +
+        '{ "firstName": "Peter" , "lastName": "Jones" }' +
     ']' + 
 '}';
 
@@ -134,3 +134,12 @@ const obj = JSON.parse(text);
 elm = document.getElementById("demo");
 
 elm.innerHTML = obj.employees[1].firstName + " " + obj.employees[1].lastName;   // Anna Smith
+
+
+//------------------------
+// JSON.stringify(obj)
+//------------------------
+
+let strJson = JSON.stringify(obj);
+
+// '{"employees":[{"firstName":"John","lastName":"Doe"},{"firstName":"Anna","lastName":"Smith"},{"firstName":"Peter","lastName":"Jones"}]}'
