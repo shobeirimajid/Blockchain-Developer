@@ -6,30 +6,39 @@
 ------------------
 What is Scope
 ------------------
-Scope determines the accessibility (visibility) of variables.
+Scope determines the accessibility (visibility) of variables from different parts of the code.
 
-JavaScript has 3 types of scope:
+// In JavaScript, objects and functions are also variables.
+
+
+JavaScript has 3 types of scope :
 
     - Block scope
     - Function scope
     - Global scope
-
 */
+
 
 
 /*
 ------------------
 Block Scope
 ------------------
-Before ES6 (2015), JavaScript had only Global Scope and Function Scope.
+Before ES6 (2015), JavaScript had only 2 Scopes :
 
-ES6 introduced two important new JavaScript keywords: `let` and `const`
+    - Global 
+    - Function
 
-These two keywords provide `Block Scope` in JavaScript.
+ES6 introduced two important new JavaScript keywords :   
+    - let   
+    - const
 
-Variables declared inside a block cannot be accessed from outside the block:
+These two keywords provide a new scope in JavaScript :
+    - Block Scope  
 */
 
+
+// Variables declared inside a block cannot be accessed from outside the block:
 
 {
     let x = 2;
@@ -38,8 +47,146 @@ Variables declared inside a block cannot be accessed from outside the block:
 
 
 // Variables declared with the `var` can NOT have `block scope`
-
 // Variables declared inside a block, can be accessed from outside the block.
+
+{
+    var x = 2;
+}
+// x CAN be used here
+
+
+
+
+//------------------
+//  Function Scope
+//------------------
+
+// JavaScript has function scope: Each function creates a new scope.
+// Variables defined inside a function are not accessible (visible) from outside the function.
+
+// Variables declared with `var`, `let` and `const` are quite similar when declared inside a function.
+//  They all have Function Scope:
+
+
+function myFunction() {
+    var carName = "Volvo";   // Function Scope
+}
+
+function myFunction() {
+    let carName = "Volvo";   // Function Scope
+}
+
+function myFunction() {
+    const carName = "Volvo";   // Function Scope
+}
+
+
+//  --- Local Scope ---
+
+// Variables declared within a JavaScript function, become LOCAL to the function.
+
+// Local variables have Function Scope:
+//    They can only be accessed from within the function.
+
+// Since local variables are only recognized inside their functions, 
+//   variables with the same name can be used in different functions.
+
+// Local variables are created when a function starts, 
+//   and deleted when the function is completed.
+
+// Function arguments (parameters) work as local variables inside functions.
+
+
+// code here can NOT use carName
+
+function myFunction() {
+    let carName = "Volvo";
+    // code here CAN use carName
+}
+  
+// code here can NOT use carName
+
+
+
+//---------------------
+//  Global Scope
+//---------------------
+
+// --- Global Variables ---
+
+// A variable declared outside a function, becomes GLOBAL.
+//   All scripts and functions on a web page can access Global Variables
+
+// WARNING ::   Do NOT create global variables unless you intend to.
+// Your global variables (or functions) can overwrite window variables (or functions).
+// Any function, including the window object, can overwrite your global variables and functions.
+
+
+let carName2 = "Volvo";
+// code here can use carName2
+
+function myFunction() {
+    // code here can also use carName2
+}
+
+
+// Variables declared Globally (outside any function) have Global Scope.
+// Global variables can be accessed from anywhere in a JavaScript program.
+
+// Variables declared with var, let and const are quite similar when declared outside a block.
+//    They all have Global Scope:
+
+var x = 2;       // Global scope
+let x = 2;       // Global scope
+const x = 2;     // Global scope
+
+
+// --- Global Variables in HTML ---
+
+// With JavaScript, the global scope is the JavaScript environment.
+// In HTML, the global scope is the window object.
+
+// Global variables defined with the var keyword belong to the window object:
+var carName = "Volvo";
+// code here can use window.carName
+
+// Global variables defined with the let keyword do not belong to the window object:
+let carName = "Volvo";
+// code here can not use window.carName
+
+
+
+//-----------------------
+// Automatically Global
+//-----------------------
+// If you assign a value to a variable that has not been declared, 
+//   it will automatically become a GLOBAL variable.
+//   Even if the value is assigned inside a function.
+
+// NOTE ::  In "Strict Mode", undeclared variables are not automatically global.
+//          All modern browsers support running JavaScript in "Strict Mode".
+
+
+// Ex. carName is a global variable
+
+myFunction();
+
+// code here can use carName
+
+function myFunction() {
+    carName = "Volvo";
+}
+
+
+
+//------------------------
+// Variables Lifetime
+//------------------------
+// The lifetime of a JavaScript variable starts when it is declared.
+// Function (local) variables are deleted when the function is completed.
+// In a web browser, global variables are deleted when you close the browser window (or tab).
+
+
 
 
 
@@ -83,7 +230,7 @@ Variables declared inside a block cannot be accessed from outside the block:
     // Example :  difference in scope between ``var`` and ``let``
 
     In this case, the `x` variable is accessible only in the scope of the if statement 
-    because it was declared as `let`
+       because it was declared as `let`
 
 */
 
