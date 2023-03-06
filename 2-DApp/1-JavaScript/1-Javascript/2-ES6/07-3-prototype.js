@@ -69,11 +69,11 @@
 // To only consider properties attached to the object itself
 // and not its prototypes, use the `hasOwnProperty()` check.
 
-for (var x in myObj){
-    if (myObj.hasOwnProperty(x)){
-        console.log(myObj[x]);
+    for (var x in myObj){
+        if (myObj.hasOwnProperty(x)){
+            console.log(myObj[x]);
+        }
     }
-}
 
 ///prints:
 // Hello world!

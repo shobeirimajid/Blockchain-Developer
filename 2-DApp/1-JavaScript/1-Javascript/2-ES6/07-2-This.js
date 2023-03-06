@@ -190,6 +190,7 @@ let fullName = personObj.fullName.bind(member);
 // This Precedence
 //---------------------------------
 /*
+
 which object this refers to?
 
 use the following precedence to determine which object `this` refers to
@@ -211,3 +212,5 @@ Precedence	    Object
 4- Check to if `this` is in an object function (method) ?
 
 5- Check to if `this` is in a function in the global scope ?
+
+*/
