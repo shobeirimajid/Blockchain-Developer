@@ -541,5 +541,3 @@ Promise.allSettled([prom1,prom2,prom3]).then {}
 //------------------------
 
 const first = await Promise.any([prom1,prom2,prom3]);
-
-
