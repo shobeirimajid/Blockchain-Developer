@@ -24,7 +24,7 @@
 // code that can take some time
 
 // --- Consuming code ---
-// code that must wait for the result
+// code that wants the result of the “producing code” once it’s ready and must wait for it
 
 // --- Promise ---
 // JavaScript object that links `producing` and `consuming` codes
@@ -67,9 +67,10 @@ myPromise.then(
 /*
     A JavaScript Promise object can be:
 
-        - Pending
-        - Fulfilled
-        - Rejected
+        - Pending       -   Hasn't fulfilled or rejected yet
+        - Fulfilled     -   The action relating to the promise succeeded
+        - Rejected      -   The action relating to the promise failed
+        - settled       -   Has fulfilled or rejected
 
     The Promise object supports two properties: 
     
@@ -152,7 +153,7 @@ aPromise.then(
 
 
 //------------------------
-// Promise Examples
+// use of promises
 //-----------------------
 
 // To demonstrate the use of promises, we will use the callback examples from previous parts
@@ -249,8 +250,56 @@ cPromise.then(
 
 
 //-----------------
-// Example
+// promise chaining
 //-----------------
+
+// we have a sequence of asynchronous tasks to be performed one after another 
+// How can we code it well?
+
+// Promises provide a couple of recipes to do that.
+// promise chaining.
+
+// It looks like this:
+
+// Example-1
+new Promise(function(resolve, reject) {
+    setTimeout(() => resolve(1), 1000);     // (*)
+}).then(function(result) {                  // (**)
+    alert(result); // 1
+    return result * 2;
+}).then(function(result) {                  // (***)
+    alert(result); // 2
+    return result * 2;
+}).then(function(result) {
+    alert(result); // 4
+    return result * 2;
+});
+
+
+// The idea is that the result is passed through the chain of .then handlers.
+
+// Here the flow is:
+
+//  1- The initial promise resolves in 1 second (*),
+//  2- Then the .then handler is called (**), which in turn creates a new promise (resolved with 2 value).
+//  3- The next then (***) gets the result of the previous one, processes it (doubles) and passes it to the next handler.
+//  4- …and so on.
+
+// As the result is passed along the chain of handlers, 
+// we can see a sequence of alert calls: 
+// 1 → 2 → 4
+
+// The whole thing works, because every call to a .then returns a new promise, 
+// so that we can call the next .then on it.
+
+// When a handler returns a value, 
+// it becomes the result of that promise, so the next .then is called with it.
+
+
+
+
+
+// Example-2
 
 
 // (1) Callback Solution
@@ -348,6 +397,96 @@ console.log("End");
 
 
 //------------------------
+// catch
+//------------------------
+
+let promise = new Promise((resolve, reject) => {
+    setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+  
+// .catch(f) is the same as promise.then(null, f)
+promise.catch(alert); // shows "Error: Whoops!" after 1 second
+
+
+
+
+// in the code below the URL to fetch is wrong (no such site) 
+// and .catch handles the error
+
+fetch('https://no-such-server.blabla') // rejects
+  .then(response => response.json())
+  .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
+
+
+
+
+// .catch doesn’t have to be immediate. 
+// It may appear after one or maybe several .then.
+// Or, maybe, everything is all right with the site, but the response is not valid JSON. 
+// The easiest way to catch all errors is to append .catch to the end of chain:
+
+// Normally, such .catch doesn’t trigger at all. 
+// But if any of the promises above rejects (a network problem or invalid json or whatever), 
+// then it would catch it.
+
+  fetch('/article/promise-chaining/user.json')
+  .then(response => response.json())
+  .then(user => fetch(`https://api.github.com/users/${user.name}`))
+  .then(response => response.json())
+  .then(githubUser => new Promise((resolve, reject) => {
+    let img = document.createElement('img');
+    img.src = githubUser.avatar_url;
+    img.className = "promise-avatar-example";
+    document.body.append(img);
+
+    setTimeout(() => {
+      img.remove();
+      resolve(githubUser);
+    }, 3000);
+  }))
+  .catch(error => alert(error.message));
+
+
+
+
+  getJSON('story.json').then(function(story) {
+    return getJSON(story.chapterUrls[0]);
+  }).then(function(chapter1) {
+    addHtmlToPage(chapter1.html);
+  }).catch(function() {
+    addTextToPage("Failed to show chapter");
+  }).then(function() {
+    document.querySelector('.spinner').style.display = 'none';
+  })
+
+
+
+//------------------------
+// finally
+//------------------------
+
+new Promise((resolve, reject) => {
+    /* do something that takes time, and then call resolve or maybe reject */
+})
+// runs when the promise is settled, doesn't matter successfully or not
+.finally(() => stop_loading_indicator)
+// so the loading indicator is always stopped before we go on
+.then(result => show_result, err => show_error)
+
+
+
+new Promise((resolve, reject) => {
+    setTimeout(() => resolve("value"), 2000);
+})
+.then(result => alert(result))              // <-- .then shows "value"
+.catch(err => alert(err))                   // <-- .catch shows the error
+.finally(() => alert("Promise ready"));     // triggers first
+
+
+
+
+
+//------------------------
 // Async , Await 
 //------------------------
 
@@ -364,7 +503,12 @@ console.log("End");
 // Async 
 // ---------------
 
-// The keyword async before a function makes the function return a promise
+// makes the function return a promise
+
+// The keyword “async” before a function means one simple thing: 
+// a function always returns a promise. 
+
+// Other values are wrapped in a resolved promise automatically.
 
 async function myFunction() {
     return "Hello";
@@ -418,6 +562,7 @@ myFunction()
 );
 
 
+
 //----------------
 // Await 
 // ---------------
@@ -426,6 +571,10 @@ myFunction()
 
 // The await keyword makes the function pause the execution 
 //   and wait for a resolved promise before it continues    
+
+// await literally suspends the function execution until the promise settles, 
+// and then resumes it with the promise result.
+
 
         let value = await promise;
 
@@ -443,7 +592,7 @@ async function myDisplay() {
     resolve("I love You !!");
   });
 
-  let resolved = await myPromise;
+  let resolved = await myPromise; // wait until the myPromise resolves
   console.log(resolved);
 }
 
@@ -460,7 +609,7 @@ async function myDisplay() {
         }, 3000);
     });
 
-    let resolved = await myPromise;
+    let resolved = await myPromise;    // wait until the myPromise resolves
     console.log(resolved);
 }
   
@@ -489,6 +638,39 @@ async function getFile() {
 }
   
 getFile();
+
+
+
+
+// example
+
+
+async function showAvatar() {
+
+    // read our JSON
+    let response = await fetch('/article/promise-chaining/user.json');
+    let user = await response.json();
+  
+    // read github user
+    let githubResponse = await fetch(`https://api.github.com/users/${user.name}`);
+    let githubUser = await githubResponse.json();
+  
+    // show the avatar
+    let img = document.createElement('img');
+    img.src = githubUser.avatar_url;
+    img.className = "promise-avatar-example";
+    document.body.append(img);
+  
+    // wait 3 seconds
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+  
+    img.remove();
+  
+    return githubUser;
+  }
+  
+  showAvatar();
+
 
 
 //------------------------

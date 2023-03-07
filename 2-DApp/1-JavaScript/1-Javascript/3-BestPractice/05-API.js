@@ -163,7 +163,10 @@ https://www.w3schools.com/js/js_api_geolocation.asp
 
 // Fetch API Example
 
-// The example below fetches a file and displays the content:
+
+//-----------------
+// fetch a file and displays the content
+//-----------------
 
 fetch(file)
 .then(x => x.text())
@@ -184,3 +187,25 @@ async function getText(file) {
     let myText = await myObject.text();
     myDisplay(myText);
 }
+
+
+//-------------
+// fetch and show a logo image 
+//-------------
+
+let response = await fetch('/article/fetch/logo-fetch.svg');
+
+let blob = await response.blob(); // download as Blob object
+
+// create <img> for it
+let img = document.createElement('img');
+img.style = 'position:fixed;top:10px;left:10px;width:100px';
+document.body.append(img);
+
+// show it
+img.src = URL.createObjectURL(blob);
+
+setTimeout(() => { // hide after three seconds
+  img.remove();
+  URL.revokeObjectURL(img.src);
+}, 3000);
