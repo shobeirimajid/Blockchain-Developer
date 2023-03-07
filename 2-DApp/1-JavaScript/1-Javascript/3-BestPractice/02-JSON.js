@@ -248,8 +248,3 @@ const myjson = JSON.stringify(arr);
 // and ready to be sent to a server
 
 // ["John","Peter","Sally","Jane"]
-
-
-
-
-
