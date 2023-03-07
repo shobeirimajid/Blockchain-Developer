@@ -2,15 +2,20 @@
 //                     Functions
 ///////////////////////////////////////////////////////
 /*
+
 A JavaScript function is a block of code designed to perform a particular task.
+
 A JavaScript function is defined with the function keyword, 
-followed by a name, 
-followed by parentheses ().
-Function names can contain 
+    followed by a name, 
+    followed by parentheses ().
+    Function names can contain 
     letters, digits, underscores, and dollar signs (same rules as variables).
+
 The parentheses may include parameter names separated by commas:
     (parameter1, parameter2, ...)
+
 The code to be executed, by the function, is placed inside curly brackets: {}
+
 */
 
 
@@ -94,6 +99,27 @@ Accessing a function without () will return the function object instead of the f
     myFunction      refers to the   function object
     myFunction()    refers to the   function result
 */
+
+
+
+
+//------------------------------
+// Function Expression vs Function Declaration
+//------------------------------
+
+// Function Declaration
+// A Function Expression is created when the execution reaches it and is usable only from that moment.
+function sum(a, b) {
+    return a + b;
+}
+
+// Function Expression
+// A Function Declaration can be called earlier than it is defined.
+let sum = function(a, b) {
+    return a + b;
+};
+
+
 
 
 

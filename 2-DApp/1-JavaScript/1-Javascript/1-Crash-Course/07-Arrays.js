@@ -42,9 +42,38 @@ Their members can be accessed using the square-brackets subscript syntax.
     // declare array by new keyword
 
     var courses1 = new Array(3);
+    alert( courses1.length );   // length 3
+    alert( courses1[0] );       // undefined! no elements.
     courses1[0] = "HTML";
     courses1[1] = "CSS";
     courses1[2] = "JS";
+    alert( courses1[0] );       // "HTML"
+
+
+
+// Some word about “length”
+
+// The length property automatically updates when we modify the array. 
+// To be precise, it is actually not the count of values in the array, 
+// but the greatest numeric index plus one.
+
+let fruits = [];
+fruits[123] = "Apple";
+alert( fruits.length ); // 124
+
+// “length” is writable
+
+let arr = [1, 2, 3, 4, 5];
+
+arr.length = 2; // truncate to 2 elements
+alert( arr ); // [1, 2]
+
+arr.length = 5; // return length back
+alert( arr[3] ); // undefined: the values do not return
+
+arr.length = 0;   // the simplest way to clear the array
+
+
 
 
     

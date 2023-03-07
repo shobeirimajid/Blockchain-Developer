@@ -2,13 +2,8 @@
 //                   Input/Output
 ///////////////////////////////////////////////////////
 
-// input
+
 //----------------------------
-
-let namevar = prompt("Please enter your name", "Ex. Shobeiri");
-var msg = "Hello " + namevar + "! How are you today?";
-
-
 // output
 //----------------------------
 
@@ -35,3 +30,32 @@ window.print();         // to print the content of the current window.
     This also means that specifying the window keyword is optional.
     window.alert(msg) ~ alert(msg)
 */
+
+
+//----------------------------
+// input
+//----------------------------
+
+
+// 1- prompt
+
+let namevar = prompt("Please enter your name", "Ex. Shobeiri");
+var msg = "Hello " + namevar + "! How are you today?";
+console.log(msg);
+
+
+// 2- confirm
+
+let isBoss  = confirm("Are you the boss?");
+if(isBoss)
+    console.log("you are the boss");
+else
+    console.log("you are not the boss");
+
+
+
+
+
+
+
+

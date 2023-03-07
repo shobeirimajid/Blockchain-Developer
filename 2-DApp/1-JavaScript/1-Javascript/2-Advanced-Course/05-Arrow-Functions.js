@@ -26,19 +26,23 @@ arr.forEach(elm => {
 
 // Arrow functions allow us to write shorter function syntax:
 
+// let func = (arg1, arg2, ..., argN) => expression;
+let sum = (x, y) => x + y;
+
+
 
 // Prior to ES6, a JavaScript function was defined like this:
-function add(x, y) {
-    var sum = x+y;  
-    return sum;
+function sum(x, y) {
+    var s = x+y;  
+    return s;
 }
 
 // ES6 introduces a new syntax for writing functions (Arrow Functions)
 // This allows functions to be defined in a `lexical scope like` with variables defined by const and let 
 
-const add = (x, y) => {
-    let sum = x + y;  
-    return sum;
+const sum = (x, y) => {
+    let s = x + y;  
+    return s;
 }
 
 
