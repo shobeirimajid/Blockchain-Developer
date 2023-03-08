@@ -7,16 +7,37 @@
 
 // The `create-react-app` tool is an officially supported way to create React applications.
 
-// `Node.js` and `npx` is required to use  `create-react-app`
 
+//--------------------------
+//  Pre-requirements
+//--------------------------
+/*
 
-// Note: If you've previously installed create-react-app globally, 
-// it is recommended that you uninstall the package 
-// to ensure npx always uses the latest version of create-react-app. 
-// To uninstall, run this command: 
-//      npm uninstall -g create-react-app
+1-  Node.js
+    Node.js is required to use `create-react-app`
+    You will need Node.js server setup on your machine
+    https://nodejs.org/
+    node -v   (v18.13.0)
 
+2-  npm
+    the default package manager for the JavaScript runtime environment Node.js. 
+    Node installation comes with npm package manager as well, 
+    npm -v    (9.4.0)
 
+3-  npx
+    npx is required to use `create-react-app`
+    npx package should be installed by default when you install Node.js
+    npx -v    (9.4.0)
+    if it says that the command is unknown, you can install it globally using :
+    npm i -g npx
+
+4-  IDE
+    Integrated development environment 
+    IDE is the software we will use to help use write our code.
+    Visual Studio Code (VSCode)
+    https://code.visualstudio.com/
+
+*/
 
 
 //--------------------------
@@ -24,15 +45,18 @@
 //--------------------------
 
 // you can create a React application by using   `create-react-app`
-// The create-react-app will set up everything you need to run a React application.
-
+// `create-react-app`  will set up everything you need to run a React application.
 // Open your terminal in the directory you would like to create your application.
 // Run this command to create a React application named `my-react-app` :
+
 //          npx create-react-app my-react-app
 
-// create-react-app will set up everything you need to run a React application.
 
+// Note: If you've previously installed create-react-app globally, 
+// it is recommended that you uninstall the package 
+// to ensure npx always uses the latest version of create-react-app. 
 // To uninstall, run this command: 
+
 //          npm uninstall -g create-react-app
 
 

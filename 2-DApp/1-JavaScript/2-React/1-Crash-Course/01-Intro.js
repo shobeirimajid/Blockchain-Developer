@@ -70,3 +70,21 @@ root.render(<Hello />);
 // create-react-app includes built tools such as webpack, Babel, and ESLint.
 // Current version of create-react-app is v5.0.1 (March 2023).
 // https://github.com/facebook/create-react-app/releases
+
+
+
+//--------------------------------
+// List of tools you may use
+//--------------------------------
+
+// Node.js + Express  -   to create REST API and database querying
+
+// MongoDB            -   non-relational database permanent storage where we will store our data
+
+// React.js           -   library for our client-side application to display content to the user
+
+// Redux              -   React.js application state handling
+
+// Tailwind CSS       -   CSS framework which will provide us different predefined CSS selectors and components
+
+// Typescript         -   a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale
