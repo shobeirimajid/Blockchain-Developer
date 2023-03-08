@@ -47,9 +47,9 @@
 // you can create a React application by using   `create-react-app`
 // `create-react-app`  will set up everything you need to run a React application.
 // Open your terminal in the directory you would like to create your application.
-// Run this command to create a React application named `my-react-app` :
+// Run this command to create a React application named `my-app` :
 
-//          npx create-react-app my-react-app
+//          npx create-react-app my-app
 
 
 // Note: If you've previously installed create-react-app globally, 
@@ -59,6 +59,19 @@
 
 //          npm uninstall -g create-react-app
 
+
+
+// If you will the react project support Typescript
+// you can choose the appropriate template
+
+//          npx create-react-app my-app --template typescript
+
+// this will create a new directory "my-app" 
+// with React project inside, that supports Typescript.
+
+
+// This may take a while, so be patient. 
+// After a while our setup should go through and you should see it when it is done.
 
 
 //----------------------------
