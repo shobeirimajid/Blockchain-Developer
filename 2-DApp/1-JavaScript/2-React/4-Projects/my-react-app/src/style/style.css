@@ -1,4 +1,5 @@
 .App-header {
+  margin-top: 50px;
   background-color: #14161a;
 
   min-height: 11vh;
@@ -10,6 +11,38 @@
   font-size: calc(2vmin);
   color: rgb(226, 226, 226);
 }
+
+.navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navigation li {
+  float: left;
+}
+
+.navigation li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navigation li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.navigation li a.active {
+  background-color: #14161A;
+}
+
 
 .Container {
   background-color: #32353c;
@@ -81,8 +114,8 @@
   margin-right: 10px;
 }
 
-.main-bkg {
-  /*width: fill;*/
+.home-bkg {
+  width: stretch;
   margin-bottom: -10px;;
 }
 

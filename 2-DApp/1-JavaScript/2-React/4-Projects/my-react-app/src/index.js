@@ -1,14 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Layout from './Components/Layout';
+import Home from './Components/Home';
+import Galery from './Components/Galery';
+import Order from './Components/Order';
+import NoPage from './Components/NoPage';
 
 import './style/style.css';
 
-import Header from './Components/Header';
-//import Garage from './Components/Garage';
-//import MainPage from './Components/MainPage';
-import Order from './Components/Order';
-import Footer from './Components/Footer';
 
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="galery" element={<Galery />} />
+          <Route path="order" element={<Order />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
 
 const header = ReactDOM.createRoot(document.getElementById('header'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,23 +41,11 @@ header.render(
   </React.StrictMode>
 );
 
-/*root.render(
-  <React.StrictMode>
-    <MainPage />
-  </React.StrictMode>
-);*/
-
 root.render(
   <React.StrictMode>
-    <Order />
+    <App />
   </React.StrictMode>
 );
-
-/*root.render(
-  <React.StrictMode>
-    <Garage />
-  </React.StrictMode>
-);*/
 
 footer.render(
   <React.StrictMode>
