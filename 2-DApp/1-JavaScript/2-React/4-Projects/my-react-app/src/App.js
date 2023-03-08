@@ -1,8 +1,8 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
-import Car from './Components/Car.js'
+import Garage from './Components/Garage.js'
 
-function App() {
+/*function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,10 +21,9 @@ function App() {
       </header>
     </div>
   );
-}
+}*/
 
-
-function HelloWorld() {
+/*function HelloWorld() {
   return (
     <div className="App">
       <header className="App-header">
@@ -32,20 +31,6 @@ function HelloWorld() {
       </header>
     </div>
   );
-}
-
-
-function Garage() {
-  const carName = "Ford";
-  const carInfo = { name: "Ford", model: "Mustang" };
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Who lives in my Garage?</h1>
-        <Car info={ carInfo } />
-      </header>
-    </div>
-  );
-}
+}*/
 
 export default Garage;
