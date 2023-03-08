@@ -1,0 +1,87 @@
+.App-header {
+  background-color: #14161a;
+
+  min-height: 15vh;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(2vmin);
+  color: rgb(82, 232, 255);
+}
+
+.Container {
+  background-color: #32353c;
+  color: rgb(252, 252, 252);
+
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.Cars-Container {
+  text-align: left;
+  align-items: left;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.modernCar {
+  font-size: calc(2vmin);
+  color: rgb(233, 99, 128);
+}
+
+.stock {
+  font-size: calc(2vmin);
+  color: rgb(233, 211, 99);
+}
+
+.App-footer {
+  background-color: #14161a;
+  min-height: 15vh;
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+
+  font-size: calc(2vmin);
+  color: rgb(82, 232, 255);
+
+  margin-top: auto;
+}
+
+.App-link {
+  color: #ffe0cd;
+  text-decoration: none;
+}
+
+.App-logo {
+  height: 10vmin;
+  pointer-events: none;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
