@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Car from './Components/Car.js'
 
 function App() {
   return (
@@ -33,4 +34,18 @@ function HelloWorld() {
   );
 }
 
-export default HelloWorld;
+
+function Garage() {
+  const carName = "Ford";
+  const carInfo = { name: "Ford", model: "Mustang" };
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>Who lives in my Garage?</h1>
+        <Car info={ carInfo } />
+      </header>
+    </div>
+  );
+}
+
+export default Garage;
