@@ -1,14 +1,14 @@
 .App-header {
   background-color: #14161a;
 
-  min-height: 15vh;
+  min-height: 11vh;
   display: flex;
 
   align-items: center;
   justify-content: center;
 
   font-size: calc(2vmin);
-  color: rgb(82, 232, 255);
+  color: rgb(226, 226, 226);
 }
 
 .Container {
@@ -27,6 +27,25 @@
   padding-right: 50px;
 }
 
+.OrderForm{
+  border-radius: 15px;
+  border-style: dashed;
+  border-width: 1px;
+  width: 500px;
+  height: 540px;
+  margin: 20px;
+  padding: 20px;
+  background-color: rgba(0, 14, 28, 0.244);
+  align-self: center;
+  font-size: calc(2vmin);
+  color: rgb(248, 239, 193);
+}
+
+.OrderForm input {
+  /*margin-left: 10px;*/
+  margin-bottom: 20px;
+}
+
 .modernCar {
   font-size: calc(2vmin);
   color: rgb(233, 99, 128);
@@ -39,7 +58,7 @@
 
 .App-footer {
   background-color: #14161a;
-  min-height: 15vh;
+  min-height: 16vh;
   display: flex;
   
   align-items: center;
@@ -57,8 +76,14 @@
 }
 
 .App-logo {
-  height: 10vmin;
+  height: 6vmin;
   pointer-events: none;
+  margin-right: 10px;
+}
+
+.main-bkg {
+  /*width: fill;*/
+  margin-bottom: -10px;;
 }
 
 body {

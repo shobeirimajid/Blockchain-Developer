@@ -1,10 +1,10 @@
-import logo from '../img/logo.svg';
+import logo from '../img/Mercedes-Logo.png';
 
 function Header() {
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Who lives in my Garage?</h1>
+        <h1>Buy your new car online</h1>
       </header>
     );
 }

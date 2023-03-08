@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom/client';
 import './style/style.css';
 
 import Header from './Components/Header';
-import Main from './Components/Main';
+//import Garage from './Components/Garage';
+//import MainPage from './Components/MainPage';
+import Order from './Components/Order';
 import Footer from './Components/Footer';
 
 
@@ -19,11 +21,23 @@ header.render(
   </React.StrictMode>
 );
 
+/*root.render(
+  <React.StrictMode>
+    <MainPage />
+  </React.StrictMode>
+);*/
+
 root.render(
   <React.StrictMode>
-    <Main />
+    <Order />
   </React.StrictMode>
 );
+
+/*root.render(
+  <React.StrictMode>
+    <Garage />
+  </React.StrictMode>
+);*/
 
 footer.render(
   <React.StrictMode>

@@ -1,6 +1,6 @@
 import Car from './Car.js'
 
-function Main() {
+function Garage() {
 
     //const carName = "Ford";
     //const carInfo = { name: "Ford", model: "Mustang" };
@@ -34,4 +34,4 @@ function Main() {
     );
 }
 
-export default Main;
+export default Garage;
