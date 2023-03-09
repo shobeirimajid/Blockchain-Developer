@@ -6,7 +6,6 @@ const Layout = () => {
   //const location = useLocation();
   //console.log(location.pathname);
 
-
   return (
     <>
       <nav className="navigation">
