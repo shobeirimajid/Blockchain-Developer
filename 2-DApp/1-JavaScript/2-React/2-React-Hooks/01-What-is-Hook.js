@@ -10,7 +10,7 @@
 // Hooks were added to React in version 16.8
 // `Hooks` allow  `function components`  to have access to `state` and other React features.
 
-// Using `Hook`s along with `function components`, we no longer need to `class components`.
+// Using `Hook`s together with `function components`, we no longer need to `class components`.
 // Although Hooks generally replace class components, there are no plans to remove classes from React.
 
 
