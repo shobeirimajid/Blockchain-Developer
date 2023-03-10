@@ -231,6 +231,11 @@ function Car() {
 
   const [car, setCar] = useState( {brand: "Ford", model: "Mustang", year: "1964", color: "red"} );
 
+    // Because we need the current value of state, 
+    // we pass a function into setCar()
+    // This function receives the previous state object (previousState)
+    // Then spreading the previousState and overwriting only the color 
+    // and finally returns modified state object
 
   const updateColor = () => {
 
@@ -240,7 +245,6 @@ function Car() {
     });
 
   }
-
 
   return (
     <>
@@ -258,7 +262,6 @@ function Car() {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Car />);
-
 
 
 
