@@ -4,8 +4,8 @@ module.exports = {
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
-     network_id: "*",       // Any network (default: none)
-    },
+     network_id: "*"        // Any network (default: none)
+    }
     //
     // goerli: {
     //   provider: () => new HDWalletProvider(mnemonic, `https://goerli.infura.io/v3/${infuraProjectId}`),
@@ -22,7 +22,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.13",      // Fetch exact version from solc-bin
+      version: "0.8.13"      // Fetch exact version from solc-bin
     }
   }
 };
