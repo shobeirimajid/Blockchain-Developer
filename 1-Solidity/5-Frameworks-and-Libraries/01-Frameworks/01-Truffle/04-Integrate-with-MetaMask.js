@@ -8,6 +8,7 @@
 
 
 // ------------- @truffle/contract ---------------
+// https://github.com/trufflesuite/truffle/tree/master/packages/contract
 // Truffle has a library called @truffle/contract. 
 // We recommend using the @truffle/contract library to interacting with contracts, 
 // as it makes the interacting easier and more robust.
@@ -33,14 +34,9 @@ $.getJSON('Adoption.json', function(data) {
 
 
 
-////////////////////////////////////////////////
-//      Using MetaMask with Ganache
-////////////////////////////////////////////////
 
+//--------- Using MetaMask with Ganache  ---------
 
-//--------------------------
-// Ganache
-//--------------------------
 // Ganache is a graphical application that runs a blockchain 
 // that can be used for testing purposes. 
 // It runs on 127.0.0.1:7545
@@ -49,9 +45,8 @@ $.getJSON('Adoption.json', function(data) {
 // because the address does not require a network connection 
 // and so is more suitable for development.
 
-//--------------------------------------
-// Detecting MetaMask's web3 injection
-//--------------------------------------
+
+// ---- Detecting MetaMask's web3 injection ----
 
 // Before diving in, we'll need to make sure the dapp is checking for MetaMask's web3 instance 
 // and that the extension itself is configured properly with Ganache.
@@ -69,3 +64,45 @@ if (typeof web3 !== 'undefined') {
     App.web3Provider = new web3.providers.HttpProvider('http://127.0.0.1:7545');
     web3 = new Web3(App.web3Provider);
 }
+
+
+//------ Using MetaMask with Truffle Develop ------
+
+// `Truffle Develop` is a command-line application that runs a temporary blockchain 
+// that is also used for testing purposes. 
+// It runs on 127.0.0.1:9545
+
+// Using MetaMask with Truffle Develop is very similar to that of Ganache. 
+// The only difference is that Truffle Develop runs by default on 127.0.0.1:9545
+// so you'll want to edit the above web3 code to say:
+
+// Is there is an injected web3 instance?
+if (typeof web3 !== 'undefined') {
+    App.web3Provider = web3.currentProvider;
+    web3 = new Web3(web3.currentProvider);
+} else {
+    // If no injected web3 instance is detected, fallback to Truffle Develop.
+    App.web3Provider = new web3.providers.HttpProvider('http://127.0.0.1:9545');
+    web3 = new Web3(App.web3Provider);
+}
+
+// In MetaMask, when entering the "New RPC URL", enter http://127.0.0.1:9545
+
+
+//------ Using MetaMask with Ganache CLI ------
+
+// Using MetaMask with Ganache CLI is also very similar to that of Ganache. 
+// The only difference is that Ganache CLI runs by default on http://127.0.0.1:8545 
+// so you'll want to edit the above web3 code to say:
+
+// Is there is an injected web3 instance?
+if (typeof web3 !== 'undefined') {
+    App.web3Provider = web3.currentProvider;
+    web3 = new Web3(web3.currentProvider);
+} else {
+    // If no injected web3 instance is detected, fallback to Ganache CLI.
+    App.web3Provider = new web3.providers.HttpProvider('http://127.0.0.1:8545');
+    web3 = new Web3(App.web3Provider);
+}
+
+// In MetaMask, when entering the "New RPC URL", enter http://127.0.0.1:8545
