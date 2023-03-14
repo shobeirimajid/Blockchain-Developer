@@ -5,11 +5,18 @@ const HDWalletProvider = require('@truffle/hdwallet-provider');
 const mnemonic = process.env.MNEMONIC;
 const infura_api_key = process.env.INFURA_API_KEY;
 const alchemy_api_key = process.env.ALCHEMy_API_KEY;
-
 const etherscan_api_key = process.env.ETHERSCAN_API_KEY;
 
 module.exports = {
+
   networks: {
+
+    development: {
+       host: "127.0.0.1",     // Localhost (default: none)
+       port: 7545,            // Standard Ethereum port (default: none)
+       network_id: "*"        // Any network (default: none)
+    },
+
     goerli: {
       /*provider: () => new HDWalletProvider(privateKey, `https://goerli.infura.io/v3/${infura_api_key}`),*/
       provider: () => new HDWalletProvider(mnemonic, "https://eth-goerli.g.alchemy.com/v2/E2uY9SQNC0CKo5pkCW_CGMFdaX2I-LWG"),
@@ -19,22 +26,26 @@ module.exports = {
       timeoutBlocks: 200   // number of blocks before a deployment times out  (minimum/default: 50)
       /*skipDryRun: true */     // Skip dry run before migrations? (default: false for public 
     },
+
     dashboard: {
       networkCheckTimeout: 120000,
     }
   },
+
   dashboard: {
     port: 24012,
   },
+
   plugins: ['truffle-plugin-verify'],
+
   api_keys: {
     etherscan: process.env.ETHERSCAN_API_KEY,
   },
 
-  // Configure your compilers
-  compilers: {
+  compilers: {                // Configure your compilers
     solc: {
-      version: "0.8.15"      // Fetch exact version from solc-bin
+      version: "0.8.15"       // Fetch exact version from solc-bin
     }
   }
+
 };
