@@ -158,30 +158,41 @@ module.exports = async function(deployer) {
 //              Truffle Dashboard
 ////////////////////////////////////////////////
 
+// In 2022, Truffle launched an awesome new feature called the Truffle Dashboard 
+// that allows you to deploy your contracts using your MetaMask wallet.
+
 // How to deploy smart contracts without having to copy-paste mnemonic phrases to a .env file?
-
-// When we are deploying smart contracts we need to specify an #Ethereum account that has enough funds to cover the transaction fees of the deployment.
-
+// When we are deploying smart contracts we need to specify an Ethereum account that has enough funds to cover the transaction fees of the deployment.
 // Wallets like MetaMask can handle signing messages with our account's private key and send transactions for us.
 
+//------------------------
 // What is the problem?
+//------------------------
 // When we are deploying smart contracts on the live networks by the command line tools,
 // Ex. @truffle/hdwallet-provider
 // HD-Wallet signs transactions itself without sending them to the metamask. So it needs to access our account's private key (mnemonic phrase).
 
+//------------------------
 // How to access it?
+//------------------------
 // The common method is copy-pasting mnemonic phrases to a gitignored .env file.
 
+//------------------------
 // That is a bad practice
+//------------------------
 // Because you might compromise your account's private key. 
 // Especially when you are going to share the project with others.
 
+//------------------------
 // What is the solution?
+//------------------------
 // Truffle Dashboard was developed to provide an easy way 
 // to use your existing MetaMask wallet for smart contracts deployment 
 // and even for any other transactions that you need to send from a command line context.
 
+//------------------------
 // How to use Truffle Dashboard?
+//------------------------
 
 // 1- Start a dashboard
 $ truffle dashboard
