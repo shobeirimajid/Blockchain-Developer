@@ -1,10 +1,16 @@
-pragma solidity ^0.5.8;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.15;
 
-import "./Killable.sol";
+contract Casino {
 
-contract Casino is Killable {
+    address payable public owner;
+
     event Play(address payable indexed player, uint256 betSize, uint8 betNumber, uint8 winningNumber);
     event Payout(address payable winner, uint256 payout);
+
+    constructor() {
+        owner = payable(msg.sender);
+    }
 
     function fund() external payable {}
 
@@ -13,10 +19,10 @@ contract Casino is Killable {
         require(msg.value > 0, "A bet should be placed");
 
         uint8 winningNumber = generateWinningNumber();
-        emit Play(msg.sender, msg.value, number, winningNumber);
+        emit Play(payable(msg.sender), msg.value, number, winningNumber);
 
         if (number == winningNumber) {
-            payout(msg.sender, msg.value * 10);
+            payout(payable(msg.sender), msg.value * 10);
         }
     }
 
@@ -34,5 +40,10 @@ contract Casino is Killable {
 
         winner.transfer(amount);
         emit Payout(winner, amount);
+    }
+
+    function kill() external {
+        require(msg.sender == owner, "Only the owner can kill this contract");
+        selfdestruct(owner);
     }
 }

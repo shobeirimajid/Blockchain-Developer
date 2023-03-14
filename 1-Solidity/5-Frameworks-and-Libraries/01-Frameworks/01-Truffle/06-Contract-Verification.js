@@ -18,10 +18,9 @@
 //----------------------------------------
 //          truffle-plugin-verify
 //----------------------------------------
-// the easiest way is Automatically verify Truffle smart contracts on Etherscan
-// using `truffle-plugin-verify`
+// The is the easiest way is Automatically verify Truffle smart contracts on Etherscan
+// is using `truffle-plugin-verify` plugin
 // This plugin integrates directly with Truffle's workflow to verify your smart contracts' source code.
-
 
 
 // setting up and using the `truffle-plugin-verify`
@@ -64,8 +63,34 @@ https://kalis.me/verify-truffle-smart-contracts-etherscan/
         /* ... rest of truffle-config */
 
         api_keys: {
-            etherscan: 'MY_API_KEY',
+            etherscan: 'NE8S14CETB81XTJYPUUMPFQ87TDKZ1YD6R',
         },
+    };
+
+
+    // your full config file should look similar to this:
+
+    const HDWalletProvider = require('@truffle/hdwallet-provider');
+    require('dotenv').config();
+
+    module.exports = {
+    networks: {
+        rinkeby: {
+        provider: function() {
+            return new HDWalletProvider(
+                `${process.env.MNEMONIC}`, 
+                `https://rinkeby.infura.io/v3/${process.env.INFURA_ID}`
+            )
+        },
+        network_id: 4
+        }
+    },
+    plugins: [
+        'truffle-plugin-verify'
+    ],
+    api_keys: {
+        etherscan: process.env.ETHERSCAN_API_KEY
+    }
     };
 
 

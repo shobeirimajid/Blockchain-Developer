@@ -4,8 +4,8 @@
   "main": "truffle-config.js",
   "license": "MIT",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.1.0",
-    "dotenv": "^8.2.0",
-    "truffle-plugin-verify": "^0.5.0"
+    "@truffle/hdwallet-provider": "^2.1.8",
+    "dotenv": "^16.0.3",
+    "truffle-plugin-verify": "^0.6.2"
   }
 }
