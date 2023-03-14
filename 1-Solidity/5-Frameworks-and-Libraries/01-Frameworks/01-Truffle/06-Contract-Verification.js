@@ -15,15 +15,21 @@
     // truffle-plugin-verify (https://github.com/rkalis/truffle-plugin-verify)
 
 
-////////////////////////////////////////////////
+//----------------------------------------
 //          truffle-plugin-verify
-////////////////////////////////////////////////
+//----------------------------------------
 // the easiest way is Automatically verify Truffle smart contracts on Etherscan
 // using `truffle-plugin-verify`
 // This plugin integrates directly with Truffle's workflow to verify your smart contracts' source code.
 
-// https://kalis.me/verify-truffle-smart-contracts-etherscan/
+
+
 // setting up and using the `truffle-plugin-verify`
+
+https://github.com/rkalis/truffle-plugin-verify
+
+https://kalis.me/verify-truffle-smart-contracts-etherscan/
+
 
 
 //-------------------------

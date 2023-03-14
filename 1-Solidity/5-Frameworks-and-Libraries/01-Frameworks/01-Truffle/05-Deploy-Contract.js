@@ -3,7 +3,9 @@
 ////////////////////////////////////////////////
 
 
-// ----- Migration -----
+//--------------------------------
+//          Migration 
+//--------------------------------
 
 // Migrations are JavaScript files that help you deploy contracts to the Ethereum network. 
 // These files are responsible for staging your deployment tasks, 
@@ -153,10 +155,9 @@ module.exports = async function(deployer) {
 
 
 
-
-////////////////////////////////////////////////
-//              Truffle Dashboard
-////////////////////////////////////////////////
+//--------------------------------
+//      Truffle Dashboard
+//--------------------------------
 
 // In 2022, Truffle launched an awesome new feature called the Truffle Dashboard 
 // that allows you to deploy your contracts using your MetaMask wallet.
