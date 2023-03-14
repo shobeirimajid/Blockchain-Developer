@@ -13,9 +13,14 @@
 // A history of previously run migrations is recorded on-chain 
 // through a special Migrations contract, detailed below.
 
-// To run your migrations, run the following:
 
+// To run your migrations, run the following:
 $ truffle migrate
+
+
+// Specify a network
+$ truffle migrate --network live
+
 
 
 
@@ -145,3 +150,41 @@ module.exports = async function(deployer) {
     //access information about your deployed contract instance
     const instance = await MyContract.deployed();
 }
+
+
+
+
+////////////////////////////////////////////////
+//              Truffle Dashboard
+////////////////////////////////////////////////
+
+// How to deploy smart contracts without having to copy-paste mnemonic phrases to a .env file?
+
+// When we are deploying smart contracts we need to specify an #Ethereum account that has enough funds to cover the transaction fees of the deployment.
+
+// Wallets like MetaMask can handle signing messages with our account's private key and send transactions for us.
+
+// What is the problem?
+// When we are deploying smart contracts on the live networks by the command line tools,
+// Ex. @truffle/hdwallet-provider
+// HD-Wallet signs transactions itself without sending them to the metamask. So it needs to access our account's private key (mnemonic phrase).
+
+// How to access it?
+// The common method is copy-pasting mnemonic phrases to a gitignored .env file.
+
+// That is a bad practice
+// Because you might compromise your account's private key. 
+// Especially when you are going to share the project with others.
+
+// What is the solution?
+// Truffle Dashboard was developed to provide an easy way 
+// to use your existing MetaMask wallet for smart contracts deployment 
+// and even for any other transactions that you need to send from a command line context.
+
+// How to use Truffle Dashboard?
+
+// 1- Start a dashboard
+$ truffle dashboard
+
+// 2- Connecting to the dashboard
+$ truffle migrate --network dashboard
