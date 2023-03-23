@@ -27,7 +27,17 @@
             The contract "ensures" there's a "valid signature" on the "actual transaction" and then executes it.
 
 
+    Meta transactions are a way of enabling users to interact with Ethereum smart contracts without paying gas fees directly.
+    Gas fees are the costs of executing transactions on the Ethereum network, which depend on the complexity and demand of the computation. 
+    Gas fees can be a barrier for new users who want to try out decentralized applications (DApps)
+    but do not have enough Ether (ETH) to pay for them.
 
+    Meta transactions solve this problem by allowing users to delegate the payment of gas fees to someone else, 
+    usually, a third-party service called a relayer. 
+    
+    A relayer is a node that listens for meta transactions from users and submits them to the Ethereum network on their behalf, 
+    paying for the gas fees with their own ETH.
+    In return, the relayer may charge a fee in ETH or tokens from the user or receive some other incentive from the DApp developer.
 
 
     
