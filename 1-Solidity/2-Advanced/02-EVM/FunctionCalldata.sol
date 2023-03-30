@@ -19,6 +19,35 @@
 
 
 
+pragma solidity >=0.6.2 <0.9.0;
+
+interface ITarget {
+    function setData(address, uint) external;
+}
+
+
+contract Target {
+
+    address public setter;
+    uint public data;
+
+    function setData(address setter_, uint data_) external {
+        setter = setter_;
+        data = data_;
+    }
+}
+
+
+contract Caller {
+
+    function callTarget(address _target, bytes calldata data) external {
+        (bool result, ) = _target.call(data);
+        require(result, "call failed");
+    }
+}
+
+
+
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.6.2 <0.9.0;
 
@@ -64,35 +93,5 @@ contract CallData {
         MyStruct memory myStruct
     ) {
         (x, addr, arr, myStruct) = abi.decode(data, (uint, address, uint[], MyStruct));
-    }
-}
-
-
-
-
-pragma solidity >=0.6.2 <0.9.0;
-
-interface ITarget {
-    function setData(address, uint) external;
-}
-
-
-contract Target {
-
-    address public setter;
-    uint public data;
-
-    function setData(address setter_, uint data_) external {
-        setter = setter_;
-        data = data_;
-    }
-}
-
-
-contract Caller {
-
-    function callTarget(address _target, bytes calldata data) external {
-        (bool result, ) = _target.call(data);
-        require(result, "call failed");
     }
 }
