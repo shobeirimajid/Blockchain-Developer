@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.6.2 <0.9.0;
+pragma solidity ^0.8.18;
 
 // you can deposit ether into this contract 
 // but you must wait 1 week before you can withdraw your funds
