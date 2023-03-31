@@ -151,8 +151,7 @@
 
             Note:
                 Send is the "low-level" counterpart of the "transfer" function but
-                    if the execution "fails", 
-                    the current contract will "not stop with an exception", but send will "return false"
+                    if the execution "fails", the current contract will "not stop with an exception", but send will "return false"
                     and failure handling is left to the calling contract.
 
             Warning:
