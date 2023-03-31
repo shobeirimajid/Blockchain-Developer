@@ -6,51 +6,53 @@ pragma solidity >=0.6.2 <0.9.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+contract TimeLock is Ownable {
 
-contract Timelock is Ownable { 
-
-    uint public immutable lockDuration = 1 weeks;
+    uint public immutable lockDuration;
 
     // amount of ether you deposited is saved in balances
     mapping(address => uint) public balances;
-  
+
     // when you can withdraw is saved in lockTime
-    mapping(address => uint) public lockTime;
+    mapping(address => uint) public lockTimes;
+
+    constructor() {
+        lockDuration = 1 weeks;
+    }
 
 
-    function deposit() external payable {
+    function deposit() public payable {
         // update balance
         balances[msg.sender] += msg.value;
 
-        // updates locktime 1 week from now
-        lockTime[msg.sender] = block.timestamp + lockDuration;
+        // updates locktimes 1 week from now
+        lockTimes[msg.sender] = block.timestamp + lockDuration;
     }
 
 
     function withdraw() public {
-
         // check that the sender has ether deposited in this contract in the mapping and the balance is >0
         require(balances[msg.sender] > 0, "insufficient funds");
 
         // check that the now time is > the time saved in the lock time mapping
-        require(block.timestamp > lockTime[msg.sender], "lock time has not expired");
+        require(block.timestamp > lockTimes[msg.sender], "lock time has not expired");
 
         // update the balance
-        uint amount = balances[msg.sender];
+        uint amount =  balances[msg.sender];
         balances[msg.sender] = 0;
 
         // send the ether back to the sender
-        (bool sent, ) = msg.sender.call{value: amount}("");
-        require(sent, "Failed to send ether");
+        (bool result, ) = msg.sender.call{value: amount}("");
+        require(result, "Failed to send ether");
     }
 
 
     function increaseLockTime(address _account, uint _seconds) public onlyOwner {
-        lockTime[_account] += _seconds;
-    }  
+        lockTimes[_account] += _seconds;
+    }
 
 
     function decreaseLockTime(address _account, uint _seconds) public onlyOwner {
-        lockTime[_account] -= _seconds;
-    }  
+        lockTimes[_account] -= _seconds;
+    }
 }

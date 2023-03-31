@@ -1,11 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.6.2 <0.9.0;
 
+contract Receiver {
 
-// doesn't accept sent Ethers
-contract Sink {
+    // .send() and .transfer() forwards 2300 gas to the receiving contract.
+    // This is only a very small amount that is sufficient to trigger a simple event
+    // more fields inside the Event need more than forwarded gas (2300 gas)
+    // and cause to fail the send and transfer function
 
     event Received(address, uint);
+
+    // receive function is executed for plain "Ether transfers" that made via 
+    // .send(), .transfer() and .call() with "empty calldata" 
+    // (no function is specified => msg.data is empty)
 
     receive() external payable {
         emit Received(msg.sender, msg.value);
@@ -13,37 +20,30 @@ contract Sink {
 }
 
 
-contract test {
+contract Sender {
 
-    function endow() public payable {}
+    address payable immutable receiverAdr;
 
-
-    // If that execution runs out of gas or fails in any way,
-    // the Ether transfer will be "reverted" and the current contract will stop with an "exception".
-    function transfer(address sink) public {
-        address payable sinkPayable = payable(sink);
-        sinkPayable.transfer(1 ether);
+    constructor(address payable receiver_) {
+        receiverAdr = receiver_;
     }
 
 
-    function send(address sink) public returns (bool) {
-        // address(sink) will not allow to call 'sink' directly, 
-        // since 'sink' has no payable fallback function
-        // It has to be converted to the 'address payable' to even allow calling 'send' on it
-        address payable sinkPayable = payable(sink);
+    // 2300 gas - not ajustable
+    // throws error and "failure handling" doesn't have any control to handling the error
+    // no longer recommended for sending Ether.
 
-        // There is no receive function in Test contract
-        // If someone sends Ether to that contract, the send will fail
-        // i.e. this returns false here.
-        return sinkPayable.send(1 ether);
+    function pay_ViaTransfer() public payable {
+        receiverAdr.transfer(msg.value);    // Receiver.receive() will be executed
     }
 
+    
+    // 2300 gas - not ajustable
+    // returns bool and "failure handling" is left to the calling contract. 
+    // not recommended for sending Ether.
 
-    // returns false on failure
-    function call(address sink) public returns (bool) {
-        (bool result,) = sink.call{value: 1 ether}("");
-        return result;
+    function pay_ViaSend() public payable {
+        bool sent = receiverAdr.send(msg.value);    // Receiver.receive() will be executed
+        require(sent, "Failed to send Ether");
     }
 }
-
-
