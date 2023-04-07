@@ -1,14 +1,14 @@
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+// SPDX-License-Identifier: GPL-3.0
+pragma solidity >=0.4.22 <0.9.0;
 
 /**
     ------------------
     Multi-Sig Wallet
     ------------------
     The wallet owners can:
-        1. submit a transaction
-        2. confirm or revokeConfirmation of pending transcations
-        3. anyone can execute a transcation after enough owners has confirmed it
+        1. `submit` a transaction
+        2. `confirm` or `revokeConfirmation` of pending transcations
+        3. anyone can `execute` a transcation after enough owners has confirmed it
 */
 
 contract MultiSigWallet {
@@ -20,10 +20,10 @@ contract MultiSigWallet {
     event ExecuteTransaction(address indexed owner, uint indexed txIndex);
 
     address[] public owners;
-
     mapping(address => bool) public isOwner;
 
-    uint public numConfirmationsRequired;
+    uint public numConfirmationRequired;
+
 
     struct Transaction {
         address to;
@@ -32,44 +32,44 @@ contract MultiSigWallet {
         bool executed;
         uint numConfirmations;
     }
+    Transaction[] transactions;
 
     // txIndex => owner => bool
     mapping(uint => mapping(address => bool)) public isConfirmed;
-
-    Transaction[] transactions;
 
     modifier onlyOwner() {
         require(isOwner[msg.sender], "not owner");
         _;
     }
 
-    modifier txExists(uint _txIndex) {
-        require(_txIndex < transactions.length, "tx does not exist");
+    modifier txExist(uint txIndex_) {
+        require(txIndex_ < transactions.length, "tx does not exist");
         _;
     }
 
-    modifier notExecuted(uint _txIndex) {
-        require(!transactions[_txIndex].executed, "tx already executed");
+    modifier notConfirmed(uint txIndex_) {
+        require(!isConfirmed[txIndex_][msg.sender], "tx already confirmed by you");
         _;
     }
 
-    modifier notConfirmed(uint _txIndex) {
-        require(!isConfirmed[_txIndex][msg.sender], "tx already confirmed by you");
+    modifier notExecuted(uint txIndex_) {
+        require(!transactions[txIndex_].executed, "tx already executed");
         _;
     }
 
+    constructor(uint numConfirmationRequired_) payable {
 
-    constructor(uint _numConfirmationsRequired) payable {
-
-        address[3] memory _owners = 
-            [0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2, 
-            0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db, 
-            0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB];
+        address[3] memory _owners = [
+            0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2,
+            0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db,
+            0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB
+        ];
 
         require(_owners.length > 0, "owners required");
-        require(_numConfirmationsRequired > 0 && _numConfirmationsRequired <= _owners.length, "invalid number of required confirmations");
+        require(numConfirmationRequired_ > 0 && numConfirmationRequired_ <= _owners.length, 
+        "invalid number of required confirmations");
 
-        for (uint i; i < _owners.length; i++) {
+        for (uint i; i<_owners.length; i++) {
 
             address owner = _owners[i];
 
@@ -80,14 +80,13 @@ contract MultiSigWallet {
             owners.push(owner);
         }
 
-        numConfirmationsRequired = _numConfirmationsRequired;
+        numConfirmationRequired = numConfirmationRequired_;
     }
 
 
     receive() external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
     }
-
 
     // Txs should be submit by one of registered owners.
     function submitTransaction(address _to, uint _value, bytes memory _data) public onlyOwner {
@@ -108,89 +107,93 @@ contract MultiSigWallet {
     }
 
 
-    function confirmTransaction(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) notConfirmed(_txIndex) {
+    function confirmTransaction(uint _txIndex) public onlyOwner txExist(_txIndex) notExecuted(_txIndex) notConfirmed(_txIndex) {
 
         Transaction storage transaction = transactions[_txIndex];
-        transaction.numConfirmations += 1;
+        transaction.numConfirmations +=1;
         isConfirmed[_txIndex][msg.sender] = true;
 
         emit ConfirmTransaction(msg.sender, _txIndex);
     }
 
 
-    function revokeConfirmation(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+    function revokeConfirm(uint _txIndex) public onlyOwner txExist(_txIndex) notExecuted(_txIndex) {
 
         require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
 
         Transaction storage transaction = transactions[_txIndex];
-        transaction.numConfirmations -= 1;
+        transaction.numConfirmations -=1;
         isConfirmed[_txIndex][msg.sender] = false;
 
         emit RevokeConfirmation(msg.sender, _txIndex);
     }
 
 
-    function executeTransaction(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) returns (bool success) {
+    function executeTransaction(uint _txIndex) public onlyOwner txExist(_txIndex) notExecuted(_txIndex) returns (bool success){
 
         Transaction storage transaction = transactions[_txIndex];
 
-        require(transaction.numConfirmations >= numConfirmationsRequired, "cannot execute tx");
+        require(transaction.numConfirmations >= numConfirmationRequired, "cannot execute tx");
 
         transaction.executed = true;
 
         // value must be provided by this wallet contract
-        (success, ) = transaction.to.call{value: transaction.value}(transaction.data);
-        require(success, "tx failed");
+        (success,) = transaction.to.call{value: transaction.value}(transaction.data);
+        require(success, "tx execution failed");
 
         emit ExecuteTransaction(msg.sender, _txIndex);
     }
 
 
     function batchExecute() public onlyOwner {
-
         for (uint i; i<transactions.length; i++) {
-
             if(!transactions[i].executed)
                 executeTransaction(i);
         }
     }
 
 
-    function getOwners() public view returns (address[] memory) {
+    function getOwner() public view returns (address[] memory) {
         return owners;
     }
 
 
-    function getTransactionCount() public view returns (uint) {
+    function getTxCount() public view returns (uint) {
         return transactions.length;
     }
 
-
-    function getTransaction(uint _txIndex) public view returns (
-        address to, uint value, bytes memory data, bool executed, uint numConfirmations
+    function getTx(uint _txIndex) public view returns (
+        address to,
+        uint value,
+        bytes memory data,
+        bool executed,
+        uint numConfirmations
     ) {
         Transaction storage transaction = transactions[_txIndex];
-        return (transaction.to, transaction.value, transaction.data, transaction.executed, transaction.numConfirmations);
+
+        return (
+            transaction.to,
+            transaction.value,
+            transaction.data,
+            transaction.executed,
+            transaction.numConfirmations
+        );
     }
 
 
-    function getBalance() external view returns (uint) {
+    function getBalance() external view returns(uint) {
         return address(this).balance;
     }
 }
 
 
-
-
 // Here is a contract to test sending transactions from the multi-sig wallet
-
-pragma solidity ^0.8.17;
-
-contract TestContract {
+contract Target {
 
     event Received(address sender, uint amount);
 
     uint public i;
+
 
     function callMe(uint j) public payable {
         i += j;
@@ -203,14 +206,11 @@ contract TestContract {
         return abi.encodeWithSignature("callMe(uint256)", 10);
     }
 
-
-    function getBalance() external view returns (uint) {
+    
+    function getBalance() external view returns(uint) {
         return address(this).balance;
     }
 }
-
-
-
 
 /*
     1. Constructor()
@@ -224,17 +224,17 @@ contract TestContract {
 
     2. SubmitTransaction()
 
-        _to: 0x53B741C64dB3F0567334e651ce62BfEe020b802a // address of TestContract
+        _to: 0xf8e81D47203A594245E36C48e151709F0C19fBe8 // address of Target
         _value: 1000000000000000000
-        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // Target.callMe(10)
 
-         _to: 0x53B741C64dB3F0567334e651ce62BfEe020b802a // address of TestContract
+         _to: 0xf8e81D47203A594245E36C48e151709F0C19fBe8 // address of Target
         _value: 2000000000000000000
-        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // Target.callMe(10)
 
-         _to: 0x53B741C64dB3F0567334e651ce62BfEe020b802a // address of TestContract
+         _to: 0xf8e81D47203A594245E36C48e151709F0C19fBe8 // address of Target
         _value: 3000000000000000000
-        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // TestContract.callMe(10)
+        _data: 0xe73620c3000000000000000000000000000000000000000000000000000000000000000a // Target.callMe(10)
 
 
     3.  confirmTransaction(_txIndex)
