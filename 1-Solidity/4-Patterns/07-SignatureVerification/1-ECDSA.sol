@@ -12,7 +12,7 @@
         
             web3.eth.sign    →   65 byte array ("bytes" in Solidity) 
 
-                                [ [v (1)] , [r (32)] , [s (32)] ]
+                                [ r : 32 bytes | s : 32 bytes | v : 1 bytes ]
 
 
 

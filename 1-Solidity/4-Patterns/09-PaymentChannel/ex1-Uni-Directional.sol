@@ -71,6 +71,8 @@ contract UniDirectionalPaymentChannel is ReentrancyGuard {
 
     Here is how this contract is used:
 
+        Alice ---> Bob
+
         - Alice deploys the contract, funding it with some Ether.
         - Alice authorizes a payment by signing a message (off chain) and sends the signature to Bob.
         - Bob claims his payment by presenting the signed message to the smart contract.

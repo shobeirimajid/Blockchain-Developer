@@ -37,6 +37,8 @@ contract VerifySignature {
     // -------------------------
     // Signing the Hash
     // -------------------------
+    
+    // --------------   
     // using browser
     // --------------
     // ethereum.enable()
@@ -44,6 +46,7 @@ contract VerifySignature {
     // hash = "0xb6198f8de65cb531fc0d6f9f637c62263b05e89dd73eb35b499f1ce39c9ac1ca"
     // ethereum.request({ method: "personal_sign", params: [account, hash]}).then(console.log)
     // 0x1507bac5542a4eb68eb75976c1af3bef4f224927861368c6f4b97babae272c1a1387d665d5dd41554e3b9199fc0f9e84f7c0f1aa74739823864f7c0ce1b1eed51b
+
     // --------------
     // using web3
     // --------------
