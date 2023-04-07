@@ -2,6 +2,7 @@
 pragma solidity ^0.8.17;
 
 contract MultiCall {
+    
     function multiCall(
         address[] calldata targets,
         bytes[] calldata data

@@ -44,7 +44,7 @@
     Agreement is done off-chain via signed messages. 
     The signed messages include four components:
 
-        1- dest:      destination account that should receive the ether.
+        1- dest:    destination account that should receive the ether.
         2- value:   ether value that should be transferred.
         3- sign:    message’s (R,S,V) signature.
         4- nonce:   sequential nonce of the message. The nonce prevents a message replay vulnerability. 

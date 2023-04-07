@@ -18,6 +18,7 @@ contract TimeLock {
         bytes data,
         uint timestamp
     );
+
     event Execute(
         bytes32 indexed txId,
         address indexed target,
@@ -26,6 +27,7 @@ contract TimeLock {
         bytes data,
         uint timestamp
     );
+
     event Cancel(bytes32 indexed txId);
 
     uint public constant MIN_DELAY = 10; // seconds
@@ -33,6 +35,7 @@ contract TimeLock {
     uint public constant GRACE_PERIOD = 1000; // seconds
 
     address public owner;
+    
     // tx id => queued
     mapping(bytes32 => bool) public queued;
 
