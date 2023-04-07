@@ -3,8 +3,6 @@
     ------------------
     Multi-Sig Wallet
     ------------------
-    Let's create an multi-sig wallet. 
-
     The wallet owners can:
         1. submit a transaction
         2. approve and revoke approval of pending transcations
@@ -73,7 +71,7 @@ contract MultiSigWallet {
         require(_owners.length > 0, "owners required");
         require(_numConfirmationsRequired > 0 && _numConfirmationsRequired <= _owners.length, "invalid number of required confirmations");
 
-        for (uint i = 0; i < _owners.length; i++) {
+        for (uint i; i < _owners.length; i++) {
 
             address owner = _owners[i];
 
@@ -122,6 +120,18 @@ contract MultiSigWallet {
     }
 
 
+    function revokeConfirmation(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+
+        require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
+
+        Transaction storage transaction = transactions[_txIndex];
+        transaction.numConfirmations -= 1;
+        isConfirmed[_txIndex][msg.sender] = false;
+
+        emit RevokeConfirmation(msg.sender, _txIndex);
+    }
+
+
     function executeTransaction(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) returns (bool success) {
 
         Transaction storage transaction = transactions[_txIndex];
@@ -140,24 +150,11 @@ contract MultiSigWallet {
 
     function batchExecute() public onlyOwner {
 
-        for (uint i=0; i<transactions.length; i++) {
+        for (uint i; i<transactions.length; i++) {
 
             if(!transactions[i].executed)
                 executeTransaction(i);
         }
-    }
-
-
-    function revokeConfirmation(uint _txIndex) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
-
-        Transaction storage transaction = transactions[_txIndex];
-
-        require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
-
-        transaction.numConfirmations -= 1;
-        isConfirmed[_txIndex][msg.sender] = false;
-
-        emit RevokeConfirmation(msg.sender, _txIndex);
     }
 
 
@@ -171,7 +168,9 @@ contract MultiSigWallet {
     }
 
 
-    function getTransaction(uint _txIndex) public view returns (address to, uint value, bytes memory data, bool executed, uint numConfirmations) {
+    function getTransaction(uint _txIndex) public view returns (
+        address to, uint value, bytes memory data, bool executed, uint numConfirmations
+    ) {
         Transaction storage transaction = transactions[_txIndex];
         return (transaction.to, transaction.value, transaction.data, transaction.executed, transaction.numConfirmations);
     }
@@ -246,7 +245,7 @@ contract TestContract {
         
 
     4. 
-        First send at least 6 ether to this contract
+        First send 6 ether to this contract
         because the value of each tx will be sent from SC's balance.
 
         executeTransaction(0)
