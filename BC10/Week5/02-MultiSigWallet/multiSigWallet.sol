@@ -37,25 +37,30 @@ contract MultiSigWallet {
     // txIndex => owner => bool
     mapping(uint => mapping(address => bool)) public isConfirmed;
 
+
     modifier onlyOwner() {
         require(isOwner[msg.sender], "not owner");
         _;
     }
+
 
     modifier txExist(uint txIndex_) {
         require(txIndex_ < transactions.length, "tx does not exist");
         _;
     }
 
+
     modifier notConfirmed(uint txIndex_) {
         require(!isConfirmed[txIndex_][msg.sender], "tx already confirmed by you");
         _;
     }
 
+
     modifier notExecuted(uint txIndex_) {
         require(!transactions[txIndex_].executed, "tx already executed");
         _;
     }
+
 
     constructor(uint numConfirmationRequired_) payable {
 
@@ -87,6 +92,7 @@ contract MultiSigWallet {
     receive() external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
     }
+
 
     // Txs should be submit by one of registered owners.
     function submitTransaction(address _to, uint _value, bytes memory _data) public onlyOwner {
@@ -161,6 +167,7 @@ contract MultiSigWallet {
     function getTxCount() public view returns (uint) {
         return transactions.length;
     }
+
 
     function getTx(uint _txIndex) public view returns (
         address to,
