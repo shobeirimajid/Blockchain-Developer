@@ -4,7 +4,7 @@ pragma solidity >=0.4.22 <0.9.0;
 
 /**
     ------------------
-    Multi-Sig Wallet
+    Multi-Sig WalletP
     ------------------
     The wallet owners can:
         1. `submit` a transaction
