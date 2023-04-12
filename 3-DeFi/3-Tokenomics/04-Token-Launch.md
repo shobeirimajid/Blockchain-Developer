@@ -168,7 +168,14 @@ created by @wvaeu and @mechanismcap.
 It shows `how much liquidity is required` for incremental `trade sizes` to maintain a <2% `slippage` target for an `80/20 Balancer pool` and a regular `50/50 uniswap-v2 style pool`.
 
 
-Now you know `how much liquidity` to target, there are a few options on `how to obtain that liquidity` :
+
+
+
+---------------------------------------------
+how to obtain that liquidity
+---------------------------------------------
+
+
 
 
 1. Liquidity Mining / Rent
@@ -181,7 +188,8 @@ In what looks similar to an equity give away, `liquidity mining programs` have s
 Tokens are emitted by the protocol to `attract liquidity providers` in the hope of them `depositing liquidity` which will allow the protocol to function or the `governance token to be tradeable` on the open market.
 
 
-`Liquidity mining` does have some `positives`:
+
+    - Some `positives` of `liquidity mining` are:
 
 - Acts as a means of `distributing the governance token` to those who are providing work to the protocol (`providing liquidity`). 
 `Protocols` often have a `treasury` full of `tokens which need to be distributed to the community`. 
@@ -194,22 +202,160 @@ By distributing these tokens to `actors helping with liquidity` this allows `gov
 `Farmers` are always on the lookout for the next `high APR farm` and will `move their capital` to the `highest yielding option` at that time.
 
 
+
+    - Some `negatives` of `liquidity mining` are:
+
+- Significant sell pressure
+`Inflationary token emission` incentives short-term behavior that `increases sell pressure` on the `farm tokens`. 
+Mercenary `liquidity providers` often `sell their rewards` to recoup their investments. 
+
+- Goal misalignment between `protocols` and `liquidity providers`
+`liquidity providers` are incentivised by `higher reward rates`, rather than a `strong belief in the success of the protocol`. 
+Hence, when the rewards are scaled back or exhausted, the liquidity providers will remove their capital and move on to the next opportunity.
+
+- Impermanent Loss (IL)
+The `success of a protocol` causes `price appreciation in its native token`, causing a `significant impermanent loss scenario` for `liquidity providers`. 
+This `misalignment` disincentivises `long-term LPs` even if they are long-term believers in the protocol.
+
+- No buyer of last resort
+During a `market crash` or in times of `uncertainty`, LPs tend to remove their liquidity from the pool as they run for safety. 
+It is at these moments when liquidity is needed the most and if there is `insufficient liquidity` depth, it will lead to a `downward death spiral` of the `protocol's token price`.
+
+
+
 2. Bribe
+`Bribing for liquidity` is the common term used to describe `incentivising governance token holders` of another protocol to direct their `voting power` in the direction that the briber chooses. 
+
+These `governance token holders` are `incentivised with tokens` that are in addition to their `regular governance token rewards`.
+
+`Incentivised voting (bribing)` was made popular by protocols (such as Frax) bribing veCRV holders to direct CRV gauge emissions to their pools on Curve. 
+
+By doing this, Frax was able to gain high amounts of CRV emissions on their FRAX pools which then can be used as income from protocol-owned liquidity (POL) and attracts other liquidity providers to these pools, which in turn creates deep liquidity which is a must-have of any pegged assets.
+
+`Bribing for liquidity` quickly grew in popularity, with protocols bribing `CVX holders` for their `governance power` over the `Curve protocol` and then expanding to other meta-governance protocols. 
+
+Currently, almost any protocol with a `vote-escrow token design` has a `meta-governance protocol` built on top and a bribe market facilitating incentivised voting to the base vote-escrow token holders.
+
+Although bribing for liquidity does require a specific base asset design, such as Curve gauges to direct emissions, if you were planning on launching on Curve or Balancer there are marketplaces which facilitate incentivised voting to the governance token holders of these platforms.
+
+    -Positives:
+
+    Due to emissions being paid in other protocols governance tokens, yield can be earned on POL and sold without impacting the bribing protocols token price. This is especially true for protocols that own a large amount of their liquidity as the emissions directed to these pools can act as another form of revenue, or could be locked for additional governance power over the DEX the liquidity is pooled upon.
+
+    Can be used to facilitate governance decisions as well as liquidity. Bribe marketplaces are also possible for general governance decisions. For example, you could bribe a DEX's governance token holder to be issued a gauge position on that DEX.
+
+
+    - negatives:
+
+    Only profitable in certain conditions. If there is large competition against other protocols that are also bribing this can drive up the necessary amount of tokens to be distributed to gain any sort of voting power, thus making bribing less profitable. 
+
+    Profitability may also reduce as the price of the governance token emitted from the gauge emissions drops in price.
+
+    Bribing for liquidity is only a temporary solution. Much like renting liquidity, bribing is only applicable for the current voting round. Once the bribing stops (or reduces), those votes will move to the next highest bidder and the emissions will reduce. In turn, LPs will usually chase the highest emissions so they will remove their liquidity from your pools.
+
 
 
 3. Buy
+`Buying liquidity` is a concept pioneered by `Olympus DAO` and their bonding program, now `Bond Protocol`. 
+Bonding works by protocols offering up their `governance tokens` at a `discount` compared to the `market rate` in exchange for `assets` they would like to accrue. 
+In the majority of cases these `assets` are their own `LP tokens`. 
 
+By bonding their own LP tokens it allows the protocol to own its own liquidity. 
+They are still emitting tokens to the market as is done with `renting` and `bribing`, although now they receive something in return that isn’t temporary. 
+
+Owning their own liquidity allows a protocol to earn trading fees from that liquidity that would usually be going to other LPs, minimize liquidity mining expenses (or end them all together) and build sustainable and reliable liquidity for their token. 
+
+As mentioned earlier, if a project can aim for `15%-20% of its circulating market cap` in `liquidity`, ideally `60%-80% of this liquidity` would be owned by the protocol itself. 
+
+This allows for `sufficient liquidity` to remain during all market conditions and will act as `another source of revenue` for the protocol.
+
+
+    - negatives:
+
+`Buying liquidity` is `expensive` due to the `bond discount` which is used to incentivise actors to visit a third party to bond their LP tokens rather than just buying the tokens off the open market. 
+Without this discount the process doesn't work. 
+Although this is expensive, it is `cheaper` than `giving the tokens out for free` as is the case with `renting and bribing` for liquidity.
+
+Bonding usually involves outsourcing the process to a third party, such as Bond Protocol. This third party and additional contract interaction add further smart contract risk for the bonders and protocol.
+
+Bonding tokens adds friction to an already poor UX. DeFi is still very difficult for the average user, so adding additional steps and complexities only reduces the market of users competent to perform them.
+
+In addition to bonding for liquidity, fundraising can also be utilized to buy and own your own liquidity. Whether this is from a private or public sale, selling tokens (or future tokens) to investors during seed, pre-sale and public sale rounds is a great way to raise funds to pair with your liquidity. 
 
 
 ---------------------------------------------
 Launch price
 ---------------------------------------------
+Trying to determine the `best launch price` is one of the `hardest decisions` to make when launching a token. 
+
+If you set the launch price `too low`, you may `miss out` on a `large amount of money` you could have earned with a `higher launch price`. 
+
+If you set the price `too high`, there is a `risk` of those with `liquid tokens` at launch `selling their tokens` and `impacting the token price`, public perception of the protocol and risk reputation damage. 
+
+Ideally, aiming for the `lower side` is a `safer` bet over the long term. 
+
+This will `allow early investors` to (hopefully) see `some nice price` appreciation and `attract new investors`, `liquidity providers` and `users` to your protocol. 
+
+Although the token is not a representation of the quality of the product, `good price action` can act as a `marketing tool` and gather the `attention` of the wider market.
+
+
+What launch price is suitable ?
+---------------------------------------------
+
+1. Research your `competition` if you have any and `what their token launched at` and their `current market cap`. 
+This will give you a `good insight` into what the market thought of their `launch price` and what is the `current perceived fair value` for their token. 
+Always remember `first mover` advantage is something to consider, so even if you believe your product is better it may pay to be conservative with your comparison to the competition.
+
+
+2. If you are `self-funding` your `liquidity pair`, this can be used to determine the `launch price`. 
+
+
+-----------------------------------------
+For example:
+-----------------------------------------
+`initial liquidity`        $500,000
+`token release amount`     10% (10M)
+`FDV`                      $5,000,000
+`launch price`             $0.05
+-----------------------------------------
+
+
+3. Utilize a `bonding curve` or `auctions` and let the `market decide the price`. 
+Bonding curves and auctions are perfect for `raising capital` to `seed initial liquidity` with and `distributing the token to the community` whilst also `letting the market` decide what a `fair launch price` is.
+This is done in many different ways such as `English` or `Dutch` auctions or along a `pre-programmed price curve`. 
+Although they all have their nuances, on the completion of the sale the `perceived fair price` is reached and this will determine the `public launch price`.
 
 
 ---------------------------------------------
 Deterring mercenary capital
 ---------------------------------------------
+Research from `Nansen` analyzed activity on `MasterChef.sol` contracts to try to `aggregate the data` and see `how to yield farmers were behaving`. 
 
+Some of the results from this research were shocking, although not that surprising:
+
+1. 
+    - `A large majority of farmers` appear to `exit` within the `first 5 days` of entering a farm
+    - `50%` of all farmers `never stay beyond 15 days`
+    - `13%` of addresses still have their funds in these contracts
+
+2. 
+    - `42% of yield farmers` that enter a farm `on the day it launches` exit that farm `within 24 hours`. 
+    - `16%` leave `within 48 hours` and by the `third day`, 
+    - `70%` of the users who deposited on the `first day` of that farm had withdrawn from the contract. 
+
+    This is believed to be caused by the reduction in emissions that occur each block post-launch.
+
+
+As shown by this research, `deterring this mercenary capital` is of the utmost importance and can be done by `utilizing mechanisms` such as `locking` or `vesting rewards`. 
+
+Requiring LPs to `loc`k their LP tokens for an extended period or to `earn boosted rewards` is a great way to filter out the mercenary capital and leave behind LPs who are prepared to stick around for the long term. 
+
+These locks may vary in length from `1week` to `multiple months`, with `rewards being boosted` for those who `lock the longest`. 
+
+`Vesting of rewards` was pioneered by GMX and has proven to be `extremely successful`. 
+In the case of GMX, their token emissions are distributed as `esGMX`, a token with equal `reward` and `governance weight` as the `regular staked GMX token` without being liquid. 
+These `esGMX tokens` can be vested over `1 year` if certain conditions are met, such as `keeping your tokens` or `liquidity staked`. 
+Vesting rewards over a long period still rewards past and present stakes with protocol fees and governance rights but requires them to stick around to vest their tokens and sell them. 
 
 ---------------------------------------------
 Conclusion
