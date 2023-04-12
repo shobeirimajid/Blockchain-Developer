@@ -360,3 +360,11 @@ Vesting rewards over a long period still rewards past and present stakes with pr
 ---------------------------------------------
 Conclusion
 ---------------------------------------------
+As covered in this article, there are many `moving parts` when `valuing`, `launching`, `distributing` and `maintaining` a token. 
+
+The information covered in this article is not exhaustive and the `token launch space` is ripe with innovation and experimentation.
+
+Please experiment with the Deus `Ex DAO tokenomics template`. 
+https://docs.google.com/spreadsheets/d/1c5S_O1SprTop-1dPY-QKEYt3IiAsus6tVmYuVKPQApo/edit?usp=sharing
+
+This tool will allow you to input potential token allocations, vesting and supply schedules to give an overview of what certain token distributions may look like.
