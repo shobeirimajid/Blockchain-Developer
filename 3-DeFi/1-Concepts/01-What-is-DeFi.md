@@ -335,8 +335,6 @@ There are many problems that are `holding back` the `decentralized finance` syst
     A majority of these have `low liquidity` which means you may `get stuck` trying to `exit` or `book profits`.
 
 
-
-
 ---------------------------
 References
 ---------------------------
