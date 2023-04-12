@@ -167,8 +167,9 @@ created by @wvaeu and @mechanismcap.
 
 It shows `how much liquidity is required` for incremental `trade sizes` to maintain a <2% `slippage` target for an `80/20 Balancer pool` and a regular `50/50 uniswap-v2 style pool`.
 
-Now you know `how much liquidity` to target, 
-there are a few options on `how to obtain that liquidity`. 
+
+Now you know `how much liquidity` to target, there are a few options on `how to obtain that liquidity` :
+
 
 1. Liquidity Mining / Rent
 `Renting of liquidity`, or better known as `liquidity mining` is the practice of `incentivising liquidity providers` to provide liquidity for your tokens in exchange for `governance token rewards`. 
@@ -183,11 +184,15 @@ Tokens are emitted by the protocol to `attract liquidity providers` in the hope 
 `Liquidity mining` does have some `positives`:
 
 - Acts as a means of `distributing the governance token` to those who are providing work to the protocol (`providing liquidity`). 
-Protocols often have a treasury full of tokens which need to be distributed to the community. By distributing these tokens to actors helping with liquidity this allows governance power to be in the hands of users rather than just investors.
+`Protocols` often have a `treasury` full of `tokens which need to be distributed to the community`. 
+By distributing these tokens to `actors helping with liquidity` this allows `governance power` to be in the hands of `users` rather than just `investors`.
 
-- Low up front cost to attract liquidity as liquidity can be purchased on a block by block basis. Pairing liquidity is expensive as the protocol has to provide the other side with funds from investors and token sales, if there are not enough funds raised renting liquidity is the most cost effective option in the short term.
+- Low `up-front cost to attract liquidity` as liquidity can be purchased on a block by block basis. 
+`Pairing liquidity` is `expensive` as the protocol has to `provide the other side` with `funds` from investors and `token sales`, if there are not enough funds raised, `renting liquidity` is the most `cost effective option` in the short term.
 
-- Liquidity can be attracted very quickly, due to the fact that a high APR acts as a marketing tactic. Farmers are always on the lookout for the next high APR farm and will move their capital to the highest yielding option at that time.
+- `Liquidity can be attracted very quickly`, due to the fact that a `high APR` acts `as a marketing tactic`. 
+`Farmers` are always on the lookout for the next `high APR farm` and will `move their capital` to the `highest yielding option` at that time.
+
 
 2. Bribe
 
