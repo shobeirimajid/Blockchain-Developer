@@ -12,9 +12,17 @@ or if the `team has self-funded` and requires fundraising via token sales to fur
 ---------------------------------------------
 Where to launch
 ---------------------------------------------
-When thinking about where to launch, there are multiple options that projects will incorporate to balance the value add from investors, attract different types of investors and decentralization of holders.
+When deciding where to launch, it is important to :
 
-Some of the major options are listed below in which a project may use 1 or a combination of them:
+- first determine `who your target market of launch participants are`. 
+
+- consider the `expenses for each launch type`, such as `market-making expenses` with a professional firm like GSR or the `cost of providing the liquidity yourself`. 
+
+- consider the `utility of your token` within your product and `where` you would like the `majority of your tokens to be located`. 
+If your token has `utility within the product` and is used for `staking` or `governance` then `launching on a decentralized exchange` may be best as the tokens will be needed on chain to be utilised within the product. 
+
+
+There are multiple options to launch the Tokens. Some of the major options are listed below in which a project may use 1 or a combination of them:
 
 
 1. Initial coin offering (ICO)
@@ -62,50 +70,130 @@ IEOs are similar to IDO, except launched on a `centralized exchange` rather than
 
 A `market maker` will also have to be employed to `provide liquidity` and allow for the `post-launch price discovery` to be facilitated.
 
-IEOs are very popular for more ‘normie’ crypto projects whose target audience may not be familiar with transacting on-chain via a decentralized exchange. IEOs generally offer a sense of legitimacy or confidence to the launch as the exchange launching the token (should) complete some due diligence checks and also has reputation damage at risk. 
+--------------------
+Benefits
+--------------------
 
-Some other benefits of an IEO include:
+- Popular
+IEOs are `very popular` for more crypto projects whose target audience may not be familiar with transacting on-chain via a decentralized exchange. 
 
-Security for both the token issuers and investors: Token issuers gain as well since centralized exchange platforms manage all things related to regulations, such as mandatory KYC/AML checks for every participant.
+- Sense of legitimacy or confidence
+IEOs generally offer a `sense of legitimacy` or `confidence` to the launch as the exchange launching the token (should) complete some due diligence checks and also has reputation damage at risk. 
 
-Frictionless process: IEO platforms ensure almost anyone, regardless of their experience in the crypto space, can easily contribute.
+- Security for both the token issuers and investors
+`Token issuers` gain as well since centralized exchange `platforms manage all things related to regulations`, such as mandatory `KYC/AML checks` for every participant.
 
-Guaranteed exchange listing: IEO tokens are listed on the IEO exchange soon after the IEO.
+- Frictionless process
+IEO platforms ensure almost `anyone, regardless of their experience in the crypto space`, can easily contribute.
 
-Benefits for the projects: Such as enhanced marketing effort by the exchange, exposure, and interest in the project.
+- Guaranteed exchange listing
+IEO tokens are `listed on the IEO exchange` soon after the IEO.
 
-Benefits for the exchanges: Including new users signing up with them only for the sake of purchasing and trading IEO tokens.
+- Benefits for the projects
+Such as enhanced `marketing` effort by the exchange, `exposure`, and `interest` in the project.
 
-IEOs also have some drawbacks due to the current unclear regulatory landscape and forcing investors to complete KYC checks, potential market manipulation, unclear supply dynamics and bots that may front run the launch. 
+- Benefits for the exchanges
+Including `new users` signing up with them only for the sake of purchasing and trading IEO tokens.
+
+--------------------
+Drawbacks
+--------------------
+IEOs also have some drawbacks due to the:
+- current `unclear regulatory` landscape 
+- `forcing investors` to complete KYC checks
+- potential market manipulation
+- unclear supply dynamics 
+- bots that may front run the launch
 
 
+5. Liquidity bootstrapping pool (LBP)
+----------------------------------
+Liquidity bootstrapping pools are `a novel launch design product` by Balancer. 
+These `smart pools` are owned by a `smart contract` and allow any sort of `arbitrary logic` to be built. 
+
+In the token launch scenario, you can think of the `starting price` of your LBP `as the ceiling` you would want to set for the token sale. 
+
+This may seem counterintuitive, but since LBPs work differently than other token sales, your `starting price` should be set `much higher` than what you believe is the `fair price` for your token.
+
+By setting an intentionally `high price`, strongly `disincentivises whales and bots` from snatching up much of the `pool liquidity` from the beginning of the launch. 
+
+When LBPs are used for `early-stage tokens`, this mechanism can help to `increase` how widespread `the token distribution` is.
+
+LBPs allow teams to `build deeper liquidity` for their tokens with `lower upfront capital costs`.
 
 
+6. Initial farm offering (IFO)
+----------------------------------
+In some cases, a token may be distributed to the community via a `IFO` / `liquidity mining campaign` or boosted rewards for using the product.
+
+These launch mechanisms are usually `more common` with products that `can function without the need for a token`. 
+
+This token may be `utilized as a reward` prior to TGE and `distributed to users` of the product upon TGE which can be used to `pair liquidity`. 
+
+The token is then `distributed to the greater community` via `token emissions on liquidity pools` or via `emissions to users of the protocol`, for example, `lenders and borrowers` on a money market.
 
 
 
 ---------------------------------------------
 Picking a trading pair
 ---------------------------------------------
+If you plan to have your token `tradable` on a `decentralized exchange` it will require `a token to be paired with`. 
+This token should ideally be a `common`, `highly liquid` token such as ETH or USDC. 
+
+In the current times of aggregators, it no longer matters if the buyer has the token in their wallet but this token pairing is aimed more at `what your liquidity providers would like to have exposure to`. 
+
+If you `pick a more obscure pair`, this may lower the appeal for a `liquidity provider` to provide liquidity to your token as they may not want exposure to the paired asset, thus the `liquidity may be lower`.
+
+The `most common pairs` and ones we would advise are `ETH` or the `L1 governance token`, such as `AVAX` or `SOL` and a `USD-pegged stablecoin` such as `USDC`, `DAI` or `FRAX` (or any of the other liquid stablecoins). 
+
+As the `token price` is set between the `ratio of the two tokens in the pool`, utilizing `ETH` or a `USD stablecoin` will have different `price effects` as the `overall market` moves.
+
+If you want `exposure to the broader crypto market` then pairing against `ETH` is your best bet, 
+if you want to be `more conservative` and your `token to trade more independently` then pairing against a `USD stablecoin` is the way to go.
 
 
 ---------------------------------------------
 Trading liquidity target
 ---------------------------------------------
+After deciding what to `pair` your token with, the next step is figuring out `how much liquidity` is required. 
+
+There is `no exact science in calculating a liquidity target` but having a goal of `15-20 %` of `your circulating market cap` in `liquidity` is a good target.
+
+This will allow for `larger-sized investors` to enter and exit your token without incurring `too much slippage` and also allow for `smooth price discovery`.
+
+A good resource is this liquidity cap target doc:
+https://docs.google.com/spreadsheets/d/1fchtxg6hq2gBC4WcMoQ8OFgMv84BZLDIT5pOm9Z18w4/edit#gid=656976389
+created by @wvaeu and @mechanismcap. 
+
+It shows `how much liquidity is required` for incremental `trade sizes` to maintain a <2% `slippage` target for an `80/20 Balancer pool` and a regular `50/50 uniswap-v2 style pool`.
+
+Now you know `how much liquidity` to target, 
+there are a few options on `how to obtain that liquidity`. 
+
+1. Liquidity Mining / Rent
+`Renting of liquidity`, or better known as `liquidity mining` is the practice of `incentivising liquidity providers` to provide liquidity for your tokens in exchange for `governance token rewards`. 
+
+Pioneered by `Synthetix` in early 2020, and subsequently made famous by `Compound`, high emissions and insane APRs were the narrative of DeFi summer. 
+
+In what looks similar to an equity give away, `liquidity mining programs` have shown to be quite effective in `bootstrapping liquidity` for `early stage projects`. 
+
+Tokens are emitted by the protocol to `attract liquidity providers` in the hope of them `depositing liquidity` which will allow the protocol to function or the `governance token to be tradeable` on the open market.
 
 
----------------------------------------------
-Rent
----------------------------------------------
+`Liquidity mining` does have some `positives`:
 
----------------------------------------------
-Bribe
----------------------------------------------
+- Acts as a means of `distributing the governance token` to those who are providing work to the protocol (`providing liquidity`). 
+Protocols often have a treasury full of tokens which need to be distributed to the community. By distributing these tokens to actors helping with liquidity this allows governance power to be in the hands of users rather than just investors.
+
+- Low up front cost to attract liquidity as liquidity can be purchased on a block by block basis. Pairing liquidity is expensive as the protocol has to provide the other side with funds from investors and token sales, if there are not enough funds raised renting liquidity is the most cost effective option in the short term.
+
+- Liquidity can be attracted very quickly, due to the fact that a high APR acts as a marketing tactic. Farmers are always on the lookout for the next high APR farm and will move their capital to the highest yielding option at that time.
+
+2. Bribe
 
 
----------------------------------------------
-Buy
----------------------------------------------
+3. Buy
+
 
 
 ---------------------------------------------
