@@ -24,7 +24,7 @@
 
 
     ------------------------------------------
-    How to Sign and Verify
+    How to Signature-Verification
     ------------------------------------------
     1. Signing (Off-chain)
         1.1. Create message to sign
