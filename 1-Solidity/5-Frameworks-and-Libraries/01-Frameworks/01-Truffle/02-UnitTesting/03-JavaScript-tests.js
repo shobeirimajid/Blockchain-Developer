@@ -250,3 +250,13 @@ contract("MetaCoin", (accounts) => {
 // Truffle supports tests saved as a .ts TypeScript file. 
 // Please see the Writing Tests in JavaScript guide for more information.
 // https://www.typescriptlang.org/
+
+
+
+//-----------------------------------------------------
+//  Notice
+//-----------------------------------------------------
+// Automaticcaly create a template test file for a contract
+//
+//    $ truffle create test <ContractName>
+// 
