@@ -1,6 +1,8 @@
 // Load compiled artifacts
 const MyToken = artifacts.require("MyToken");
 
+const truffleAssert = require('truffle-assertions');
+
 // Start test block
 contract("MyToken", (accounts) => {
 
@@ -19,10 +21,17 @@ contract("MyToken", (accounts) => {
         const amount = 1000;
         let txResult = await instance.safeMint(acc0, amount);
 
+        /*
         assert.equal(txResult.logs[0].event, "Transfer", "Transfer event was not emitted")
         assert.equal(txResult.logs[0].args.from, '0x0000000000000000000000000000000000000000', "Token was not transferred from the zero address");
         assert.equal(txResult.logs[0].args.to, acc0, "Receiver wrong address");
         assert.equal(txResult.logs[0].args.value, amount, "amount wrong value");
+        */
+
+        truffleAssert.eventEmitted(txResult, 'Transfer', 
+            {from: '0x0000000000000000000000000000000000000000', to: acc0, value: amount}
+        );
+
 
         assert.equal(await instance.balanceOf(acc0), amount, "balance of acc0 should be 1000");
         assert.equal(await instance.totalSupply(), amount, "totalSupply of Token should be 1000");
