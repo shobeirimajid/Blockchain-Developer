@@ -19,7 +19,7 @@ contract("MyToken", (accounts) => {
     it('2-should mint 1000 MTK Token to the first account', async () => {
         const instance = await MyToken.deployed();
         const amount = 1000;
-        let txResult = await instance.safeMint(acc0, amount);
+        let txResult = await debug(instance.safeMint(acc0, amount));
 
         /*
         assert.equal(txResult.logs[0].event, "Transfer", "Transfer event was not emitted")
@@ -45,7 +45,7 @@ contract("MyToken", (accounts) => {
         assert.equal(await instance.balanceOf.call(acc1), 0, "");
 
         // Make transaction from first account to second.
-        await instance.transfer(acc1, 200, { from: acc0 });
+        await debug(instance.transfer(acc1, 200, { from: acc0 }));
 
         //Check the balances of acc0 and acc1 after transaction.
         assert.equal(await instance.balanceOf.call(acc0), 800, "Amount wasn't correctly taken from the acc0");
