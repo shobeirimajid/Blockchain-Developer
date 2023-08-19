@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\FirstHardhatProject\\contracts\\MyFirstContract.sol": {
-      "lastModificationDate": 1692462354101,
-      "contentHash": "2d9a30865490c59aeffa341cf924c901",
+      "lastModificationDate": 1692468455985,
+      "contentHash": "a5976cc95deb7d1aac4ee1678d428706",
       "sourceName": "contracts/MyFirstContract.sol",
       "solcConfig": {
         "version": "0.8.19",
@@ -34,6 +34,43 @@
       ],
       "artifacts": [
         "MyFirstContract"
+      ]
+    },
+    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\FirstHardhatProject\\contracts\\ERC-20.sol": {
+      "lastModificationDate": 1692477212656,
+      "contentHash": "dfe614c9f0e14ac197655170ab2e8211",
+      "sourceName": "contracts/ERC-20.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "0.8.19"
+      ],
+      "artifacts": [
+        "ERC20Basic",
+        "IERC20",
+        "SafeMath"
       ]
     }
   }

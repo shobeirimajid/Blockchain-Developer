@@ -2,13 +2,13 @@
 pragma solidity =0.8.19;
 contract MyFirstContract {
 
-    uint256 number;
+    string str;
 
-    function setNumber(uint256 _num) public {
-        number = _num;
+    function setMessage(string memory _str) public {
+        str = _str;
     }
 
-    function getNumber() public view returns (uint256){
-        return number;
+    function getMessage() public view returns (string memory){
+        return str;
     }
 }
