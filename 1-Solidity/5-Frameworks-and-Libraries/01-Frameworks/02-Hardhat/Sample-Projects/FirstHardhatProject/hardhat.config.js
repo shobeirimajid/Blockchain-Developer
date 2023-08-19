@@ -1,4 +1,4 @@
-require("ethers");
+require("@nomicfoundation/hardhat-ethers");
 require('dotenv').config()
 
 /** 
