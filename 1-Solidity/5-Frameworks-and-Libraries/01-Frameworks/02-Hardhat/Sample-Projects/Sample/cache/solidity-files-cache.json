@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\Sample\\contracts\\Greete.sol": {
-      "lastModificationDate": 1692521799669,
-      "contentHash": "d9ab8fd840d18180596f64e9fb4a8573",
-      "sourceName": "contracts/Greete.sol",
+    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\Sample\\contracts\\Greeter.sol": {
+      "lastModificationDate": 1692525366727,
+      "contentHash": "4213d6bdd1fdda33b943bce1ea0efb0d",
+      "sourceName": "contracts/Greeter.sol",
       "solcConfig": {
         "version": "0.8.19",
         "settings": {

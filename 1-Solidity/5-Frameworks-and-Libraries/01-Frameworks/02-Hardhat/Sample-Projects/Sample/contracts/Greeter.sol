@@ -11,6 +11,11 @@ contract Greeter {
         greeting = _greeting;
     }
 
+    function setGreeting(string memory _greeting) public {
+        console.log("Setting new value for the greeting:", _greeting);
+        greeting = _greeting;
+    }
+
     function greet() public view returns (string memory) {
         return greeting;
     }
