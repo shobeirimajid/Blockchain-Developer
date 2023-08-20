@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\FirstHardhatProject\\contracts\\ERC-20.sol": {
-      "lastModificationDate": 1692477212656,
-      "contentHash": "dfe614c9f0e14ac197655170ab2e8211",
-      "sourceName": "contracts/ERC-20.sol",
+    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\Sample\\contracts\\Greete.sol": {
+      "lastModificationDate": 1692521799669,
+      "contentHash": "d9ab8fd840d18180596f64e9fb4a8573",
+      "sourceName": "contracts/Greete.sol",
       "solcConfig": {
         "version": "0.8.19",
         "settings": {
@@ -28,20 +28,20 @@
           }
         }
       },
-      "imports": [],
+      "imports": [
+        "hardhat/console.sol"
+      ],
       "versionPragmas": [
         "0.8.19"
       ],
       "artifacts": [
-        "ERC20Basic",
-        "IERC20",
-        "SafeMath"
+        "Greeter"
       ]
     },
-    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\FirstHardhatProject\\contracts\\MyFirstContract.sol": {
-      "lastModificationDate": 1692468455985,
-      "contentHash": "a5976cc95deb7d1aac4ee1678d428706",
-      "sourceName": "contracts/MyFirstContract.sol",
+    "F:\\githubdesktop\\Blockchain-Developer\\1-Solidity\\5-Frameworks-and-Libraries\\01-Frameworks\\02-Hardhat\\Sample-Projects\\Sample\\node_modules\\hardhat\\console.sol": {
+      "lastModificationDate": 1692521304093,
+      "contentHash": "896f68942c3a20e9ae3c3c5bfd3add54",
+      "sourceName": "hardhat/console.sol",
       "solcConfig": {
         "version": "0.8.19",
         "settings": {
@@ -67,10 +67,10 @@
       },
       "imports": [],
       "versionPragmas": [
-        "=0.8.19"
+        ">=0.4.22 <0.9.0"
       ],
       "artifacts": [
-        "MyFirstContract"
+        "console"
       ]
     }
   }
