@@ -71,6 +71,7 @@ module.exports = {
             //     mnemonic: MNEMONIC,
             //   },
             chainId: 11155111,
+            saveDeployments: true,
         },
         mainnet: {
             url: MAINNET_RPC_URL,
@@ -91,7 +92,7 @@ module.exports = {
             chainId: 80001,
         },
     },
-    defaultNetwork: "hardhat",
+    defaultNetwork: "sepolia",
     etherscan: {
         // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
         apiKey: {
