@@ -22,9 +22,10 @@ async function main(){
     
     //let balance = BigInt(await deployedContract.balanceOf('0x041e61175A7822ac35611BE9F01Cd3bd53F8dF4f'));
     //let balance = BigNumber.from(v1);
-    let balance = ethers.formatEther(await deployedContract.balanceOf('0x041e61175A7822ac35611BE9F01Cd3bd53F8dF4f'));
+    //let balance = ethers.formatEther(await deployedContract.balanceOf(deployer.address));
+    //console.log("Balance of Owner:", balance);
 
-    console.log("Balance of Owner:", balance);
+    await deployedContract.transfer('0x2a61990aeff5034961B6aAbdcFe61402d9aC8845', hardhat.ethers.parseEther("500"))
 };
 
 main().catch((error) => {
