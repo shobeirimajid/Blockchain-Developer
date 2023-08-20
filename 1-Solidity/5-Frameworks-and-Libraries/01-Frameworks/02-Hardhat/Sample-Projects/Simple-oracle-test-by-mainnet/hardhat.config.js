@@ -12,6 +12,7 @@
 // You need to export an object to set up your config
 module.exports = {
   solidity: "0.8.19",
+  defaultNetwork: "hardhat",
   networks: {
     hardhat: {
       forking: {
