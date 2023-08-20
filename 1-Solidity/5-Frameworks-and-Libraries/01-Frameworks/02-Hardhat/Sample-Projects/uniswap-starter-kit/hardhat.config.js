@@ -1,6 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
 require('dotenv').config();
-require("@uniswap/hardhat-v3-deploy");
 
 module.exports = {
   solidity: "0.8.19",
