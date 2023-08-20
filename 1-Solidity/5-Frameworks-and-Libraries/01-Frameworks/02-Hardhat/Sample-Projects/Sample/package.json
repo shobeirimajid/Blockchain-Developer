@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "hardhat": "^2.17.1"
+    "hardhat": "^2.17.1",
+    "@nomiclabs/hardhat-waffle": "^2.0.6"
   }
 }
