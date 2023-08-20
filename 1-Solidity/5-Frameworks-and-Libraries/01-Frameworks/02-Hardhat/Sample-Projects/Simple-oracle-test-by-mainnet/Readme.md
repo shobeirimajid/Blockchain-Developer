@@ -2,17 +2,17 @@
 
 # QuickStart
 
-Set your `ETHEREUM_RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). You can get one for free at [Alchemy's site.](https://alchemyapi.io/). You'll also need your `MNEMONIC` which is your 12 word seed phrase from you wallet, ie metamask. 
+Set your `ETHEREUM_RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). You can get one for free at [Alchemy's site.](https://alchemyapi.io/). You'll also need your `PRIVATE_KEY` which is available in you wallet, ie metamask. 
 
 ```
-export MNEMONIC='cat dog frog....'
-export ALCHEMY_MAINNET_RPC_URL='www.infura.io/asdfadsfafdadf'
+export PRIVATE_KEY='a2dd...'
+export ETHEREUM_RPC_URL='https://eth-mainnet.g.alchemy.com/v2/Rd...'
 ```
 
 Then run
 
-1. `git clone https://github.com/PatrickAlphaC/chainlink-hardhat`
-2. `cd chainlink-hardhat`
+1. `git clone https://github.com/shobeirimajid/hardhat-starter-kit-chainlink`
+2. `cd hardhat-starter-kit-chainlink`
 3. `yarn`
 4. `npx hardhat test`
 
@@ -24,6 +24,6 @@ This repo makes use of hardhat's forking mechanism. This allows us to test forke
 
 # Deploy 
 
-Set your `KOVAN_RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html)
+Set your `SEPOLIA_RPC_URL` [environment variable.](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html)
 
-`npx hardhat run --network kovan scripts/deploy.js`
+`npx hardhat run --network sepolia scripts/deploy.js`
