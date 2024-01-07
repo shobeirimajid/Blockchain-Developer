@@ -15,8 +15,7 @@ library ISet {
 
 /*
     Note that the first parameter (self) is of type "storage reference" 
-        and thus only its storage address 
-        and not its contents 
+        and thus only its storage address, and not its contents 
         is passed as part of the call.  
 
     This is a special feature of library functions.  
@@ -28,7 +27,7 @@ library ISet {
     function insert(Data storage self, uint value) public returns (bool) {
 
         if (self.flags[value])
-            return false; // already exixt there
+            return false; // already exist there
         
         self.flags[value] = true;
         return true;
